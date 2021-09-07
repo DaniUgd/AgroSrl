@@ -5,28 +5,19 @@
  */
 package agro.srl;
 import Clases.Campo;
+import Interfaces.Inicio;
 
-/**
- *
- * @author Daniel
- */
 public class AgroSRL {
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String[] args) {
-        // TODO code application logic here
+        Inicio ini = new Inicio();
+        ini.show(true);
+
         
-        int idCampo=1;
-        int b=2;
-        
-        long tamanio=300;
-        long t2=500;
-        
-       Campo campo = new Campo(tamanio,idCampo);
+   
        
-        campo.mostrar();
+   
     }
     
 }

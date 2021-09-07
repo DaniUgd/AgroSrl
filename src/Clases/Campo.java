@@ -24,7 +24,6 @@ ArrayList <Lotes> lotes;
     }
 
     public Campo(long tamanio, int idCampo) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList<Lotes> getLotes() {
