@@ -10,8 +10,8 @@ package Clases;
  * @author Daniel
  */
 public class TipoSuelo {
-    int idSuelo;
-    String descripcion;
+    private int idSuelo;
+    private String descripcion;
 
     public TipoSuelo(int idSuelo, String descripcion) {
         this.idSuelo = idSuelo;

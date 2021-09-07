@@ -10,8 +10,8 @@ package Clases;
  * @author Daniel
  */
 public class EstadoCampo {
-    int idEstado;
-    String descripcion;
+    private int idEstado;
+    private String descripcion;
 
     public EstadoCampo(int idEstado, String descripcion) {
         this.idEstado = idEstado;

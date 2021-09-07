@@ -10,8 +10,9 @@ package Clases;
  * @author Daniel
  */
 public class Proyecto {
-    int idProyecto;
-    String descripcion;
+    private int idProyecto;
+   private  String descripcion;
+   ArrayList <Labores>
 
     public Proyecto(int idProyecto, String descripcion) {
         this.idProyecto = idProyecto;

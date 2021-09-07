@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -13,9 +15,24 @@ package Clases;
 public class Campo {
 private long tamanio;
 private int idCampo;
+ArrayList <Lotes> lotes;
+
+    public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes) {
+        this.tamanio = tamanio;
+        this.idCampo = idCampo;
+        this.lotes = lotes;
+    }
 
     public Campo(long tamanio, int idCampo) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<Lotes> getLotes() {
+        return lotes;
+    }
+
+    public void setLotes(ArrayList<Lotes> lotes) {
+        this.lotes = lotes;
     }
 
    
@@ -48,6 +65,12 @@ private int idCampo;
         System.out.println(this.idCampo);
     
     }
+
+    @Override
+    public String toString() {
+        return "Campo{" + "tamanio=" + tamanio + ", idCampo=" + idCampo + ", lotes=" + lotes + '}';
+    }
+    
     
 }
  

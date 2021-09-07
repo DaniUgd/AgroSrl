@@ -9,11 +9,14 @@ package Clases;
  *
  * @author Daniel
  */
-public class laboreo {
-    int idLaboreo;
-    String descripcion;
+public class Laboreo {
+    private int idLaboreo;
+    private String descripcion;
 
-    public laboreo(int idLaboreo, String descripcion) {
+    public Laboreo() {
+    }
+
+    public Laboreo(int idLaboreo, String descripcion) {
         this.idLaboreo = idLaboreo;
         this.descripcion = descripcion;
     }
