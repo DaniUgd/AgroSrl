@@ -10,8 +10,8 @@ package Clases;
  * @author Daniel
  */
 public class TipoProyecto {
-    int idTipoProyecto;
-    String descripcion;
+    private int idTipoProyecto;
+    private String descripcion;
 
     public TipoProyecto(int idTipoProyecto, String descripcion) {
         this.idTipoProyecto = idTipoProyecto;

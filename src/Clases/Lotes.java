@@ -10,8 +10,21 @@ package Clases;
  * @author Daniel
  */
 public class Lotes {
-    int idLote;
-    long tamanio;
+    private int idLote;
+    private long tamanio;
+    TipoSuelo tiposuelo;
+
+   
+
+    public void setTiposuelo(TipoSuelo tiposuelo) {
+        this.tiposuelo = tiposuelo;
+    }
+
+    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo) {
+        this.idLote = idLote;
+        this.tamanio = tamanio;
+        this.tiposuelo = tiposuelo;
+    }
 
     public Lotes(int idLote, long tamanio) {
         this.idLote = idLote;
@@ -32,6 +45,9 @@ public class Lotes {
 
     public void setTamanio(long tamanio) {
         this.tamanio = tamanio;
+    }
+     public TipoSuelo getTiposuelo() {
+        return tiposuelo;
     }
     
 }
