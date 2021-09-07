@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
@@ -12,7 +14,7 @@ package Clases;
 public class Proyecto {
     private int idProyecto;
    private  String descripcion;
-   ArrayList <Labores>
+   ArrayList <Laboreo> laboreo;
 
     public Proyecto(int idProyecto, String descripcion) {
         this.idProyecto = idProyecto;

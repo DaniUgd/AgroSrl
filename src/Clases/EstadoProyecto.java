@@ -18,6 +18,9 @@ public class EstadoProyecto {
         this.descripcion = descripcion;
     }
 
+    public EstadoProyecto() {
+    }
+
     public int getIdEstado() {
         return idEstado;
     }
