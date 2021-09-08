@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Interfaces.Campo.AgregarCampo;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -64,6 +65,11 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2.setText("Campo");
 
         jMenuItem17.setText("Agregar");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem17);
 
         jMenuItem18.setText("Modifica");
@@ -141,6 +147,15 @@ public class Inicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        // TODO add your handling code here:
+        this.show(false);
+        AgregarCampo agregarCampo = new AgregarCampo();
+        agregarCampo.setLocationRelativeTo(null);
+        agregarCampo.show(true);
+         
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,8 +186,12 @@ public class Inicio extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Inicio().setVisible(true);
+                Inicio inicio = new Inicio();
+                inicio.setVisible(true);
+               
             }
+
+           
         });
     }
 
