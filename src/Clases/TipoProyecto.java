@@ -13,6 +13,9 @@ public class TipoProyecto {
     private int idTipoProyecto;
     private String descripcion;
 
+    public TipoProyecto() {
+    }
+
     public TipoProyecto(int idTipoProyecto, String descripcion) {
         this.idTipoProyecto = idTipoProyecto;
         this.descripcion = descripcion;
@@ -33,5 +36,7 @@ public class TipoProyecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+
     
 }

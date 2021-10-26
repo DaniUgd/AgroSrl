@@ -40,5 +40,13 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-mapping>
-  <class name="Clases.Campo" table="campo"/>
+  <class  name="Clases.EstadoProyecto" table="EstadoProyecto">
+    <id name="idEstado" type="int">
+            <column name="IDESTADO" />
+            <generator class="native" />
+    </id>
+    <property name="descripcion" type="java.lang.String">
+             <column name="DESCRIPCION"/>
+    </property>
+  </class>
 </hibernate-mapping>

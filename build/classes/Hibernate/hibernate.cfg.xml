@@ -41,7 +41,7 @@ Contributor(s):
 -->
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/agrosrl?zeroDateTimeBehavior=CONVERT_TO_NULL</property>
     <property name="hibernate.connection.username">root</property>
@@ -49,6 +49,13 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-
+    <mapping resource="Mapeo/Lotes.xml"/>
+    <mapping resource="Mapeo/Proyecto.xml"/>
+    <mapping resource="Mapeo/Laboreo.xml"/>
+    <mapping resource="Mapeo/EstadoCampo.xml"/>
+    <mapping resource="Mapeo/EstadoProyecto.xml"/>
+    <mapping resource="Mapeo/TipoLaboreo.xml"/>
+    <mapping resource="Mapeo/TipoSuelo.xml"/>
+    <mapping resource="Mapeo/TipoProyecto.xml"/>
   </session-factory>
 </hibernate-configuration>
