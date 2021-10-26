@@ -18,15 +18,42 @@ private int idCampo;
 ArrayList <Lotes> lotes;
 private EstadoCampo estado;
 
-
-    public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes, char estado) {
+    public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes, EstadoCampo estado) {
         this.tamanio = tamanio;
         this.idCampo = idCampo;
         this.lotes = lotes;
-        
+        this.estado = estado;
     }
 
-    public Campo(long tamanio, int idCampo) {
+    public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes) {
+        this.tamanio = tamanio;
+        this.idCampo = idCampo;
+        this.lotes = lotes;
+    }
+
+    public Campo(long tamanio, int idCampo, EstadoCampo estado) {
+        this.tamanio = tamanio;
+        this.idCampo = idCampo;
+        this.estado = estado;
+    }
+
+    public Campo() {
+    }
+
+    public long getTamanio() {
+        return tamanio;
+    }
+
+    public void setTamanio(long tamanio) {
+        this.tamanio = tamanio;
+    }
+
+    public int getIdCampo() {
+        return idCampo;
+    }
+
+    public void setIdCampo(int idCampo) {
+        this.idCampo = idCampo;
     }
 
     public ArrayList<Lotes> getLotes() {
@@ -37,41 +64,15 @@ private EstadoCampo estado;
         this.lotes = lotes;
     }
 
-   
-            
-    
-    public void Campo (long tamanio,int idCampo){
-    this.tamanio=tamanio;
-    this.idCampo=idCampo;
-
-}
-
-    public long getTamanio() {
-        return tamanio;
+    public EstadoCampo getEstado() {
+        return estado;
     }
 
-    public int getIdCampo() {
-        return idCampo;
+    public void setEstado(EstadoCampo estado) {
+        this.estado = estado;
     }
 
-    public void setTamanio(long tamanio) {
-        this.tamanio = tamanio;
-    }
-
-    public void setIdCampo(int idCampo) {
-        this.idCampo = idCampo;
-    }
-    
-    public void mostrar(){
-    
-        System.out.println(this.idCampo);
-    
-    }
-
-    @Override
-    public String toString() {
-        return "Campo{" + "tamanio=" + tamanio + ", idCampo=" + idCampo + ", lotes=" + lotes + '}';
-    }
+ 
     
     
 }
