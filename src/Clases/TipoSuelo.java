@@ -13,6 +13,9 @@ public class TipoSuelo {
     private int idSuelo;
     private String descripcion;
 
+    public TipoSuelo() {
+    }
+
     public TipoSuelo(int idSuelo, String descripcion) {
         this.idSuelo = idSuelo;
         this.descripcion = descripcion;

@@ -49,12 +49,12 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
+    <mapping resource="Mapeo/Campo.xml"/>
     <mapping resource="Mapeo/Lotes.xml"/>
-    <mapping resource="Mapeo/Proyecto.xml"/>
+   <mapping resource="Mapeo/Proyecto.xml"/>
     <mapping resource="Mapeo/Laboreo.xml"/>
     <mapping resource="Mapeo/EstadoCampo.xml"/>
     <mapping resource="Mapeo/EstadoProyecto.xml"/>
-    <mapping resource="Mapeo/TipoLaboreo.xml"/>
     <mapping resource="Mapeo/TipoSuelo.xml"/>
     <mapping resource="Mapeo/TipoProyecto.xml"/>
   </session-factory>

@@ -7,13 +7,13 @@
             <column name="IDPROYECTO" />
             <generator class="native" />
     </id>
-    <property name="descipcion" type="java.lang.String">
+    <property name="descripcion" type="java.lang.String">
              <column name="DESCRIPCION"/>
     </property>
     <list name="laboreo" cascade="none">
         <key column="IDLABOREO"/>
         <index column="ORDEN"/>
-        <one-to-many class="Clases.TipoLaboreo"/>
+        <one-to-many class="Clases.Laboreo"/>
     </list>
   </class>
 

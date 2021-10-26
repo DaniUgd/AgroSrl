@@ -5,6 +5,8 @@
  */
 package Interfaces.Campo;
 
+
+import Clases.Campo;
 import Controladora.Controlador;
 import Interfaces.Inicio;
 import javax.swing.table.DefaultTableModel;
@@ -48,15 +50,12 @@ public class AgregarCampo extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         jSeparator1 = new javax.swing.JSeparator();
         label2 = new java.awt.Label();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        codCampo = new javax.swing.JTextPane();
         elim = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         cantHec = new javax.swing.JTextPane();
-        label3 = new java.awt.Label();
         jScrollPane4 = new javax.swing.JScrollPane();
         CantLotes = new javax.swing.JTextPane();
         label4 = new java.awt.Label();
@@ -96,11 +95,6 @@ public class AgregarCampo extends javax.swing.JFrame {
         label2.setPreferredSize(new java.awt.Dimension(300, 20));
         label2.setText("Agro SRL");
 
-        codCampo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
-        jScrollPane1.setViewportView(codCampo);
-        codCampo.getAccessibleContext().setAccessibleName("");
-        codCampo.getAccessibleContext().setAccessibleDescription("codCampo");
-
         elim.setText("Eliminar");
         elim.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -132,10 +126,6 @@ public class AgregarCampo extends javax.swing.JFrame {
 
         cantHec.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane2.setViewportView(cantHec);
-
-        label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label3.setText("Ingrese el ID del campo");
 
         CantLotes.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane4.setViewportView(CantLotes);
@@ -212,14 +202,12 @@ public class AgregarCampo extends javax.swing.JFrame {
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -241,14 +229,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                 .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(13, 13, 13)
+                .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -322,7 +303,8 @@ public class AgregarCampo extends javax.swing.JFrame {
     }//GEN-LAST:event_crearMouseClicked
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-       
+
+        Campo g;
     }//GEN-LAST:event_crearActionPerformed
 
     private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
@@ -378,7 +360,6 @@ public class AgregarCampo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane CantLotes;
     private javax.swing.JTextPane cantHec;
-    private javax.swing.JTextPane codCampo;
     private javax.swing.JButton crear;
     private javax.swing.JButton elim;
     private javax.swing.JTextPane estcam;
@@ -387,7 +368,6 @@ public class AgregarCampo extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -397,7 +377,6 @@ public class AgregarCampo extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.Label label3;
     private java.awt.Label label4;
     private java.awt.Label label5;
     private java.awt.Menu menu1;

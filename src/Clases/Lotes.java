@@ -14,6 +14,9 @@ public class Lotes {
     private long tamanio;
     TipoSuelo tiposuelo;
 
+    public Lotes() {
+    }
+
    
 
     public void setTiposuelo(TipoSuelo tiposuelo) {

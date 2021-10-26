@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel
@@ -12,6 +14,16 @@ package Clases;
 public class EstadoCampo {
     private int idEstado;
     private String descripcion;
+    ArrayList <Campo> campo;
+    
+    public EstadoCampo() {
+    }
+
+    public EstadoCampo(int idEstado, String descripcion, ArrayList<Campo> campo) {
+        this.idEstado = idEstado;
+        this.descripcion = descripcion;
+        this.campo = campo;
+    }
 
     public EstadoCampo(int idEstado, String descripcion) {
         this.idEstado = idEstado;
@@ -33,5 +45,7 @@ public class EstadoCampo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
+
+
 }

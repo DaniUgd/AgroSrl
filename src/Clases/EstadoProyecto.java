@@ -12,7 +12,7 @@ package Clases;
 public class EstadoProyecto {
    private int idEstado;
    private String descripcion;
-
+   
     public EstadoProyecto(int idEstado, String descripcion) {
         this.idEstado = idEstado;
         this.descripcion = descripcion;

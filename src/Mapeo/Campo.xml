@@ -52,7 +52,7 @@ Contributor(s):
     <list name="lotes" cascade="all">
         <key column="LOTES"/>
         <index column="ORDEN"/>
-    <one-to-many class="Clases.lotes"/>
+    <one-to-many class="Clases.Lotes"/>
     </list>
     <many-to-one name="estado" cascade="none" class="Clases.EstadoCampo">
         <column name="FKESTADOCAMPO"/>

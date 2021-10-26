@@ -16,23 +16,14 @@ public class Campo {
 private long tamanio;
 private int idCampo;
 ArrayList <Lotes> lotes;
-private char estado;
+
 
     public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes, char estado) {
         this.tamanio = tamanio;
         this.idCampo = idCampo;
         this.lotes = lotes;
-        this.estado = estado;
+        
     }
-
-    public char getEstado() {
-        return estado;
-    }
-
-    public void setEstado(char estado) {
-        this.estado = estado;
-    }
-
 
     public Campo(long tamanio, int idCampo) {
     }

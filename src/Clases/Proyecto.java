@@ -16,9 +16,18 @@ public class Proyecto {
    private  String descripcion;
    ArrayList <Laboreo> laboreo;
 
+    public Proyecto() {
+    }
+
     public Proyecto(int idProyecto, String descripcion) {
         this.idProyecto = idProyecto;
         this.descripcion = descripcion;
+    }
+
+    public Proyecto(int idProyecto, String descripcion, ArrayList<Laboreo> laboreo) {
+        this.idProyecto = idProyecto;
+        this.descripcion = descripcion;
+        this.laboreo = laboreo;
     }
 
     public int getIdProyecto() {
@@ -36,5 +45,15 @@ public class Proyecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
+    public ArrayList<Laboreo> getLaboreo() {
+        return laboreo;
+    }
+
+    public void setLaboreo(ArrayList<Laboreo> laboreo) {
+        this.laboreo = laboreo;
+    }
+   
+   
+   
 }

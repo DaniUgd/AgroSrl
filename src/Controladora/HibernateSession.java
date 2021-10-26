@@ -23,11 +23,11 @@ public class HibernateSession {
      */
     public static Session getSession() {
         if (sessionFactory == null){
-            final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("hibernate/hibernate.cfg.xml").build();
+            final StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure("Hibernate/hibernate.cfg.xml").build();
             try {
                 sessionFactory = new Configuration().configure("Hibernate/hibernate.cfg.xml").buildSessionFactory(registry);           
             }
-            catch (Exception e) {
+            catch (HibernateException e) {
                 System.out.println("Error al crear factory: " + e.getMessage());
                 StandardServiceRegistryBuilder.destroy( registry );
             }
