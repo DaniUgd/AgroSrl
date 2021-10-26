@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class EstadoCampo {
     private int idEstado;
     private String descripcion;
-    ArrayList <Campo> campo;
     
     public EstadoCampo() {
     }
@@ -22,7 +21,6 @@ public class EstadoCampo {
     public EstadoCampo(int idEstado, String descripcion, ArrayList<Campo> campo) {
         this.idEstado = idEstado;
         this.descripcion = descripcion;
-        this.campo = campo;
     }
 
     public EstadoCampo(int idEstado, String descripcion) {

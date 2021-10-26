@@ -3,22 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/Proyecto.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Mapeo/EstadoCampo.xml</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Mapeo/TipoSuelo.xml</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Hibernate/hibernate.reveng.xml</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/EstadoCampo.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Controladora/AgroSRL.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/TipoLaboreo.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Controladora/HibernateSession.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/TipoProyecto.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Mapeo/Campo.xml</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Hibernate/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Controladora/Controlador.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/TipoSuelo.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/EstadoProyecto.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/Lotes.java</file>
-            <file>file:/C:/Users/Daniel/Documents/NetBeansProjects/Agro%20SRL/src/Clases/Laboreo.java</file>
+            <file>file:/C:/Users/ezest/Desktop/TPIntegrador/AgroSrl/src/Clases/Campo.java</file>
         </group>
     </open-files>
 </project-private>

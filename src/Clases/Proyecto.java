@@ -12,9 +12,10 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class Proyecto {
-    private int idProyecto;
+   private int idProyecto;
    private  String descripcion;
    ArrayList <Laboreo> laboreo;
+   private EstadoProyecto estado;
 
     public Proyecto() {
     }

@@ -16,6 +16,7 @@ public class Campo {
 private long tamanio;
 private int idCampo;
 ArrayList <Lotes> lotes;
+private EstadoCampo estado;
 
 
     public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes, char estado) {
