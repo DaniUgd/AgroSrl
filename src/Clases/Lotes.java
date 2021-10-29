@@ -14,26 +14,21 @@ public class Lotes {
     private long tamanio;
     TipoSuelo tiposuelo;
 
-    public Lotes() {
-    }
-
-   
-
-    public void setTiposuelo(TipoSuelo tiposuelo) {
-        this.tiposuelo = tiposuelo;
-    }
-
     public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo) {
         this.idLote = idLote;
         this.tamanio = tamanio;
         this.tiposuelo = tiposuelo;
     }
 
-    public Lotes(int idLote, long tamanio) {
-        this.idLote = idLote;
-        this.tamanio = tamanio;
+    public Lotes() {
     }
 
+    @Override
+    public String toString() {
+        return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + '}';
+    }
+
+    
     public int getIdLote() {
         return idLote;
     }
@@ -49,8 +44,19 @@ public class Lotes {
     public void setTamanio(long tamanio) {
         this.tamanio = tamanio;
     }
-     public TipoSuelo getTiposuelo() {
+
+    public TipoSuelo getTiposuelo() {
         return tiposuelo;
     }
+
+    public void setTiposuelo(TipoSuelo tiposuelo) {
+        this.tiposuelo = tiposuelo;
+    }
+
+    
+
+   
+
+   
     
 }

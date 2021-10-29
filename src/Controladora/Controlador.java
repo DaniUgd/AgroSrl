@@ -27,10 +27,7 @@ public void agregarCampo(Campo g){
 
 public List <Campo> ActualizarCampo(){
    List <Campo> mostrar=null;
-   
    mostrar=campodao.obtenerTodos();
-
-
 return mostrar;
 }
 
@@ -41,5 +38,12 @@ estados=estadocampodao.obtenerTodos();
 
 return  estados;
 }
+
+    public Campo buscarCampo(long ide) {
+       Campo busco = null; 
+        busco=campodao.obtener(ide);
+       return busco;
+        
+    }
 
 }

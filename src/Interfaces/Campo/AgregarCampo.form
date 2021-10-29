@@ -96,12 +96,10 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="label1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="label5" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                       <Component id="jScrollPane2" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane4" alignment="0" pref="111" max="32767" attributes="0"/>
                                       <Component id="jScrollPane5" alignment="0" pref="111" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -131,17 +129,17 @@
                       <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                       <Component id="label4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
-                      <Component id="label5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="label1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane5" min="-2" max="-2" attributes="0"/>
-                      <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="18" max="32767" attributes="0"/>
+                  <EmptySpace pref="39" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane3" alignment="0" min="-2" pref="149" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
@@ -173,12 +171,12 @@
         <Component class="java.awt.Label" name="label1">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ingrese el estado del campo"/>
+            <Property name="text" type="java.lang.String" value="Ingrese Nombre del campo"/>
           </Properties>
           <AccessibilityProperties>
             <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="codCampo"/>
@@ -193,7 +191,7 @@
               <Color blue="cc" green="ff" red="99" type="rgb"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -234,7 +232,7 @@
                   <Table columnCount="4" rowCount="0">
                     <Column editable="true" title="IDCampo" type="java.lang.Object"/>
                     <Column editable="true" title="Tama&#xf1;o" type="java.lang.Object"/>
-                    <Column editable="true" title="Cantidad de Lotes" type="java.lang.Object"/>
+                    <Column editable="true" title="Nombre del Campo" type="java.lang.Object"/>
                     <Column editable="true" title="Estado del Campo" type="java.lang.Object"/>
                   </Table>
                 </Property>
@@ -266,6 +264,9 @@
                   <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -289,30 +290,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane4">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTextPane" name="CantLotes">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
-                    <EtchetBorder>
-                      <Color PropertyName="highlight" blue="0" green="cc" red="99" type="rgb"/>
-                    </EtchetBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="java.awt.Label" name="label4">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
+              <Color id="Default Cursor"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="12" style="1"/>
@@ -327,7 +308,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextPane" name="estcam">
+            <Component class="javax.swing.JTextPane" name="NomCampo">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
@@ -340,17 +321,6 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="java.awt.Label" name="label5">
-          <Properties>
-            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Cursor Por defecto"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="12" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Ingrese la cantidad de Lotes que posee"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="crear">
           <Properties>
             <Property name="text" type="java.lang.String" value="Crear"/>

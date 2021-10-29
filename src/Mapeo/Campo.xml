@@ -41,17 +41,20 @@ Contributor(s):
 -->
 <hibernate-mapping>
   <class name="Clases.Campo" table="campo">
-    <id name="idCampo" type="int">
+    <id name="idCampo" type="java.lang.Long">
             <column name="ID" />
             <generator class="native" />
     </id>
     <property name="tamanio" type="java.lang.Long">
              <column name="TAMANIO"/>
     </property>
+     <property name="nombre" type="java.lang.String">
+             <column name="Nombre"/>
+    </property>
 
     <list name="lotes" cascade="none">
-        <key column="LOTES"/>
-        <index column="ORDEN"/>
+        <key column="fk_Campo"/>
+        <index column=""/>
     <one-to-many class="Clases.Lotes"/>
     </list>
     <many-to-one name="estado" cascade="none" class="Clases.EstadoCampo">

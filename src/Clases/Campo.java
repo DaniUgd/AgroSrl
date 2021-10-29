@@ -6,6 +6,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -14,32 +15,16 @@ import java.util.ArrayList;
  */
 public class Campo {
 private long tamanio;
-private int idCampo;
-ArrayList <Lotes> lotes;
+private Long idCampo;
+private String nombre;
+List <Lotes> lotes;
 private EstadoCampo estado;
 
-    @Override
-    public String toString() {
-        return "Campo{" + "tamanio=" + tamanio + ", idCampo=" + idCampo + ", lotes=" + lotes + ", estado=" + estado + '}';
-    }
- 
-    public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes, EstadoCampo estado) {
+    public Campo(long tamanio, Long idCampo, String nombre, List<Lotes> lotes, EstadoCampo estado) {
         this.tamanio = tamanio;
         this.idCampo = idCampo;
+        this.nombre = nombre;
         this.lotes = lotes;
-        this.estado = estado;
-        
-        
-}
-    public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes) {
-        this.tamanio = tamanio;
-        this.idCampo = idCampo;
-        this.lotes = lotes;
-    }
-
-    public Campo(long tamanio, int idCampo, EstadoCampo estado) {
-        this.tamanio = tamanio;
-        this.idCampo = idCampo;
         this.estado = estado;
     }
 
@@ -54,19 +39,27 @@ private EstadoCampo estado;
         this.tamanio = tamanio;
     }
 
-    public int getIdCampo() {
+    public Long getIdCampo() {
         return idCampo;
     }
 
-    public void setIdCampo(int idCampo) {
+    public void setIdCampo(Long idCampo) {
         this.idCampo = idCampo;
     }
 
-    public ArrayList<Lotes> getLotes() {
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Lotes> getLotes() {
         return lotes;
     }
 
-    public void setLotes(ArrayList<Lotes> lotes) {
+    public void setLotes(List<Lotes> lotes) {
         this.lotes = lotes;
     }
 
@@ -78,7 +71,15 @@ private EstadoCampo estado;
         this.estado = estado;
     }
 
+   
  
+
+ 
+     public void agregarL(Lotes e){
+       lotes= new ArrayList<Lotes>();
+        this.lotes.add(e);
+ }
+
     
     
 }

@@ -8,35 +8,55 @@ package Interfaces.Campo;
 
 import Clases.Campo;
 import Clases.EstadoCampo;
+import Clases.Lotes;
+import Clases.TipoSuelo;
 import Controladora.Controlador;
 import Interfaces.Inicio;
+import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
+import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import static javassist.CtMethod.ConstParameter.integer;
 import javax.swing.table.DefaultTableModel;
+import static jdk.nashorn.internal.objects.NativeJava.to;
 /**
  *
  * @author Daniel
+ * 
+ *
  */
+
 public class AgregarCampo extends javax.swing.JFrame {
     DefaultTableModel dtm = new  DefaultTableModel(); 
     Controlador control;
     ArrayList <Campo> mostrar= null;
     List <Campo> lista = null;
-    public AgregarCampo() {
+    
+    
+    public AgregarCampo(Controlador control2) {
+        control=control2;
         initComponents();
-        String [] titulo = new String []  {"Id","Hectareas","Cantidad de Lotes","Estado del Campo"};
+        String [] titulo = new String []  {"Nro del Campo","Hectareas","Nombre del Campo","Estado del Campo"};
         dtm.setColumnIdentifiers(titulo);
         jTable1.setModel(dtm);
+        lista=control.ActualizarCampo();
+           lista.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion().toString()}).forEachOrdered((campos) -> {
+           dtm.addRow(campos);
+        });
       }
 
-    public AgregarCampo(Controlador control2) {
-       control=control2;
+    public AgregarCampo() {
+       
        initComponents();
        this.setLocationRelativeTo(null);
        this.setVisible(true);
+       
+       
     }
+   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,12 +83,9 @@ public class AgregarCampo extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         cantHec = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        CantLotes = new javax.swing.JTextPane();
         label4 = new java.awt.Label();
         jScrollPane5 = new javax.swing.JScrollPane();
-        estcam = new javax.swing.JTextPane();
-        label5 = new java.awt.Label();
+        NomCampo = new javax.swing.JTextPane();
         crear = new javax.swing.JButton();
         update = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -93,7 +110,7 @@ public class AgregarCampo extends javax.swing.JFrame {
 
         label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Ingrese el estado del campo");
+        label1.setText("Ingrese Nombre del campo");
 
         label2.setAlignment(java.awt.Label.CENTER);
         label2.setBackground(new java.awt.Color(153, 255, 204));
@@ -126,27 +143,25 @@ public class AgregarCampo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "IDCampo", "Tamaño", "Cantidad de Lotes", "Estado del Campo"
+                "IDCampo", "Tamaño", "Nombre del Campo", "Estado del Campo"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
 
         cantHec.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane2.setViewportView(cantHec);
 
-        CantLotes.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
-        jScrollPane4.setViewportView(CantLotes);
-
         label4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label4.setText("Ingrese la cantidad de Hectareas");
 
-        estcam.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
-        jScrollPane5.setViewportView(estcam);
-
-        label5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label5.setText("Ingrese la cantidad de Lotes que posee");
+        NomCampo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
+        jScrollPane5.setViewportView(NomCampo);
 
         crear.setText("Crear");
         crear.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -215,12 +230,10 @@ public class AgregarCampo extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
+                                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(55, 55, 55)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jScrollPane2)
-                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
                                     .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
@@ -241,15 +254,14 @@ public class AgregarCampo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -324,9 +336,25 @@ public class AgregarCampo extends javax.swing.JFrame {
 
     private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
         Campo g =new Campo();
+        
+        EstadoCampo e = new EstadoCampo();
+        List <Lotes> listalo = new ArrayList(); 
+        g.setLotes(listalo);
+        g.setNombre(NomCampo.getText());
         long tam=parseLong(cantHec.getText());
         g.setTamanio(tam);
+        int estado=1;
+        e.setIdEstado(estado);
+        g.setEstado(e);
+        
+        TipoSuelo tipos = new TipoSuelo();
+        tipos.setIdSuelo(1);
+        
+        Lotes lot=new Lotes();
+        
+        //g.agregarL(lot);
         // instanciar EstadCampo g.setEstado();
+        
         control.agregarCampo(g);
         
     }//GEN-LAST:event_crearActionPerformed
@@ -336,34 +364,9 @@ public class AgregarCampo extends javax.swing.JFrame {
     }//GEN-LAST:event_updateMouseClicked
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-       lista=control.ActualizarCampo();
-
        
-       
-       
-       
- 
         
-            
-                   
-                   
-        
-        
-                
-        
-        
-        
-       
-       
-       
-       
-       
-       
-
-
-      
-
-        
+        lista=control.ActualizarCampo();
          
     }//GEN-LAST:event_updateActionPerformed
 
@@ -376,45 +379,26 @@ public class AgregarCampo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_filtroActionPerformed
 
-   
-    public static void main(String args[]) {
-  
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AgregarCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AgregarCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AgregarCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AgregarCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+      int indice, ide;
+      String id;
+       
+        indice=jTable1.getSelectedRow();
+        id=(String) (dtm.getValueAt(indice,0));
+        ide=(int) Long.parseLong(id);
+        
+        
+        control.buscarCampo(Long.valueOf(ide));
+    }//GEN-LAST:event_jTable1MouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AgregarCampo().setVisible(true);
-            }
-        });
-    }
+   
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextPane CantLotes;
+    private javax.swing.JTextPane NomCampo;
     private javax.swing.JTextPane cantHec;
     private javax.swing.JButton crear;
     private javax.swing.JButton elim;
-    private javax.swing.JTextPane estcam;
     private javax.swing.JButton filtro;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -422,7 +406,6 @@ public class AgregarCampo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
@@ -430,7 +413,6 @@ public class AgregarCampo extends javax.swing.JFrame {
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label4;
-    private java.awt.Label label5;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
