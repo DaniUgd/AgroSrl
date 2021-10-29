@@ -7,9 +7,13 @@ package Interfaces.Campo;
 
 
 import Clases.Campo;
+import Clases.EstadoCampo;
 import Controladora.Controlador;
 import Interfaces.Inicio;
 import static java.lang.Long.parseLong;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -18,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 public class AgregarCampo extends javax.swing.JFrame {
     DefaultTableModel dtm = new  DefaultTableModel(); 
     Controlador control;
+    ArrayList <Campo> mostrar= null;
+    List <Campo> lista = null;
     public AgregarCampo() {
         initComponents();
         String [] titulo = new String []  {"Id","Hectareas","Cantidad de Lotes","Estado del Campo"};
@@ -288,8 +294,20 @@ public class AgregarCampo extends javax.swing.JFrame {
     }//GEN-LAST:event_elimMouseClicked
 
     private void elimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimActionPerformed
+           List <EstadoCampo> estados =null;
+           estados=control.MostrarEstadoC();
+          
+           for(Object obj : estados){
+               if(obj instanceof EstadoCampo){
+               
+                   EstadoCampo es = ((EstadoCampo) obj);
+                   System.out.println(es.getIdEstado());
+                   System.out.println(es.getDescripcion());
+               }
            
-
+           
+           
+           }
         
     }//GEN-LAST:event_elimActionPerformed
 
@@ -308,6 +326,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         Campo g =new Campo();
         long tam=parseLong(cantHec.getText());
         g.setTamanio(tam);
+        // instanciar EstadCampo g.setEstado();
         control.agregarCampo(g);
         
     }//GEN-LAST:event_crearActionPerformed
@@ -317,7 +336,35 @@ public class AgregarCampo extends javax.swing.JFrame {
     }//GEN-LAST:event_updateMouseClicked
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+       lista=control.ActualizarCampo();
+
        
+       
+       
+       
+ 
+        
+            
+                   
+                   
+        
+        
+                
+        
+        
+        
+       
+       
+       
+       
+       
+       
+
+
+      
+
+        
+         
     }//GEN-LAST:event_updateActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

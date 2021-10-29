@@ -49,7 +49,7 @@ Contributor(s):
              <column name="TAMANIO"/>
     </property>
 
-    <list name="lotes" cascade="all">
+    <list name="lotes" cascade="none">
         <key column="LOTES"/>
         <index column="ORDEN"/>
     <one-to-many class="Clases.Lotes"/>

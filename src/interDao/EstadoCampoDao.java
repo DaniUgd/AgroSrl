@@ -4,25 +4,13 @@
  * and open the template in the editor.
  */
 package interDao;
+
+import Clases.EstadoCampo;
 import ClasesDao.DAO;
 /**
  *
- * @author Daniel
+ * @author ezest
  */
-
-   import Clases.Campo;
-
-
-/**
- *
- * @author Daniel
- */
-public interface CampoDao extends DAO<Campo,Long>{
-
+public interface EstadoCampoDao extends DAO<EstadoCampo,Long> {
     
-    
-        
-                            
- }
-    
-
+}

@@ -8,6 +8,7 @@ package ClasesDao;
 import Clases.Campo;
 import Controladora.HibernateSession;
 import interDao.CampoDao;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -52,13 +53,38 @@ private Session session;
 
     @Override
     public List<Campo> obtenerTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+     
+        Transaction tr= null;
+        List <Campo> mostrar = null;
+      
+                try {
+                    session = null;
+                    session= HibernateSession.getSession();
+                    tr=session.beginTransaction();
+                    tr.setTimeout(2);
+                    mostrar= session.createCriteria(Campo.class).list();
+                    System.out.println(mostrar);
+                    
+                }
+                
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return mostrar;
+    
+        
+    
+
+        }
+
+
 
     @Override
     public Campo obtener(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+ 
         
         
         

@@ -51,7 +51,7 @@ Contributor(s):
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping resource="Mapeo/Campo.xml"/>
     <mapping resource="Mapeo/Lotes.xml"/>
-   <mapping resource="Mapeo/Proyecto.xml"/>
+    <mapping resource="Mapeo/Proyecto.xml"/>
     <mapping resource="Mapeo/Laboreo.xml"/>
     <mapping resource="Mapeo/EstadoCampo.xml"/>
     <mapping resource="Mapeo/EstadoProyecto.xml"/>

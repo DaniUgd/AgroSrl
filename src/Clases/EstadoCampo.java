@@ -16,7 +16,9 @@ public class EstadoCampo {
     private String descripcion;
     
     public EstadoCampo() {
-    }
+       
+
+}
 
     public EstadoCampo(int idEstado, String descripcion, ArrayList<Campo> campo) {
         this.idEstado = idEstado;

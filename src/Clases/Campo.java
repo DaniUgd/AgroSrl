@@ -18,13 +18,19 @@ private int idCampo;
 ArrayList <Lotes> lotes;
 private EstadoCampo estado;
 
+    @Override
+    public String toString() {
+        return "Campo{" + "tamanio=" + tamanio + ", idCampo=" + idCampo + ", lotes=" + lotes + ", estado=" + estado + '}';
+    }
+ 
     public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes, EstadoCampo estado) {
         this.tamanio = tamanio;
         this.idCampo = idCampo;
         this.lotes = lotes;
         this.estado = estado;
-    }
-
+        
+        
+}
     public Campo(long tamanio, int idCampo, ArrayList<Lotes> lotes) {
         this.tamanio = tamanio;
         this.idCampo = idCampo;
