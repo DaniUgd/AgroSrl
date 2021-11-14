@@ -52,7 +52,7 @@ Contributor(s):
              <column name="Nombre"/>
     </property>
 
-    <list name="lotes" cascade="none">
+    <list name="lotes" cascade="all">
         <key column="fk_Campo"/>
         <index column=""/>
     <one-to-many class="Clases.Lotes"/>

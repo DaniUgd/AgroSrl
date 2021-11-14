@@ -13,8 +13,7 @@ public class AgroSRL {
         Inicio ini = new Inicio(control);
         ini.show(true);
         ini.setLocationRelativeTo(null);
-        //HibernateSession sesion = new HibernateSession ();
-        //sesion.getSession();
+
 
         
        

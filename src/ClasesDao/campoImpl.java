@@ -43,12 +43,35 @@ Campo campo;
 
     @Override
     public void modificar(Campo g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+            session = null;
+            session= HibernateSession.getSession();
+            session.beginTransaction();
+            session.update(g);
+            session.getTransaction().commit();
+            session.close();
+            System.out.println("Exito");
+        } catch (HibernateException hibernateException) {
+            System.out.println(hibernateException);
+            System.out.println("Fallo");
+        }
     }
 
     @Override
     public void eliminar(Campo g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            session = null;
+            session= HibernateSession.getSession();
+            session.beginTransaction();
+            session.delete(g);
+            session.getTransaction().commit();
+            session.close();
+            System.out.println("Exito");
+        } catch (HibernateException hibernateException) {
+            System.out.println(hibernateException);
+            System.out.println("Fallo");
+        }	
+	
     }
 
     @Override
@@ -90,24 +113,13 @@ Campo campo;
                 session = null;
                 session= HibernateSession.getSession();
                 retorno = (Campo) session.get(Campo.class, id);
-                System.out.println("andu");
-            } catch (NullPointerException e){
-                //JOptionPane.showMessageDialog(null,"EL DNI INGRESADO NO EXISTE");
-            }
-            return retorno;
-         /* Campo retorno = null;
-        String consulta="SELECT * From Campo c where c.id=:id";
-            try {
-                session = null;
-                session= HibernateSession.getSession();
-                System.out.println("Exito");
-                retorno = (Campo) session.get(Campo.class, consulta);
                 
-            } catch (HibernateException hibernateException) {
-                System.out.println(hibernateException);
-                System.out.println("Fallo");
+            } catch (NullPointerException e){
+                System.out.println("Falló");
             }
-            return retorno;*/
+            
+            return retorno;
+         
     }
          
         

@@ -12,6 +12,10 @@ import Clases.Lotes;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
 import Interfaces.Inicio;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.lang.ProcessBuilder.Redirect.to;
@@ -19,6 +23,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import static javassist.CtMethod.ConstParameter.integer;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeJava.to;
 /**
@@ -31,19 +40,71 @@ import static jdk.nashorn.internal.objects.NativeJava.to;
 public class AgregarCampo extends javax.swing.JFrame {
     DefaultTableModel dtm = new  DefaultTableModel(); 
     Controlador control;
-    ArrayList <Campo> mostrar= null;
+    Campo campo = null;
     List <Campo> lista = null;
+    JFrame pregunta = new JFrame();
+    JPanel panel = new  JPanel();
+    JLabel label = new JLabel("¿Desea agregar lotes a este campo?");
+    JButton botsi = new JButton();
+    JButton botno = new JButton();
+    ActionListener actionsi = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                AgregarLote agregarL = new AgregarLote(control,NomCampo.getText(),cantHec.getText());
+                
+        }
+    };    
+    ActionListener actionno = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        Campo g =new Campo();
+        
+        EstadoCampo est = new EstadoCampo();
+        List <Lotes> listalo = new ArrayList(); 
+        g.setLotes(listalo);
+        g.setNombre(NomCampo.getText());
+        long tam=parseLong(cantHec.getText());
+        g.setTamanio(tam);
+        int estado=1;
+        est.setIdEstado(estado);
+        g.setEstado(est);
+        
+        TipoSuelo tipos = new TipoSuelo();
+        tipos.setIdSuelo(1);
+        
+        Lotes lot=new Lotes();
+        control.agregarCampo(g);
+        pregunta.setVisible(false);
+        }
+    };
+   
     
+
     
     public AgregarCampo(Controlador control2) {
         control=control2;
+        botsi.setText("Si");
+        botno.setText("No");
+        botsi.setBounds(100, 200, 75, 40);
+        botno.setBounds(300, 200, 75, 40);
+        label.setBounds(145, 50, 500, 75);
+        panel.setSize(500, 300); 
+        panel.setLayout(null);
+        panel.add(label);
+        panel.add(botsi);
+        panel.add(botno); 
+        pregunta.add(panel);
+        pregunta.setSize(500, 300);
+        botsi.addActionListener(actionsi);
+        botno.addActionListener(actionno);
         initComponents();
         String [] titulo = new String []  {"Nro del Campo","Hectareas","Nombre del Campo","Estado del Campo"};
         dtm.setColumnIdentifiers(titulo);
         jTable1.setModel(dtm);
-        lista=control.ActualizarCampo();
-           lista.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion().toString()}).forEachOrdered((campos) -> {
-           dtm.addRow(campos);
+        lista=control.obtenerCampos();
+        lista.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion()}).forEachOrdered((campos) -> {
+        dtm.addRow(campos);
+        
         });
       }
 
@@ -73,6 +134,8 @@ public class AgregarCampo extends javax.swing.JFrame {
         menuBar2 = new java.awt.MenuBar();
         menu3 = new java.awt.Menu();
         menu4 = new java.awt.Menu();
+        jDialog1 = new javax.swing.JDialog();
+        jDialog2 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         label1 = new java.awt.Label();
         jSeparator1 = new javax.swing.JSeparator();
@@ -86,13 +149,16 @@ public class AgregarCampo extends javax.swing.JFrame {
         label4 = new java.awt.Label();
         jScrollPane5 = new javax.swing.JScrollPane();
         NomCampo = new javax.swing.JTextPane();
-        crear = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
         update = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jScrollPane6 = new javax.swing.JScrollPane();
         valorfil = new javax.swing.JTextPane();
         filtro = new javax.swing.JButton();
+        label3 = new java.awt.Label();
+        label5 = new java.awt.Label();
+        label6 = new java.awt.Label();
+        crearcampo = new javax.swing.JButton();
 
         menu1.setLabel("File");
         menuBar1.add(menu1);
@@ -107,10 +173,17 @@ public class AgregarCampo extends javax.swing.JFrame {
         menuBar2.add(menu4);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label1.setText("Ingrese Nombre del campo");
+        label1.setText("Seleccione algun campo de la tabla para modificarlo.");
+        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        label1.getAccessibleContext().setAccessibleName("codCampo");
+
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 50, 751, 19));
 
         label2.setAlignment(java.awt.Label.CENTER);
         label2.setBackground(new java.awt.Color(153, 255, 204));
@@ -118,6 +191,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label2.setPreferredSize(new java.awt.Dimension(300, 20));
         label2.setText("Agro SRL");
+        jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 50));
 
         elim.setText("Eliminar");
         elim.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -130,6 +204,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                 elimActionPerformed(evt);
             }
         });
+        jPanel1.add(elim, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, 114, 36));
 
         jButton2.setText("Volver");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +212,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 114, 36));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,29 +229,37 @@ public class AgregarCampo extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable1);
 
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 206, 576, 149));
+
         cantHec.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane2.setViewportView(cantHec);
 
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 111, -1));
+
         label4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label4.setText("Ingrese la cantidad de Hectareas");
+        label4.setText("Crear Campo:");
+        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         NomCampo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane5.setViewportView(NomCampo);
 
-        crear.setText("Crear");
-        crear.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                crearMouseClicked(evt);
-            }
-        });
-        crear.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crearActionPerformed(evt);
-            }
-        });
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 111, -1));
 
-        update.setText("Actualizar");
+        modificar.setText("Modificar");
+        modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificarMouseClicked(evt);
+            }
+        });
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(modificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 250, 114, 36));
+
+        update.setText("Actualizar Tabla");
         update.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateMouseClicked(evt);
@@ -186,8 +270,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                 updateActionPerformed(evt);
             }
         });
-
-        jLabel1.setText("Filtrar campo por:");
+        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 360, 180, 36));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Hectareas", "Cantidad de Lotes", "Estado" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -195,9 +278,12 @@ public class AgregarCampo extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 105, -1));
 
         valorfil.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane6.setViewportView(valorfil);
+
+        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 105, 25));
 
         filtro.setText("Filtrar");
         filtro.addActionListener(new java.awt.event.ActionListener() {
@@ -205,98 +291,37 @@ public class AgregarCampo extends javax.swing.JFrame {
                 filtroActionPerformed(evt);
             }
         });
+        jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 84, -1));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane2)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(crear, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                            .addComponent(elim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(update, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(crear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(elim, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(update, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filtro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane6))
-                .addGap(92, 92, 92))
-        );
+        label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        label3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        label3.setText("Buscar Campo:");
+        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
 
-        label1.getAccessibleContext().setAccessibleName("codCampo");
+        label5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        label5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        label5.setText("Ingrese la cantidad de Hectareas");
+        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        label6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        label6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        label6.setText("Ingrese Nombre del campo");
+        jPanel1.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+
+        crearcampo.setText("Crear");
+        crearcampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                crearcampoMouseClicked(evt);
+            }
+        });
+        crearcampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crearcampoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(crearcampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 114, 36));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 571));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -306,7 +331,22 @@ public class AgregarCampo extends javax.swing.JFrame {
     }//GEN-LAST:event_elimMouseClicked
 
     private void elimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_elimActionPerformed
-           List <EstadoCampo> estados =null;
+        String id;
+        long ide;
+        
+        
+        id=(String)dtm.getValueAt(1,0);
+        ide=Long.parseLong(id);
+        
+        control.eliminarCampo(ide, lista);
+        
+        
+        
+        
+        
+        
+        
+        /* List <EstadoCampo> estados =null;
            estados=control.MostrarEstadoC();
           
            for(Object obj : estados){
@@ -319,7 +359,7 @@ public class AgregarCampo extends javax.swing.JFrame {
            
            
            
-           }
+           }*/
         
     }//GEN-LAST:event_elimActionPerformed
 
@@ -330,12 +370,87 @@ public class AgregarCampo extends javax.swing.JFrame {
         inicio.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void crearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearMouseClicked
+    private void modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMouseClicked
    
-    }//GEN-LAST:event_crearMouseClicked
+    }//GEN-LAST:event_modificarMouseClicked
 
-    private void crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearActionPerformed
-        Campo g =new Campo();
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        long ide;
+        String id;
+        
+        List <Lotes> lotes = new ArrayList <>();
+        id=String.valueOf(dtm.getValueAt(jTable1.getSelectedRow(),0));
+        ide=Long.parseLong(id);
+        for(Campo c : lista){
+            if(c.getIdCampo().equals(ide)){
+            
+                lotes=c.getLotes();
+                campo=c;
+            
+            }
+        }
+        this.setVisible(false);
+        ModificarCampo modiC = new ModificarCampo(control,campo);
+        modiC.setVisible(true);
+        modiC.setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
+
+    }//GEN-LAST:event_updateMouseClicked
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        
+        dtm.setRowCount(0);
+        
+        lista=control.obtenerCampos();
+        lista.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion()}).forEachOrdered((campos) -> {
+        dtm.addRow(campos);
+        
+        });
+        
+         
+    }//GEN-LAST:event_updateActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroActionPerformed
+        int select = jComboBox1.getSelectedIndex();
+        
+    }//GEN-LAST:event_filtroActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+      
+     
+      
+        
+        
+
+     
+      
+            
+       
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void crearcampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_crearcampoMouseClicked
+        
+    }//GEN-LAST:event_crearcampoMouseClicked
+
+ 
+
+
+    
+    private void crearcampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearcampoActionPerformed
+       pregunta.setLocationRelativeTo(null);
+       pregunta.setVisible(true);
+
+        
+      /*  Campo g =new Campo();
         
         EstadoCampo e = new EstadoCampo();
         List <Lotes> listalo = new ArrayList(); 
@@ -351,45 +466,11 @@ public class AgregarCampo extends javax.swing.JFrame {
         tipos.setIdSuelo(1);
         
         Lotes lot=new Lotes();
-        
-        //g.agregarL(lot);
-        // instanciar EstadCampo g.setEstado();
-        
-        control.agregarCampo(g);
-        
-    }//GEN-LAST:event_crearActionPerformed
 
-    private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked
-
-    }//GEN-LAST:event_updateMouseClicked
-
-    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-       
         
-        lista=control.ActualizarCampo();
-         
-    }//GEN-LAST:event_updateActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroActionPerformed
-        int select = jComboBox1.getSelectedIndex();
+        control.agregarCampo(g);*/
         
-    }//GEN-LAST:event_filtroActionPerformed
-
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-      int indice, ide;
-      String id;
-       
-        indice=jTable1.getSelectedRow();
-        id=(String) (dtm.getValueAt(indice,0));
-        ide=(int) Long.parseLong(id);
-        
-        
-        control.buscarCampo(Long.valueOf(ide));
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_crearcampoActionPerformed
 
    
    
@@ -397,12 +478,13 @@ public class AgregarCampo extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextPane NomCampo;
     private javax.swing.JTextPane cantHec;
-    private javax.swing.JButton crear;
+    private javax.swing.JButton crearcampo;
     private javax.swing.JButton elim;
     private javax.swing.JButton filtro;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -412,13 +494,17 @@ public class AgregarCampo extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private java.awt.Label label1;
     private java.awt.Label label2;
+    private java.awt.Label label3;
     private java.awt.Label label4;
+    private java.awt.Label label5;
+    private java.awt.Label label6;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.Menu menu3;
     private java.awt.Menu menu4;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
+    private javax.swing.JButton modificar;
     private javax.swing.JButton update;
     private javax.swing.JTextPane valorfil;
     // End of variables declaration//GEN-END:variables
