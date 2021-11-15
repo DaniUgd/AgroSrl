@@ -35,12 +35,8 @@ public class Inicio extends javax.swing.JFrame {
         lblimagen = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        estado = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
-        AgregarTiposuelo = new javax.swing.JMenuItem();
-        ModiLA = new javax.swing.JMenuItem();
-        BorrarLA = new javax.swing.JMenuItem();
-        BuscarLA = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,28 +48,20 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenuBar2.add(jMenu2);
 
-        jMenu3.setText("Proyecto");
-        jMenuBar2.add(jMenu3);
-
-        jMenu8.setText("TipoSuelo");
-
-        AgregarTiposuelo.setText("Agregar");
-        AgregarTiposuelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarTiposueloActionPerformed(evt);
+        estado.setText("Estados");
+        estado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                estadoMouseClicked(evt);
             }
         });
-        jMenu8.add(AgregarTiposuelo);
+        jMenuBar2.add(estado);
 
-        ModiLA.setText("Modifica");
-        jMenu8.add(ModiLA);
-
-        BorrarLA.setText("Borrar");
-        jMenu8.add(BorrarLA);
-
-        BuscarLA.setText("Buscar");
-        jMenu8.add(BuscarLA);
-
+        jMenu8.setText("TipoSuelo");
+        jMenu8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu8MouseClicked(evt);
+            }
+        });
         jMenuBar2.add(jMenu8);
 
         setJMenuBar(jMenuBar2);
@@ -99,18 +87,21 @@ public class Inicio extends javax.swing.JFrame {
         agregarCampo.show(true);
     }//GEN-LAST:event_jMenu2MouseClicked
 
-    private void AgregarTiposueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarTiposueloActionPerformed
-        
+    private void estadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_estadoMouseClicked
+        this.setVisible(false);
+        AgregarEstadoCampo agregarE= new AgregarEstadoCampo(control);
+        agregarE.setVisible(true);
+        agregarE.setLocationRelativeTo(null);
+    }//GEN-LAST:event_estadoMouseClicked
+
+    private void jMenu8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu8MouseClicked
         AgregarTipoSuelo agregarT = new AgregarTipoSuelo(control);
         this.setVisible(false);
         agregarT.setVisible(true);
         agregarT.setLocationRelativeTo(null);
-        
-    }//GEN-LAST:event_AgregarTiposueloActionPerformed
+    }//GEN-LAST:event_jMenu8MouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -146,12 +137,8 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem AgregarTiposuelo;
-    private javax.swing.JMenuItem BorrarLA;
-    private javax.swing.JMenuItem BuscarLA;
-    private javax.swing.JMenuItem ModiLA;
+    private javax.swing.JMenu estado;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JLabel lblimagen;

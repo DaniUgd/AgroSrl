@@ -73,11 +73,13 @@ return  estados;
         
         campodao.modificar(g);
 
-
-
-
-
-
+}
+    
+    public void agregarEstadoC(EstadoCampo g){
+    
+        estadocampodao.insertar(g);
+    
+    
     }
     public List <TipoSuelo> obtenerSuelos() {
      List <TipoSuelo> tipos = null;

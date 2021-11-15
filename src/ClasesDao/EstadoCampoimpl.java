@@ -22,7 +22,18 @@ public class EstadoCampoimpl implements DAO {
 private Session session=null;
     @Override
     public void insertar(Object g) {
-       
+       try {
+            session = null;
+            session= HibernateSession.getSession();
+            session.beginTransaction();
+            session.save(g);
+            session.getTransaction().commit();
+            session.close();
+            System.out.println("Exito");
+        } catch (HibernateException hibernateException) {
+            System.out.println(hibernateException);
+            System.out.println("Fallo");
+        }
     }
 
     @Override
@@ -52,7 +63,8 @@ private Session session=null;
 
     @Override
     public Object obtener(Object id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return null;
+        
     }
     
 }

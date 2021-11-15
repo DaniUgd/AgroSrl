@@ -146,16 +146,10 @@ public class AgregarCampo extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         cantHec = new javax.swing.JTextPane();
-        label4 = new java.awt.Label();
         jScrollPane5 = new javax.swing.JScrollPane();
         NomCampo = new javax.swing.JTextPane();
         modificar = new javax.swing.JButton();
         update = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        valorfil = new javax.swing.JTextPane();
-        filtro = new javax.swing.JButton();
-        label3 = new java.awt.Label();
         label5 = new java.awt.Label();
         label6 = new java.awt.Label();
         crearcampo = new javax.swing.JButton();
@@ -180,7 +174,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label1.setText("Seleccione algun campo de la tabla para modificarlo.");
-        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
+        jPanel1.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
         label1.getAccessibleContext().setAccessibleName("codCampo");
 
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 50, 751, 19));
@@ -190,7 +184,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         label2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label2.setPreferredSize(new java.awt.Dimension(300, 20));
-        label2.setText("Agro SRL");
+        label2.setText("Administrar Campos");
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 50));
 
         elim.setText("Eliminar");
@@ -229,22 +223,17 @@ public class AgregarCampo extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 206, 576, 149));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 206, 550, 149));
 
         cantHec.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane2.setViewportView(cantHec);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 111, -1));
-
-        label4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label4.setText("Crear Campo:");
-        jPanel1.add(label4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 111, -1));
 
         NomCampo.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
         jScrollPane5.setViewportView(NomCampo);
 
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 150, 111, -1));
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 111, -1));
 
         modificar.setText("Modificar");
         modificar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,43 +259,17 @@ public class AgregarCampo extends javax.swing.JFrame {
                 updateActionPerformed(evt);
             }
         });
-        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 360, 180, 36));
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Hectareas", "Cantidad de Lotes", "Estado" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 105, -1));
-
-        valorfil.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 204, 0), null));
-        jScrollPane6.setViewportView(valorfil);
-
-        jPanel1.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 105, 25));
-
-        filtro.setText("Filtrar");
-        filtro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filtroActionPerformed(evt);
-            }
-        });
-        jPanel1.add(filtro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 84, -1));
-
-        label3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        label3.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        label3.setText("Buscar Campo:");
-        jPanel1.add(label3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
+        jPanel1.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 370, 180, 36));
 
         label5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label5.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label5.setText("Ingrese la cantidad de Hectareas");
-        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jPanel1.add(label5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         label6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label6.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         label6.setText("Ingrese Nombre del campo");
-        jPanel1.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
+        jPanel1.add(label6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         crearcampo.setText("Crear");
         crearcampo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -321,7 +284,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         });
         jPanel1.add(crearcampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 210, 114, 36));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 571));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 770, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -335,9 +298,8 @@ public class AgregarCampo extends javax.swing.JFrame {
         long ide;
         
         
-        id=(String)dtm.getValueAt(1,0);
+        id=(String)dtm.getValueAt(jTable1.getSelectedRow(),0);
         ide=Long.parseLong(id);
-        
         control.eliminarCampo(ide, lista);
         
         
@@ -346,20 +308,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         
         
         
-        /* List <EstadoCampo> estados =null;
-           estados=control.MostrarEstadoC();
-          
-           for(Object obj : estados){
-               if(obj instanceof EstadoCampo){
-               
-                   EstadoCampo es = ((EstadoCampo) obj);
-                   System.out.println(es.getIdEstado());
-                   System.out.println(es.getDescripcion());
-               }
-           
-           
-           
-           }*/
+
         
     }//GEN-LAST:event_elimActionPerformed
 
@@ -412,15 +361,6 @@ public class AgregarCampo extends javax.swing.JFrame {
         
          
     }//GEN-LAST:event_updateActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void filtroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filtroActionPerformed
-        int select = jComboBox1.getSelectedIndex();
-        
-    }//GEN-LAST:event_filtroActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
       
@@ -480,22 +420,17 @@ public class AgregarCampo extends javax.swing.JFrame {
     private javax.swing.JTextPane cantHec;
     private javax.swing.JButton crearcampo;
     private javax.swing.JButton elim;
-    private javax.swing.JButton filtro;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private java.awt.Label label1;
     private java.awt.Label label2;
-    private java.awt.Label label3;
-    private java.awt.Label label4;
     private java.awt.Label label5;
     private java.awt.Label label6;
     private java.awt.Menu menu1;
@@ -506,6 +441,5 @@ public class AgregarCampo extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar2;
     private javax.swing.JButton modificar;
     private javax.swing.JButton update;
-    private javax.swing.JTextPane valorfil;
     // End of variables declaration//GEN-END:variables
 }
