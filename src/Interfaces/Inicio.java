@@ -8,7 +8,7 @@ package Interfaces;
 import Controladora.Controlador;
 import Interfaces.Campo.AgregarCampo;
 import Interfaces.Campo.ModificarCampo;
-import Interfaces.AgregarProyecto;
+import Interfaces.Proyecto.AgregarProyecto;
 
 
 
@@ -37,7 +37,6 @@ public class Inicio extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         estado = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,14 +63,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenuBar2.add(jMenu8);
-
-        jMenu1.setText("Proyecto");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar2.add(jMenu1);
 
         setJMenuBar(jMenuBar2);
 
@@ -110,14 +101,6 @@ public class Inicio extends javax.swing.JFrame {
         agregarT.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenu8MouseClicked
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        AgregarProyecto agp = new AgregarProyecto(control);  
-        this.setVisible(false);
-        agp.setVisible(true);
-        agp.setLocationRelativeTo(null);
-        
-    }//GEN-LAST:event_jMenu1MouseClicked
-
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -155,7 +138,6 @@ public class Inicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu estado;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar2;
