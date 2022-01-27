@@ -3,6 +3,7 @@ package Interfaces;
 
 import Clases.TipoSuelo;
 import Controladora.Controlador;
+import Interfaces.Excepciones.Warning;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -11,6 +12,8 @@ public class AgregarTipoSuelo extends javax.swing.JFrame {
 Controlador control= null;
 DefaultTableModel dtm = new DefaultTableModel();
 List <TipoSuelo> tiposuelos = null;
+Warning er = new Warning();
+
     public AgregarTipoSuelo() {
         initComponents();
     }
@@ -111,9 +114,15 @@ List <TipoSuelo> tiposuelos = null;
     }//GEN-LAST:event_nomTiposActionPerformed
 
     private void agregarTSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTSActionPerformed
+      if("".equals(nomTipos.getText())){
+           er.setVisible(true);
+           er.setLocationRelativeTo(null);
+      }else{
        TipoSuelo tipo = new TipoSuelo();
        tipo.setDescripcion(nomTipos.getText());
        control.agregarTipoSuelo(tipo);
+      
+      }
     }//GEN-LAST:event_agregarTSActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed

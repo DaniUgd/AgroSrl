@@ -8,6 +8,7 @@ package Interfaces;
 import Clases.EstadoCampo;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
+import Interfaces.Excepciones.Warning;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +20,8 @@ public class AgregarEstadoCampo extends javax.swing.JFrame {
 Controlador control= null;
 DefaultTableModel dtm = new DefaultTableModel();
 List <EstadoCampo> estados = null;
+Warning er = new Warning();
+
     public AgregarEstadoCampo() {
         initComponents();
     }
@@ -43,12 +46,12 @@ List <EstadoCampo> estados = null;
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        nuevoest = new javax.swing.JTextField();
         volver = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         agregaE1 = new javax.swing.JButton();
         label2 = new java.awt.Label();
+        nuevoest = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,13 +59,6 @@ List <EstadoCampo> estados = null;
 
         jLabel1.setText("Ingrese un nuevo Estado ");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 132, -1));
-
-        nuevoest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nuevoestActionPerformed(evt);
-            }
-        });
-        jPanel1.add(nuevoest, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 120, -1));
 
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +98,7 @@ List <EstadoCampo> estados = null;
         label2.setPreferredSize(new java.awt.Dimension(300, 20));
         label2.setText("Administrar Estados");
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 420, 50));
+        jPanel1.add(nuevoest, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,10 +114,6 @@ List <EstadoCampo> estados = null;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nuevoestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoestActionPerformed
-        
-    }//GEN-LAST:event_nuevoestActionPerformed
-
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
         this.setVisible(false);
         Inicio ini = new Inicio(control);
@@ -130,9 +123,17 @@ List <EstadoCampo> estados = null;
     }//GEN-LAST:event_volverActionPerformed
 
     private void agregaE1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregaE1ActionPerformed
-       EstadoCampo estC = new EstadoCampo();
-        estC.setDescripcion(nuevoest.getText());
-       control.agregarEstadoC(estC);
+       
+        
+        if("".equals(nuevoest.getText())){
+            er.setVisible(true);
+            er.setLocationRelativeTo(null);
+            
+        }else{
+            EstadoCampo estC = new EstadoCampo();
+            estC.setDescripcion(nuevoest.getText());
+            control.agregarEstadoC(estC);
+        }
     }//GEN-LAST:event_agregaE1ActionPerformed
 
 

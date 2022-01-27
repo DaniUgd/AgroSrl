@@ -48,5 +48,6 @@ Contributor(s):
     <property name="descripcion" type="java.lang.String">
              <column name="DESCRIPCION"/>
     </property>
+    
   </class>
 </hibernate-mapping>

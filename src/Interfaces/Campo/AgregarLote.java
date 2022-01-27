@@ -6,6 +6,7 @@ import Clases.EstadoCampo;
 import Clases.Lotes;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
+import Interfaces.Excepciones.Warning;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,28 +21,23 @@ public class AgregarLote extends javax.swing.JFrame {
 Controlador control;
 List <Lotes> lotes = new ArrayList<>();
 List <TipoSuelo> suelos=null;
-long tamanio;
-String nombreC;
+Warning er = new Warning();
+Campo campo;
 
 public AgregarLote() {
         initComponents();
     }
 
-    AgregarLote(Controlador control2,String nom, String tam) {
+    AgregarLote(Controlador control2,Campo c) {
         initComponents();
         control=control2;
-        tamanio=Long.parseLong(tam);   
-        nombreC=nom;
+        campo=c;
+        lotes=campo.getLotes();
         suelos=control.obtenerSuelos();
-
-        for(TipoSuelo t : suelos){
-                
+        suelos.forEach((t) -> {
             combox.addItem(t.getDescripcion());
-        
-       }
-
-        
-        this.setVisible(true);
+    });
+            this.setVisible(true);
         
         
     }
@@ -141,31 +137,35 @@ public AgregarLote() {
             }
         });
 
+        combox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tamanioL)
+                            .addComponent(combox, 0, 104, Short.MAX_VALUE))
+                        .addGap(46, 46, 46))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tamanioL)
-                    .addComponent(combox, 0, 104, Short.MAX_VALUE))
-                .addGap(46, 46, 46))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(volver, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(agregalote)
-                .addGap(139, 139, 139))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(volver, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(agregalote)
+                        .addGap(139, 139, 139))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,41 +207,45 @@ public AgregarLote() {
     }//GEN-LAST:event_tamanioLActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-      Campo c = new Campo();
-      EstadoCampo e = new EstadoCampo(1,"Creado");
-      c.setNombre(nombreC);
-      c.setTamanio(tamanio);
-      c.setEstado(e);
-      System.out.println(lotes);
-      c.setLotes(lotes);
-      
-      control.agregarCampo(c);
+      campo.setLotes(lotes);
+      control.modificarCampo(campo);
+      this.setVisible(false);
+      ModificarCampo volveratras= new ModificarCampo(control,campo);
+      volveratras.setVisible(true);
+      volveratras.setLocationRelativeTo(null);
     }//GEN-LAST:event_volverActionPerformed
 
     private void agregaloteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregaloteActionPerformed
         long hectareas;
-        String inde;
-        
+        String inde,hec=tamanioL.getText();
+        try {
         Lotes l = new Lotes();
-        hectareas=Long.parseLong(tamanioL.getText());
+        hectareas=Long.parseLong(hec);
         inde=combox.getItemAt(combox.getSelectedIndex());
         for (TipoSuelo t : suelos){
             if(inde.equals(t.getDescripcion())){
                 
-                l.setTiposuelo(t); 
-            
-            }
-        }
+            l.setTiposuelo(t);
+    }};
         
         l.setTamanio(hectareas);
         
         lotes.add(l);
         
         control.agregarLotes(l);
-        
+        }catch(NumberFormatException z){
+    
+         er.setVisible(true);
+         er.setLocationRelativeTo(null);
+         
+        }
         
         
     }//GEN-LAST:event_agregaloteActionPerformed
+
+    private void comboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxActionPerformed
+        
+    }//GEN-LAST:event_comboxActionPerformed
 
     /**
      * @param args the command line arguments

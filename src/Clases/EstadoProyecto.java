@@ -12,13 +12,18 @@ package Clases;
 public class EstadoProyecto {
    private int idEstado;
    private String descripcion;
-   
+
     public EstadoProyecto(int idEstado, String descripcion) {
         this.idEstado = idEstado;
         this.descripcion = descripcion;
     }
 
     public EstadoProyecto() {
+    }
+
+    @Override
+    public String toString() {
+        return "EstadoProyecto{" + "idEstado=" + idEstado + ", descripcion=" + descripcion + '}';
     }
 
     public int getIdEstado() {
@@ -36,7 +41,8 @@ public class EstadoProyecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+   
+   
    
 
     

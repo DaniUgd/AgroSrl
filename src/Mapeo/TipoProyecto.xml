@@ -10,5 +10,11 @@
     <property name="descripcion" type="java.lang.String">
              <column name="DESCRIPCION"/>
     </property>
+    <list name="laboreos" cascade="none">
+        <key column="fk_tipoproyecto"/>
+        <index column=""/>
+    <one-to-many class="Clases.Laboreo"/>
+    </list>
+
   </class>
 </hibernate-mapping>

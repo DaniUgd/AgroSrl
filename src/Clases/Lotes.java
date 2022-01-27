@@ -14,12 +14,6 @@ public class Lotes {
     private long tamanio;
     TipoSuelo tiposuelo;
 
-    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo) {
-        this.idLote = idLote;
-        this.tamanio = tamanio;
-        this.tiposuelo = tiposuelo;
-    }
-
     public Lotes() {
     }
 
@@ -28,7 +22,12 @@ public class Lotes {
         return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + '}';
     }
 
-    
+    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo) {
+        this.idLote = idLote;
+        this.tamanio = tamanio;
+        this.tiposuelo = tiposuelo;
+    }
+
     public int getIdLote() {
         return idLote;
     }
@@ -52,8 +51,6 @@ public class Lotes {
     public void setTiposuelo(TipoSuelo tiposuelo) {
         this.tiposuelo = tiposuelo;
     }
-
-    
 
    
 

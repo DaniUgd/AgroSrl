@@ -5,6 +5,8 @@
  */
 package Clases;
 
+import java.util.List;
+
 /**
  *
  * @author Daniel
@@ -12,13 +14,20 @@ package Clases;
 public class TipoProyecto {
     private int idTipoProyecto;
     private String descripcion;
+    private List <Laboreo> laboreos;
 
-    public TipoProyecto() {
-    }
-
-    public TipoProyecto(int idTipoProyecto, String descripcion) {
+    public TipoProyecto(int idTipoProyecto, String descripcion, List<Laboreo> laboreos) {
         this.idTipoProyecto = idTipoProyecto;
         this.descripcion = descripcion;
+        this.laboreos = laboreos;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoProyecto{" + "idTipoProyecto=" + idTipoProyecto + ", descripcion=" + descripcion + ", laboreos=" + laboreos + '}';
+    }
+
+    public TipoProyecto() {
     }
 
     public int getIdTipoProyecto() {
@@ -37,6 +46,13 @@ public class TipoProyecto {
         this.descripcion = descripcion;
     }
 
+    public List<Laboreo> getLaboreos() {
+        return laboreos;
+    }
 
+    public void setLaboreos(List<Laboreo> laboreos) {
+        this.laboreos = laboreos;
+    }
+    
     
 }

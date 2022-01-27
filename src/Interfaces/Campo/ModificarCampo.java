@@ -33,16 +33,6 @@ DefaultTableModel dtm = new DefaultTableModel();
         listalotes= c.getLotes();
         suelos=control.obtenerSuelos();
         estados = control.obtenerEstados();
-         for(EstadoCampo e : estados){
-                
-            modiest.addItem(e.getDescripcion());
-        
-       }
-        for(TipoSuelo t : suelos){
-                
-            modisuelo.addItem(t.getDescripcion());
-        
-       }
         String [] columnas = new String [] {"Nro Lote","Hectareas","Tipo de Suelo"};
         dtm.setColumnIdentifiers(columnas);
         jTable1.setModel(dtm);
@@ -67,19 +57,14 @@ DefaultTableModel dtm = new DefaultTableModel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         nuevonom = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
         volver = new javax.swing.JButton();
         label2 = new java.awt.Label();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         modicampo = new javax.swing.JButton();
         nuevahec = new javax.swing.JTextField();
-        hectareasL = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        modisuelo = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        modiest = new javax.swing.JComboBox<>();
+        AgregarL = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,7 +83,7 @@ DefaultTableModel dtm = new DefaultTableModel();
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 390, 120));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 390, 120));
 
         nuevonom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,16 +92,13 @@ DefaultTableModel dtm = new DefaultTableModel();
         });
         jPanel1.add(nuevonom, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 110, -1));
 
-        jLabel2.setText("Cambiar Estado");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 volverActionPerformed(evt);
             }
         });
-        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 300, 90, 30));
+        jPanel1.add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 300, 70, 30));
 
         label2.setAlignment(java.awt.Label.CENTER);
         label2.setBackground(new java.awt.Color(153, 255, 204));
@@ -126,11 +108,8 @@ DefaultTableModel dtm = new DefaultTableModel();
         label2.setText("Modificar Campo");
         jPanel1.add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 40));
 
-        jLabel4.setText("Tipo del Suelo");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, 80, -1));
-
         jLabel5.setText("Lotes Existentes");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
         modicampo.setText("Modificar");
         modicampo.addActionListener(new java.awt.event.ActionListener() {
@@ -138,52 +117,34 @@ DefaultTableModel dtm = new DefaultTableModel();
                 modicampoActionPerformed(evt);
             }
         });
-        jPanel1.add(modicampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 300, -1, 30));
+        jPanel1.add(modicampo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 30));
 
         nuevahec.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nuevahecActionPerformed(evt);
             }
         });
-        jPanel1.add(nuevahec, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 110, -1));
-
-        hectareasL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hectareasLActionPerformed(evt);
-            }
-        });
-        jPanel1.add(hectareasL, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 230, 110, -1));
+        jPanel1.add(nuevahec, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 110, -1));
 
         jLabel6.setText("Cambiar Hectareas");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
-
-        jLabel8.setText("Hectareas del Lote");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 230, -1, -1));
-
-        modisuelo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modisueloActionPerformed(evt);
-            }
-        });
-        jPanel1.add(modisuelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, 90, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         jLabel3.setText("Cambiar Nombre");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
 
-        modiest.addActionListener(new java.awt.event.ActionListener() {
+        AgregarL.setText("Agregar Lote");
+        AgregarL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modiestActionPerformed(evt);
+                AgregarLActionPerformed(evt);
             }
         });
-        jPanel1.add(modiest, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 110, -1));
+        jPanel1.add(AgregarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 120, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,37 +170,28 @@ DefaultTableModel dtm = new DefaultTableModel();
     private void modicampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modicampoActionPerformed
        String nombreC;
        String hectC;
-       String inde;
-       long hectL,hectaC;
+       long hectarea;
        nombreC=nuevonom.getText();
        hectC=nuevahec.getText();
-       hectaC=Long.parseLong(hectC);
-        if(hectareasL!=null){
+       if(!"".equals(nombreC)){
+       campo.setNombre(nombreC);
+       hectarea=campo.getTamanio();
+       campo.setTamanio(hectarea);
+       }else{
+            nombreC=campo.getNombre();
             campo.setNombre(nombreC);
-            campo.setTamanio(hectaC);
-            Lotes l = new Lotes();
-            hectL=Long.parseLong(hectareasL.getText());
-            inde=modisuelo.getItemAt(modisuelo.getSelectedIndex());
-            for (TipoSuelo t : suelos){
-                if(inde.equals(t.getDescripcion())){
-                
-                    l.setTiposuelo(t); 
-            
-                }
-             }
-        
-            l.setTamanio(hectL);
-            control.agregarLotes(l);
-            campo.getLotes().add(l);
-            control.modificarCampo(campo);
-        }else{
-            campo.setNombre(nombreC);
-            campo.setTamanio(hectaC);
-            control.modificarCampo(campo);
-        
-        
-        }
+       }
        
+       if(!"".equals(nuevahec.getText())){
+       hectarea=Long.parseLong(hectC);
+       campo.setTamanio(hectarea);
+       
+       }else{
+           hectarea=campo.getTamanio();
+           campo.setTamanio(hectarea);
+       
+       }
+        control.modificarCampo(campo);
         
         
         
@@ -249,17 +201,15 @@ DefaultTableModel dtm = new DefaultTableModel();
         
     }//GEN-LAST:event_nuevahecActionPerformed
 
-    private void hectareasLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hectareasLActionPerformed
-      
-    }//GEN-LAST:event_hectareasLActionPerformed
-
-    private void modisueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modisueloActionPerformed
-       
-    }//GEN-LAST:event_modisueloActionPerformed
-
-    private void modiestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modiestActionPerformed
+    private void AgregarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarLActionPerformed
+      AgregarLote agregarL = new AgregarLote(control,campo);
+      this.setVisible(false);
+      agregarL.setVisible(true);
+      agregarL.setLocationRelativeTo(null);
         
-    }//GEN-LAST:event_modiestActionPerformed
+        
+        
+    }//GEN-LAST:event_AgregarLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,20 +247,15 @@ DefaultTableModel dtm = new DefaultTableModel();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField hectareasL;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton AgregarL;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.awt.Label label2;
     private javax.swing.JButton modicampo;
-    private javax.swing.JComboBox<String> modiest;
-    private javax.swing.JComboBox<String> modisuelo;
     private javax.swing.JTextField nuevahec;
     private javax.swing.JTextField nuevonom;
     private javax.swing.JButton volver;

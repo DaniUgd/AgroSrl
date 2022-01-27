@@ -52,6 +52,5 @@ Contributor(s):
 <many-to-one name="tiposuelo" cascade="none" class="Clases.TipoSuelo">
         <column name="FKTIPOSUELO"/>
 </many-to-one>
-
   </class>
 </hibernate-mapping>

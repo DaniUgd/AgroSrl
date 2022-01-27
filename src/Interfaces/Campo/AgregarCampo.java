@@ -11,6 +11,7 @@ import Clases.EstadoCampo;
 import Clases.Lotes;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
+import Interfaces.Excepciones.Warning;
 import Interfaces.Inicio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,17 +48,12 @@ public class AgregarCampo extends javax.swing.JFrame {
     JLabel label = new JLabel("¿Desea agregar lotes a este campo?");
     JButton botsi = new JButton();
     JButton botno = new JButton();
-    ActionListener actionsi = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-                AgregarLote agregarL = new AgregarLote(control,NomCampo.getText(),cantHec.getText());
-                
-        }
-    };    
+    ActionListener actionsi;    
     ActionListener actionno = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-        Campo g =new Campo();
+        try {
+            Campo g =new Campo();
         
         EstadoCampo est = new EstadoCampo();
         List <Lotes> listalo = new ArrayList(); 
@@ -75,13 +71,51 @@ public class AgregarCampo extends javax.swing.JFrame {
         Lotes lot=new Lotes();
         control.agregarCampo(g);
         pregunta.setVisible(false);
-        }
+        }catch (NumberFormatException z){
+        Warning er = new Warning();
+         er.setVisible(true);
+           er.setLocationRelativeTo(null);
+           pregunta.setVisible(false);
+        
+        
+        
+        }}
     };
    
     
 
     
     public AgregarCampo(Controlador control2) {
+        this.actionsi = new ActionListener() {
+        AgregarLote agregarL;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Campo g =new Campo();
+                    
+                    EstadoCampo est = new EstadoCampo();
+                    List <Lotes> listalo = new ArrayList();
+                    g.setLotes(listalo);
+                    g.setNombre(NomCampo.getText());
+                    long tam=parseLong(cantHec.getText());
+                    g.setTamanio(tam);
+                    int estado=1;
+                    est.setIdEstado(estado);
+                    g.setEstado(est);
+                    
+                    TipoSuelo tipos = new TipoSuelo();
+                    tipos.setIdSuelo(1);
+                    
+                    control.agregarCampo(g);
+                    agregarL = new AgregarLote(control,g);
+                    
+                }catch(NumberFormatException z){
+                    Warning er = new Warning();
+                    er.setVisible(true);
+                    er.setLocationRelativeTo(null);
+                    pregunta.setVisible(false);
+                }}
+        };
         control=control2;
         botsi.setText("Si");
         botno.setText("No");
@@ -109,6 +143,33 @@ public class AgregarCampo extends javax.swing.JFrame {
       }
 
     public AgregarCampo() {
+        this.actionsi = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Campo g =new Campo();
+                    
+                    EstadoCampo est = new EstadoCampo();
+                    List <Lotes> listalo = new ArrayList();
+                    g.setLotes(listalo);
+                    g.setNombre(NomCampo.getText());
+                    long tam=parseLong(cantHec.getText());
+                    g.setTamanio(tam);
+                    int estado=1;
+                    est.setIdEstado(estado);
+                    g.setEstado(est);
+                    
+                    TipoSuelo tipos = new TipoSuelo();
+                    tipos.setIdSuelo(1);
+                    
+                    control.agregarCampo(g);
+                    AgregarLote agregarL = new AgregarLote(control,g);
+                    
+                }catch(NumberFormatException z){
+                    Error er = new Error();
+                    
+                }}
+        };
        
        initComponents();
        this.setLocationRelativeTo(null);
@@ -386,30 +447,12 @@ public class AgregarCampo extends javax.swing.JFrame {
 
     
     private void crearcampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearcampoActionPerformed
+    try{
        pregunta.setLocationRelativeTo(null);
        pregunta.setVisible(true);
-
-        
-      /*  Campo g =new Campo();
-        
-        EstadoCampo e = new EstadoCampo();
-        List <Lotes> listalo = new ArrayList(); 
-        g.setLotes(listalo);
-        g.setNombre(NomCampo.getText());
-        long tam=parseLong(cantHec.getText());
-        g.setTamanio(tam);
-        int estado=1;
-        e.setIdEstado(estado);
-        g.setEstado(e);
-        
-        TipoSuelo tipos = new TipoSuelo();
-        tipos.setIdSuelo(1);
-        
-        Lotes lot=new Lotes();
-
-        
-        control.agregarCampo(g);*/
-        
+       }catch(Exception e){
+           System.out.println(e.getMessage());
+ }
     }//GEN-LAST:event_crearcampoActionPerformed
 
    

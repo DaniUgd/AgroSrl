@@ -6,6 +6,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -14,21 +15,24 @@ import java.util.ArrayList;
 public class Proyecto {
    private int idProyecto;
    private  String descripcion;
-   ArrayList <Laboreo> laboreo;
+   private List <Lotes> lotes;
    private EstadoProyecto estado;
+   private TipoProyecto tproyecto;
 
     public Proyecto() {
     }
 
-    public Proyecto(int idProyecto, String descripcion) {
+    public Proyecto(int idProyecto, String descripcion, List<Lotes> lotes, EstadoProyecto estado, TipoProyecto tproyecto) {
         this.idProyecto = idProyecto;
         this.descripcion = descripcion;
+        this.lotes = lotes;
+        this.estado = estado;
+        this.tproyecto = tproyecto;
     }
 
-    public Proyecto(int idProyecto, String descripcion, ArrayList<Laboreo> laboreo) {
-        this.idProyecto = idProyecto;
-        this.descripcion = descripcion;
-        this.laboreo = laboreo;
+    @Override
+    public String toString() {
+        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", estado=" + estado + ", tproyecto=" + tproyecto + '}';
     }
 
     public int getIdProyecto() {
@@ -47,14 +51,31 @@ public class Proyecto {
         this.descripcion = descripcion;
     }
 
-    public ArrayList<Laboreo> getLaboreo() {
-        return laboreo;
+    public List<Lotes> getLotes() {
+        return lotes;
     }
 
-    public void setLaboreo(ArrayList<Laboreo> laboreo) {
-        this.laboreo = laboreo;
+    public void setLotes(List<Lotes> lotes) {
+        this.lotes = lotes;
     }
+
+    public EstadoProyecto getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoProyecto estado) {
+        this.estado = estado;
+    }
+
+    public TipoProyecto getTproyecto() {
+        return tproyecto;
+    }
+
+    public void setTproyecto(TipoProyecto tproyecto) {
+        this.tproyecto = tproyecto;
+    }
+ 
+
    
-   
-   
+    
 }

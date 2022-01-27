@@ -13,12 +13,17 @@ public class Laboreo {
     private int idLaboreo;
     private String descripcion;
 
-    public Laboreo() {
-    }
-
     public Laboreo(int idLaboreo, String descripcion) {
         this.idLaboreo = idLaboreo;
         this.descripcion = descripcion;
+    }
+
+    public Laboreo() {
+    }
+
+    @Override
+    public String toString() {
+        return "Laboreo{" + "idLaboreo=" + idLaboreo + ", descripcion=" + descripcion + '}';
     }
 
     public int getIdLaboreo() {
@@ -36,6 +41,8 @@ public class Laboreo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+     
+  
     
     
 }
