@@ -10,27 +10,22 @@ package Clases;
  * @author Daniel
  */
 public class Laboreo {
-    private int idLaboreo;
+    private Long idLaboreo;
     private String descripcion;
-
-    public Laboreo(int idLaboreo, String descripcion) {
-        this.idLaboreo = idLaboreo;
-        this.descripcion = descripcion;
-    }
 
     public Laboreo() {
     }
 
-    @Override
-    public String toString() {
-        return "Laboreo{" + "idLaboreo=" + idLaboreo + ", descripcion=" + descripcion + '}';
+    public Laboreo(Long idLaboreo, String descripcion) {
+        this.idLaboreo = idLaboreo;
+        this.descripcion = descripcion;
     }
 
-    public int getIdLaboreo() {
+    public Long getIdLaboreo() {
         return idLaboreo;
     }
 
-    public void setIdLaboreo(int idLaboreo) {
+    public void setIdLaboreo(Long idLaboreo) {
         this.idLaboreo = idLaboreo;
     }
 
@@ -41,7 +36,13 @@ public class Laboreo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-     
+
+    @Override
+    public String toString() {
+        return "Laboreo{" + "idLaboreo=" + idLaboreo + ", descripcion=" + descripcion + '}';
+    }
+
+    
   
     
     

@@ -18,11 +18,13 @@
     <many-to-one name="estado" cascade="none" class="Clases.EstadoProyecto">
         <column name="FKESTADOP"/>
     </many-to-one>
-    <many-to-one name="tproyecto" cascade="none" class="Clases.TipoProyecto">
-        <column name="FKTIPOPROYECTO"/>
-    </many-to-one>
     
-
+    <list name="tpsuelo" cascade="none">
+        <key column="fk_proyecto"/>
+        <index column=""/>
+    <one-to-many class="Clases.TipoSuelo"/>
+    </list>
+    
 </class>
 
 

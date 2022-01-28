@@ -22,6 +22,7 @@ public class Controlador {
  private final EstadoCampoimpl estadocampodao = new EstadoCampoimpl();
  private final TipoSueloimpl tiposuelodao = new TipoSueloimpl();
  private final Lotesimpl lotesdao= new Lotesimpl();
+ private final Laboreoimpl laboreodao = new Laboreoimpl();
 public void agregarCampo(Campo g){
     campodao.insertar(g);
 }
@@ -50,24 +51,10 @@ return  estados;
     public void eliminarCampo(long ide,List<Campo> campos){
         System.out.println(campos);
         for(Campo c : campos){
-            
             if(c.getIdCampo()==ide){
-            
                 campodao.eliminar(c);
-                
-            
             }
-        
-        
-        
         }
-        
-        
-    
-        
-        
-    
-    
     }
     public void modificarCampo(Campo g){
         
@@ -76,10 +63,7 @@ return  estados;
 }
     
     public void agregarEstadoC(EstadoCampo g){
-    
         estadocampodao.insertar(g);
-    
-    
     }
     public List <TipoSuelo> obtenerSuelos() {
      List <TipoSuelo> tipos = null;
@@ -97,7 +81,16 @@ return  estados;
         tiposuelodao.insertar(tipo);
     }
     
+    public void agregarLaboreo(Laboreo labor) {
+        laboreodao.insertar(labor);
+    }
     
+     public List <Laboreo> obtenerLaboreos() {
+         List <Laboreo> labores = null;
+        labores=laboreodao.obtenerTodos();
+        
+        return labores;
     
-    
+    }
+
 }

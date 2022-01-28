@@ -41,7 +41,7 @@ Contributor(s):
 -->
 <hibernate-mapping>
   <class  name="Clases.Laboreo" table="Laboreos">
-      <id name="idLaboreo" type="int">
+      <id name="idLaboreo" type="long">
             <column name="IDLABOREO" />
             <generator class="native" />
     </id>

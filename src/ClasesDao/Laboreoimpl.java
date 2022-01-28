@@ -5,27 +5,25 @@
  */
 package ClasesDao;
 
+
 import Clases.Campo;
+import Clases.Laboreo;
 import Controladora.HibernateSession;
-import interDao.CampoDao;
-import java.util.ArrayList;
+import interDao.LaboreoDao;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
 
-
-public class campoImpl implements CampoDao{
+/**
+ *
+ * @author Daniel
+ */
+public class Laboreoimpl implements LaboreoDao {
 private Session session;
-Campo campo;
-    public campoImpl() {
-    }
 
     @Override
-    public void insertar(Campo g) {
+    public void insertar(Laboreo g) {
         try {
             session = null;
             session= HibernateSession.getSession();
@@ -37,55 +35,30 @@ Campo campo;
         } catch (HibernateException hibernateException) {
             System.out.println(hibernateException);
             System.out.println("Fallo");
-          }
-		
-   }
-
-    @Override
-    public void modificar(Campo g) {
-       try {
-            session = null;
-            session= HibernateSession.getSession();
-            session.beginTransaction();
-            session.update(g);
-            session.getTransaction().commit();
-            session.close();
-            System.out.println("Exito");
-        } catch (HibernateException hibernateException) {
-            System.out.println(hibernateException);
-            System.out.println("Fallo");
         }
     }
 
     @Override
-    public void eliminar(Campo g) {
-        try {
-            session = null;
-            session= HibernateSession.getSession();
-            session.beginTransaction();
-            session.delete(g);
-            session.getTransaction().commit();
-            session.close();
-            System.out.println("Exito");
-        } catch (HibernateException hibernateException) {
-            System.out.println(hibernateException);
-            System.out.println("Fallo");
-        }	
-	
+    public void modificar(Laboreo g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Campo> obtenerTodos() {
-     
-        Transaction tr= null;
-        List <Campo> mostrar = null;
+    public void eliminar(Laboreo g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Laboreo> obtenerTodos() {
+       Transaction tr= null;
+        List <Laboreo> mostrar = null;
 
                 try {
                     session = null;
                     session= HibernateSession.getSession();
                     tr=session.beginTransaction();
                     tr.setTimeout(2);
-                    mostrar= session.createCriteria(Campo.class).list();
+                    mostrar= session.createCriteria(Laboreo.class).list();
                     System.out.println(mostrar);
                     for(Object obj :mostrar ){
                         System.out.println(obj.toString());
@@ -99,30 +72,24 @@ Campo campo;
                      session.getTransaction().rollback();
                 }
                 return mostrar;
-        }
+    }
 
     @Override
-    public Campo obtener(Long id) {
-        Campo retorno = null;
+    public Laboreo obtener(Long id) {
+       Laboreo retorno = null;
             try {
                 session = null;
                 session= HibernateSession.getSession();
-                retorno = (Campo) session.get(Campo.class, id);
+                retorno = (Laboreo) session.get(Laboreo.class, id);
                 
             } catch (NullPointerException e){
                 System.out.println("Falló");
             }
+            
             return retorno;
     }
-        
-    }
-
-  
-
-    
-
-    
-    
     
     
 
+
+}

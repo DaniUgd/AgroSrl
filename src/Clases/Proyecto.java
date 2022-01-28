@@ -13,33 +13,28 @@ import java.util.List;
  * @author Daniel
  */
 public class Proyecto {
-   private int idProyecto;
+   private Long idProyecto;
    private  String descripcion;
    private List <Lotes> lotes;
    private EstadoProyecto estado;
-   private TipoProyecto tproyecto;
+   private List <TipoSuelo> tpsuelo;
 
-    public Proyecto() {
-    }
-
-    public Proyecto(int idProyecto, String descripcion, List<Lotes> lotes, EstadoProyecto estado, TipoProyecto tproyecto) {
+    public Proyecto(Long idProyecto, String descripcion, List<Lotes> lotes, EstadoProyecto estado, List<TipoSuelo> tpsuelo) {
         this.idProyecto = idProyecto;
         this.descripcion = descripcion;
         this.lotes = lotes;
         this.estado = estado;
-        this.tproyecto = tproyecto;
+        this.tpsuelo = tpsuelo;
     }
 
-    @Override
-    public String toString() {
-        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", estado=" + estado + ", tproyecto=" + tproyecto + '}';
+    public Proyecto() {
     }
 
-    public int getIdProyecto() {
+    public Long getIdProyecto() {
         return idProyecto;
     }
 
-    public void setIdProyecto(int idProyecto) {
+    public void setIdProyecto(Long idProyecto) {
         this.idProyecto = idProyecto;
     }
 
@@ -67,14 +62,27 @@ public class Proyecto {
         this.estado = estado;
     }
 
-    public TipoProyecto getTproyecto() {
-        return tproyecto;
+    public List<TipoSuelo> getTpsuelo() {
+        return tpsuelo;
     }
 
-    public void setTproyecto(TipoProyecto tproyecto) {
-        this.tproyecto = tproyecto;
+    public void setTpsuelo(List<TipoSuelo> tpsuelo) {
+        this.tpsuelo = tpsuelo;
     }
- 
+
+    @Override
+    public String toString() {
+        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", estado=" + estado + ", tpsuelo=" + tpsuelo + '}';
+    }
+   
+   
+
+   
+   
+
+    
+
+    
 
    
     
