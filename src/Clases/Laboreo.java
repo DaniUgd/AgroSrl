@@ -39,7 +39,7 @@ public class Laboreo {
 
     @Override
     public String toString() {
-        return "Laboreo{" + "idLaboreo=" + idLaboreo + ", descripcion=" + descripcion + '}';
+        return  descripcion;
     }
 
     

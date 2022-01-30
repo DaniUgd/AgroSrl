@@ -16,7 +16,6 @@ public class Proyecto {
    private Long idProyecto;
    private String descripcion;
    private List <Lotes> lotes;
-   
    private List <TipoSuelo> tpsuelo;
    private List <Laboreo> laboreos;
 

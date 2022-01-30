@@ -24,6 +24,7 @@ public class Controlador {
  private final Lotesimpl lotesdao= new Lotesimpl();
  private final Laboreoimpl laboreodao = new Laboreoimpl();
  private final EstadoProyectoimpl estadopdao = new EstadoProyectoimpl();
+ private final Proyectoimpl proyectodao = new Proyectoimpl();
  
  public void agregarCampo(Campo g){
     campodao.insertar(g);
@@ -106,10 +107,18 @@ return  estados;
     
     }
     
+    public void agregarP(Proyecto proy) {
+        proyectodao.insertar(proy);
    
-
+    }
      
-     
+     public List <Proyecto> obtenerProyectos() {
+         List <Proyecto> proy= null;
+        proy=proyectodao.obtenerTodos();
+        
+        return proy;
+    
+    }
      
 
 }

@@ -294,6 +294,9 @@ Proyecto proyecto = new Proyecto();
             proyecto.setDescripcion(nomCultivo.getText());
             proyecto.setLaboreos(lselect);
             proyecto.setTpsuelo(tsselect);
+            control.agregarP(proyecto);
+            
+            
             
     }//GEN-LAST:event_CrearProyectoActionPerformed
 

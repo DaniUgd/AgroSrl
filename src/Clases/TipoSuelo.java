@@ -20,7 +20,7 @@ public class TipoSuelo {
 
     @Override
     public String toString() {
-        return "TipoSuelo{" + "idSuelo=" + idSuelo + ", descripcion=" + descripcion + '}';
+        return  descripcion;
     }
 
     public TipoSuelo() {
@@ -42,9 +42,8 @@ public class TipoSuelo {
         this.descripcion = descripcion;
     }
 
- 
-  
    
+  
     
    
 

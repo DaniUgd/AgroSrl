@@ -6,7 +6,10 @@
 package Interfaces;
 import Clases.Campo;
 import Clases.EstadoCampo;
+import Clases.EstadoProyecto;
+import Clases.Laboreo;
 import Clases.Lotes;
+import Clases.Proyecto;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
 import Interfaces.Excepciones.Warning;
@@ -19,8 +22,11 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Long.parseLong;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import static javafx.scene.input.KeyCode.T;
+import javax.swing.table.DefaultTableModel;
 import static javassist.CtMethod.ConstParameter.integer;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -36,15 +42,21 @@ import static jdk.nashorn.internal.objects.NativeJava.to;
 public class AgregarProyecto extends javax.swing.JFrame {
     DefaultTableModel dtm = new  DefaultTableModel();
     DefaultTableModel dtm2 = new  DefaultTableModel();
+    DefaultTableModel dtmPro = new  DefaultTableModel();
+    
     Controlador control;
     Campo campo = null;
     List <Campo> lista = null;
     List <Lotes> listaL=null;
+    List <Proyecto> listaP=null;
+    List <TipoSuelo> listaTpS=new ArrayList();
+   
     
     /**
      * Creates new form AgregarProyecto
      * @param control2
      */
+   
     public AgregarProyecto(Controlador control2) {
         control = control2;
         initComponents();
@@ -55,11 +67,18 @@ public class AgregarProyecto extends javax.swing.JFrame {
         lista=control.obtenerCampos();
         lista.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion()}).forEachOrdered((campos) -> {
         dtm.addRow(campos);
+        });
         
+        String [] titulo1 = new String []  {"ID Lote","Hectareas","Tipo Suelo"};
+        dtm2.setColumnIdentifiers(titulo1);
+        jTable2.setModel(dtm2);
         
-            
-        
-        
+        String [] tituloP = new String []  {"Id Proyecto","Cultivo","Tipo de suelo necesario","Laboreos"};
+        dtmPro.setColumnIdentifiers(tituloP);
+        tablaProyecto.setModel(dtmPro);
+        listaP=control.obtenerProyectos();
+        listaP.stream().map((obj) -> new String []{Long.toString(obj.getIdProyecto()),obj.getDescripcion(), obj.getTpsuelo().toString(),obj.getLaboreos().toString() }).forEachOrdered((proyecto) -> {
+        dtmPro.addRow(proyecto);
         });
         
         
@@ -82,6 +101,10 @@ public class AgregarProyecto extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         BotonAgregarP = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaProyecto = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        btnVolver = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,7 +142,7 @@ public class AgregarProyecto extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 380, 90));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 380, 90));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -146,7 +169,7 @@ public class AgregarProyecto extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, 290, 90));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 380, 90));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
 
         BotonAgregarP.setText("Agregar Proyecto");
@@ -155,7 +178,34 @@ public class AgregarProyecto extends javax.swing.JFrame {
                 BotonAgregarPActionPerformed(evt);
             }
         });
-        jPanel1.add(BotonAgregarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 170, -1));
+        jPanel1.add(BotonAgregarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 170, 40));
+
+        tablaProyecto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tablaProyecto);
+
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 910, 100));
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Cultivos disponibles");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 320, -1));
+
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 100, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,13 +222,33 @@ public class AgregarProyecto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarPActionPerformed
+                    Proyecto p =new Proyecto();
+                    long k = 1;
+                    EstadoProyecto estP = new EstadoProyecto();
+                    List <Lotes> listalo = new ArrayList();
+                    int indice;
+                   /* p=tablaProyecto.getSelectedRow();
+                    
+                    p.setLotes(jTable2.getSelectedRow());
+                    p.setLaboreos(laboreos);
+                    long tam=parseLong(cantHec.getText());
+                    g.setTamanio(tam);
+                    int estado=1;
+                    est.setIdEstado(estado);
+                    g.setEstado(est);
+                    
+                    TipoSuelo tipos = new TipoSuelo();
+                    tipos.setIdSuelo(k);
+                    
+                    control.agregarCampo(g);
+                    agregarL = new AgregarLote(control,g);*/
+        
+
         
     }//GEN-LAST:event_BotonAgregarPActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        String [] titulo = new String []  {"ID Lote","Hectareas,Tipo Suelo"};
-        dtm2.setColumnIdentifiers(titulo);
-        jTable2.setModel(dtm2);
+       
         dtm2.setRowCount(0);
         int indice;
         indice=jTable1.getSelectedRow();
@@ -191,7 +261,7 @@ public class AgregarProyecto extends javax.swing.JFrame {
         
         }
         
-        listaL.stream().map((obj) -> new String []{Long.toString(obj.getIdLote()),Long.toString(obj.getTamanio()),obj.getTiposuelo().toString()}).forEachOrdered((Lotes) -> {
+        listaL.stream().map((obj) -> new String []{Long.toString(obj.getIdLote()),Long.toString(obj.getTamanio()),obj.getTiposuelo().getDescripcion()}).forEachOrdered((Lotes) -> {
         dtm2.addRow(Lotes);
         
         
@@ -199,6 +269,15 @@ public class AgregarProyecto extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+       Inicio ini = new Inicio(control);
+       this.setVisible(false);
+       ini.setVisible(true);
+       ini.setLocationRelativeTo(null);
+        
+        
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,11 +316,15 @@ public class AgregarProyecto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAgregarP;
+    private javax.swing.JToggleButton btnVolver;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable tablaProyecto;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
 
 <hibernate-mapping>
   <class name="Clases.Proyecto" table="Proyecto">
-  <id name="idProyecto" type="int">
+  <id name="idProyecto" type="java.lang.Long">
             <column name="IDPROYECTO" />
             <generator class="native" />
     </id>
@@ -19,12 +19,12 @@
     <list name="tpsuelo" cascade="none">
         <key column="fk_proyecto"/>
         <index column=""/>
-    <one-to-many class="Clases.TipoSuelo"/>
+    <many-to-many class="Clases.TipoSuelo"/>
     </list>
     <list name="laboreos" cascade="none">
         <key column="fk_proyecto"/>
         <index column=""/>
-    <one-to-many class="Clases.Laboreo"/>
+    <many-to-many class="Clases.Laboreo"/>
     </list>
     
 </class>
