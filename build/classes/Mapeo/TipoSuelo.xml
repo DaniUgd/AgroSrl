@@ -41,7 +41,7 @@ Contributor(s):
 -->
 <hibernate-mapping>
   <class name="Clases.TipoSuelo" table="TipoSuelo">
-      <id name="idSuelo" type="int">
+      <id name="idSuelo" type="java.lang.Long">
             <column name="IDSUELO" />
             <generator class="native" />
     </id>

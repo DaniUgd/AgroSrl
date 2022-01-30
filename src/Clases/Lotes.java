@@ -13,19 +13,20 @@ public class Lotes {
     private int idLote;
     private long tamanio;
     TipoSuelo tiposuelo;
-
+    private EstadoProyecto estado;
     public Lotes() {
     }
 
     @Override
     public String toString() {
-        return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + '}';
+        return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + ", estado=" + estado + '}';
     }
 
-    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo) {
+    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo, EstadoProyecto estado) {
         this.idLote = idLote;
         this.tamanio = tamanio;
         this.tiposuelo = tiposuelo;
+        this.estado = estado;
     }
 
     public int getIdLote() {
@@ -52,8 +53,15 @@ public class Lotes {
         this.tiposuelo = tiposuelo;
     }
 
-   
+    public EstadoProyecto getEstado() {
+        return estado;
+    }
 
+    public void setEstado(EstadoProyecto estado) {
+        this.estado = estado;
+    }
+
+    
    
     
 }

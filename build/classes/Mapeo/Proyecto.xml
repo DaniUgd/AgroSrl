@@ -15,14 +15,16 @@
         <index column=""/>
         <one-to-many class="Clases.Lotes"/>
     </list>
-    <many-to-one name="estado" cascade="none" class="Clases.EstadoProyecto">
-        <column name="FKESTADOP"/>
-    </many-to-one>
-    
+   
     <list name="tpsuelo" cascade="none">
         <key column="fk_proyecto"/>
         <index column=""/>
     <one-to-many class="Clases.TipoSuelo"/>
+    </list>
+    <list name="laboreos" cascade="none">
+        <key column="fk_proyecto"/>
+        <index column=""/>
+    <one-to-many class="Clases.Laboreo"/>
     </list>
     
 </class>

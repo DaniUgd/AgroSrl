@@ -45,6 +45,7 @@ public class Inicio extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
+        EstadoP = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -107,6 +108,14 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenuBar2.add(jMenu4);
 
+        EstadoP.setText("Estados de Proyecto");
+        EstadoP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EstadoPMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(EstadoP);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,8 +162,10 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
-        
-        
+        Cultivos cultivo = new Cultivos(control);
+        this.setVisible(false);
+        cultivo.setVisible(true);
+        cultivo.setLocationRelativeTo(null);
         
         
     }//GEN-LAST:event_jMenu3MouseClicked
@@ -165,6 +176,15 @@ public class Inicio extends javax.swing.JFrame {
         labor.setVisible(true);
         labor.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void EstadoPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EstadoPMouseClicked
+        CrearEstadoP estadopro = new CrearEstadoP(control);
+        this.setVisible(false);
+        estadopro.setVisible(true);
+        estadopro.setLocationRelativeTo(null);
+        
+        
+    }//GEN-LAST:event_EstadoPMouseClicked
 
    
     public static void main(String args[]) {
@@ -202,6 +222,7 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu EstadoP;
     private javax.swing.JMenu estado;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

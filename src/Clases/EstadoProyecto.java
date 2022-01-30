@@ -10,13 +10,8 @@ package Clases;
  * @author Daniel
  */
 public class EstadoProyecto {
-   private int idEstado;
+   private Long idEstado;
    private String descripcion;
-
-    public EstadoProyecto(int idEstado, String descripcion) {
-        this.idEstado = idEstado;
-        this.descripcion = descripcion;
-    }
 
     public EstadoProyecto() {
     }
@@ -26,11 +21,16 @@ public class EstadoProyecto {
         return "EstadoProyecto{" + "idEstado=" + idEstado + ", descripcion=" + descripcion + '}';
     }
 
-    public int getIdEstado() {
+    public EstadoProyecto(Long idEstado, String descripcion) {
+        this.idEstado = idEstado;
+        this.descripcion = descripcion;
+    }
+
+    public Long getIdEstado() {
         return idEstado;
     }
 
-    public void setIdEstado(int idEstado) {
+    public void setIdEstado(Long idEstado) {
         this.idEstado = idEstado;
     }
 
@@ -41,6 +41,8 @@ public class EstadoProyecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+  
    
    
    

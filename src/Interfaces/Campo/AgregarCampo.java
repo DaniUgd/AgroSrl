@@ -54,7 +54,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         public void actionPerformed(ActionEvent e) {
         try {
             Campo g =new Campo();
-        
+        long k = 1;
         EstadoCampo est = new EstadoCampo();
         List <Lotes> listalo = new ArrayList(); 
         g.setLotes(listalo);
@@ -66,7 +66,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         g.setEstado(est);
         
         TipoSuelo tipos = new TipoSuelo();
-        tipos.setIdSuelo(1);
+        tipos.setIdSuelo(k);
         
         Lotes lot=new Lotes();
         control.agregarCampo(g);
@@ -92,7 +92,7 @@ public class AgregarCampo extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Campo g =new Campo();
-                    
+                    long k = 1;
                     EstadoCampo est = new EstadoCampo();
                     List <Lotes> listalo = new ArrayList();
                     g.setLotes(listalo);
@@ -104,7 +104,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     g.setEstado(est);
                     
                     TipoSuelo tipos = new TipoSuelo();
-                    tipos.setIdSuelo(1);
+                    tipos.setIdSuelo(k);
                     
                     control.agregarCampo(g);
                     agregarL = new AgregarLote(control,g);
@@ -148,7 +148,7 @@ public class AgregarCampo extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Campo g =new Campo();
-                    
+                    long k = 1;
                     EstadoCampo est = new EstadoCampo();
                     List <Lotes> listalo = new ArrayList();
                     g.setLotes(listalo);
@@ -160,7 +160,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     g.setEstado(est);
                     
                     TipoSuelo tipos = new TipoSuelo();
-                    tipos.setIdSuelo(1);
+                    tipos.setIdSuelo(k);
                     
                     control.agregarCampo(g);
                     AgregarLote agregarL = new AgregarLote(control,g);

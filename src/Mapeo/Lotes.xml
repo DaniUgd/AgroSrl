@@ -48,7 +48,9 @@ Contributor(s):
     <property name="tamanio" type="java.lang.Long">
              <column name="TAMANIO"/>
     </property>
-    
+    <many-to-one name="estado" cascade="none" class="Clases.EstadoProyecto">
+        <column name="FKESTADOPROYECTO"/>
+</many-to-one>
 <many-to-one name="tiposuelo" cascade="none" class="Clases.TipoSuelo">
         <column name="FKTIPOSUELO"/>
 </many-to-one>

@@ -23,7 +23,9 @@ public class Controlador {
  private final TipoSueloimpl tiposuelodao = new TipoSueloimpl();
  private final Lotesimpl lotesdao= new Lotesimpl();
  private final Laboreoimpl laboreodao = new Laboreoimpl();
-public void agregarCampo(Campo g){
+ private final EstadoProyectoimpl estadopdao = new EstadoProyectoimpl();
+ 
+ public void agregarCampo(Campo g){
     campodao.insertar(g);
 }
 
@@ -92,5 +94,22 @@ return  estados;
         return labores;
     
     }
+    public void agregarEstadoP(EstadoProyecto estadop) {
+        estadopdao.insertar(estadop);
+    }
+    
+    public List <EstadoProyecto> obtenerEstadosP() {
+         List <EstadoProyecto> estadosP= null;
+        estadosP=estadopdao.obtenerTodos();
+        
+        return estadosP;
+    
+    }
+    
+   
+
+     
+     
+     
 
 }

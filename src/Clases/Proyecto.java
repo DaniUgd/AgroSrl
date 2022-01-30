@@ -14,20 +14,26 @@ import java.util.List;
  */
 public class Proyecto {
    private Long idProyecto;
-   private  String descripcion;
+   private String descripcion;
    private List <Lotes> lotes;
-   private EstadoProyecto estado;
+   
    private List <TipoSuelo> tpsuelo;
+   private List <Laboreo> laboreos;
 
-    public Proyecto(Long idProyecto, String descripcion, List<Lotes> lotes, EstadoProyecto estado, List<TipoSuelo> tpsuelo) {
+    public Proyecto() {
+    }
+
+    public Proyecto(Long idProyecto, String descripcion, List<Lotes> lotes, List<TipoSuelo> tpsuelo, List<Laboreo> laboreos) {
         this.idProyecto = idProyecto;
         this.descripcion = descripcion;
         this.lotes = lotes;
-        this.estado = estado;
         this.tpsuelo = tpsuelo;
+        this.laboreos = laboreos;
     }
 
-    public Proyecto() {
+    @Override
+    public String toString() {
+        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", tpsuelo=" + tpsuelo + ", laboreos=" + laboreos + '}';
     }
 
     public Long getIdProyecto() {
@@ -54,14 +60,6 @@ public class Proyecto {
         this.lotes = lotes;
     }
 
-    public EstadoProyecto getEstado() {
-        return estado;
-    }
-
-    public void setEstado(EstadoProyecto estado) {
-        this.estado = estado;
-    }
-
     public List<TipoSuelo> getTpsuelo() {
         return tpsuelo;
     }
@@ -70,10 +68,17 @@ public class Proyecto {
         this.tpsuelo = tpsuelo;
     }
 
-    @Override
-    public String toString() {
-        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", estado=" + estado + ", tpsuelo=" + tpsuelo + '}';
+    public List<Laboreo> getLaboreos() {
+        return laboreos;
     }
+
+    public void setLaboreos(List<Laboreo> laboreos) {
+        this.laboreos = laboreos;
+    }
+
+ 
+
+   
    
    
 
