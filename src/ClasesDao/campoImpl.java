@@ -37,6 +37,7 @@ Campo campo;
         } catch (HibernateException hibernateException) {
             System.out.println(hibernateException);
             System.out.println("Fallo");
+            session.getTransaction().rollback();
           }
 		
    }
@@ -54,6 +55,8 @@ Campo campo;
         } catch (HibernateException hibernateException) {
             System.out.println(hibernateException);
             System.out.println("Fallo");
+            session.getTransaction().rollback();
+            
         }
     }
 
@@ -70,6 +73,7 @@ Campo campo;
         } catch (HibernateException hibernateException) {
             System.out.println(hibernateException);
             System.out.println("Fallo");
+            session.getTransaction().rollback();
         }	
 	
     }
@@ -81,10 +85,11 @@ Campo campo;
         List <Campo> mostrar = null;
 
                 try {
+                    
                     session = null;
                     session= HibernateSession.getSession();
                     tr=session.beginTransaction();
-                    tr.setTimeout(2);
+                    tr.setTimeout(5);
                     mostrar= session.createCriteria(Campo.class).list();
                     System.out.println(mostrar);
                     for(Object obj :mostrar ){
@@ -95,8 +100,8 @@ Campo campo;
                 }
                 
                 catch (Exception e) {
-                    e.printStackTrace();
-                     session.getTransaction().rollback();
+                     e.printStackTrace();
+                    // session.getTransaction().rollback();
                 }
                 return mostrar;
         }
@@ -111,6 +116,7 @@ Campo campo;
                 
             } catch (NullPointerException e){
                 System.out.println("Falló");
+                
             }
             return retorno;
     }

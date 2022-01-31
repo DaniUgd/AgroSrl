@@ -5,6 +5,7 @@
  */
 package ClasesDao;
 
+import Clases.Campo;
 import Clases.EstadoCampo;
 import java.util.List;
 import org.hibernate.Session;
@@ -14,37 +15,17 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.hibernate.HibernateException;
 import Controladora.HibernateSession;
+import interDao.EstadoCampoDao;
 /**
  *
  * @author ezest
  */
-public class EstadoCampoimpl implements DAO {
+public class EstadoCampoimpl implements EstadoCampoDao {
 private Session session=null;
-    @Override
-    public void insertar(Object g) {
-       try {
-            session = null;
-            session= HibernateSession.getSession();
-            session.beginTransaction();
-            session.save(g);
-            session.getTransaction().commit();
-            session.close();
-            System.out.println("Exito");
-        } catch (HibernateException hibernateException) {
-            System.out.println(hibernateException);
-            System.out.println("Fallo");
-        }
-    }
 
-    @Override
-    public void modificar(Object g) {
-        
-    }
 
-    @Override
-    public void eliminar(Object g) {
-        
-    }
+
+
 
     @Override
     public List<EstadoCampo> obtenerTodos() {
@@ -62,9 +43,43 @@ private Session session=null;
     }
 
     @Override
-    public Object obtener(Object id) {
-    return null;
-        
+    public void insertar(EstadoCampo g) {
+        try {
+            session = null;
+            session= HibernateSession.getSession();
+            session.beginTransaction();
+            session.save(g);
+            session.getTransaction().commit();
+            session.close();
+            System.out.println("Exito");
+        } catch (HibernateException hibernateException) {
+            System.out.println(hibernateException);
+            System.out.println("Fallo");
+        }
+    }
+
+    @Override
+    public void modificar(EstadoCampo g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void eliminar(EstadoCampo g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public EstadoCampo obtener(Long id) {
+         EstadoCampo retorno = null;
+            try {
+                session = null;
+                session= HibernateSession.getSession();
+                retorno = (EstadoCampo) session.get(EstadoCampo.class, id);
+                
+            } catch (NullPointerException e){
+                System.out.println("Falló");
+            }
+            return retorno;
     }
     
 }

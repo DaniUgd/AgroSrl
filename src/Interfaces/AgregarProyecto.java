@@ -12,7 +12,10 @@ import Clases.Lotes;
 import Clases.Proyecto;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
+import Interfaces.Excepciones.Exito;
 import Interfaces.Excepciones.Warning;
+import Interfaces.Excepciones.Warning2;
+import Interfaces.Excepciones.Warning3;
 import Interfaces.Inicio;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +26,7 @@ import static java.lang.Long.parseLong;
 import static java.lang.ProcessBuilder.Redirect.to;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import static javafx.scene.input.KeyCode.T;
@@ -42,15 +46,22 @@ import static jdk.nashorn.internal.objects.NativeJava.to;
 public class AgregarProyecto extends javax.swing.JFrame {
     DefaultTableModel dtm = new  DefaultTableModel();
     DefaultTableModel dtm2 = new  DefaultTableModel();
+    DefaultTableModel dtmmostrar = new  DefaultTableModel();
     DefaultTableModel dtmPro = new  DefaultTableModel();
-    
+    Warning2 er = new Warning2();
+    Warning3 er1 = new Warning3();
+    Exito ex = new Exito();
     Controlador control;
     Campo campo = null;
-    List <Campo> lista = null;
-    List <Lotes> listaL=null;
+    List <Campo> listaCmod= new ArrayList();
+    List <EstadoCampo> listaestadosC= new ArrayList();
+    List <Campo> listaCompararC= new ArrayList();
+    List <Campo> listaC= null;
+    List <Lotes> listaL=new ArrayList();
     List <Proyecto> listaP=null;
     List <TipoSuelo> listaTpS=new ArrayList();
-   
+    List <Lotes> listaLSelect=new ArrayList();
+
     
     /**
      * Creates new form AgregarProyecto
@@ -62,16 +73,21 @@ public class AgregarProyecto extends javax.swing.JFrame {
         initComponents();
         String [] titulo = new String []  {"Nro del Campo","Hectareas","Nombre del Campo","Estado del Campo"};
         dtm.setColumnIdentifiers(titulo);
-        jTable1.setModel(dtm);
-        
-        lista=control.obtenerCampos();
-        lista.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion()}).forEachOrdered((campos) -> {
+        tablaCampos.setModel(dtm);
+        listaestadosC=control.obtenerEstados();
+        listaC=control.obtenerCampos();
+        listaC.stream().map((obj) -> new String []{Long.toString(obj.getIdCampo()),Long.toString(obj.getTamanio()),obj.getNombre(),obj.getEstado().getDescripcion()}).forEachOrdered((campos) -> {
         dtm.addRow(campos);
         });
         
         String [] titulo1 = new String []  {"ID Lote","Hectareas","Tipo Suelo"};
         dtm2.setColumnIdentifiers(titulo1);
-        jTable2.setModel(dtm2);
+        tablaLotes.setModel(dtm2);
+        
+       
+        dtmmostrar.setColumnIdentifiers(titulo1);
+        tablaLotesAgr.setModel(dtmmostrar);
+        
         
         String [] tituloP = new String []  {"Id Proyecto","Cultivo","Tipo de suelo necesario","Laboreos"};
         dtmPro.setColumnIdentifiers(tituloP);
@@ -96,21 +112,25 @@ public class AgregarProyecto extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCampos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaLotes = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         BotonAgregarP = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tablaProyecto = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnVolver = new javax.swing.JToggleButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tablaLotesAgr = new javax.swing.JTable();
+        quitarL = new javax.swing.JButton();
+        agregarL = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCampos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -129,22 +149,31 @@ public class AgregarProyecto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+        tablaCampos.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+                tablaCamposAncestorMoved(evt);
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        tablaCampos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaCamposMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaCampos);
+        if (tablaCampos.getColumnModel().getColumnCount() > 0) {
+            tablaCampos.getColumnModel().getColumn(0).setResizable(false);
+            tablaCampos.getColumnModel().getColumn(1).setResizable(false);
+            tablaCampos.getColumnModel().getColumn(2).setResizable(false);
+            tablaCampos.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 380, 90));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 380, 90));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaLotes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -163,16 +192,21 @@ public class AgregarProyecto extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setResizable(false);
+        tablaLotes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaLotesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tablaLotes);
+        if (tablaLotes.getColumnModel().getColumnCount() > 0) {
+            tablaLotes.getColumnModel().getColumn(0).setResizable(false);
+            tablaLotes.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 320, 380, 90));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 380, 90));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
 
-        BotonAgregarP.setText("Agregar Proyecto");
+        BotonAgregarP.setText("Iniciar Proyecto");
         BotonAgregarP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAgregarPActionPerformed(evt);
@@ -193,11 +227,11 @@ public class AgregarProyecto extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tablaProyecto);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 910, 100));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 870, 120));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cultivos disponibles");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 320, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 60, 320, -1));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -207,11 +241,59 @@ public class AgregarProyecto extends javax.swing.JFrame {
         });
         jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 100, 40));
 
+        tablaLotesAgr.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Tamaño", "Tipo del Suelo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablaLotesAgr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaLotesAgrMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tablaLotesAgr);
+        if (tablaLotesAgr.getColumnModel().getColumnCount() > 0) {
+            tablaLotesAgr.getColumnModel().getColumn(0).setResizable(false);
+            tablaLotesAgr.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, 380, 90));
+
+        quitarL.setText("Quitar");
+        quitarL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitarLActionPerformed(evt);
+            }
+        });
+        jPanel1.add(quitarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 430, 70, -1));
+
+        agregarL.setText("Agregar");
+        agregarL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarLActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agregarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 430, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,52 +305,159 @@ public class AgregarProyecto extends javax.swing.JFrame {
 
     private void BotonAgregarPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarPActionPerformed
                     Proyecto p =new Proyecto();
-                    long k = 1;
-                    EstadoProyecto estP = new EstadoProyecto();
-                    List <Lotes> listalo = new ArrayList();
-                    int indice;
-                   /* p=tablaProyecto.getSelectedRow();
-                    
-                    p.setLotes(jTable2.getSelectedRow());
-                    p.setLaboreos(laboreos);
-                    long tam=parseLong(cantHec.getText());
-                    g.setTamanio(tam);
-                    int estado=1;
-                    est.setIdEstado(estado);
-                    g.setEstado(est);
-                    
-                    TipoSuelo tipos = new TipoSuelo();
-                    tipos.setIdSuelo(k);
-                    
-                    control.agregarCampo(g);
-                    agregarL = new AgregarLote(control,g);*/
-        
+                    List <TipoSuelo> tipoS = new ArrayList();
+                    int cont=0;
 
+                    int indice;
+                    indice=tablaProyecto.getSelectedRow();
+                    p=listaP.get(indice);
+                   
+                    tipoS=p.getTpsuelo();
+                    for(Lotes l :listaLSelect){
+                    
+                        if(tipoS.contains(l.getTiposuelo())){
+                            l.setEstado(control.obtenerEstado((long)1));
+                        
+                        }else{
+                            cont++;
+                            System.out.println("noentra");
+                            
+                            break;
+                            
+                        }
+                    
+                    
+                    }
+                    
+                    
+                  if(cont>0){
+                      er.setVisible(true);
+                      er.setLocationRelativeTo(null);
+                  } else{
+                      p.setLotes(listaLSelect);
+                      
+                      control.modificarProyecto(p);
+                        
+                      ex.setVisible(true);
+                      ex.setLocationRelativeTo(null);
+                  }
+                  System.out.println(p.toString());
+            cont=0;
+            ModificarEstadoCampo();
+            
+                    
         
     }//GEN-LAST:event_BotonAgregarPActionPerformed
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       
+    private void ModificarEstadoCampo(){
+    boolean flag=false;
+    int tamLista=0,contest=0;
+    long id;
+    listaCompararC=control.obtenerCampos();
+    System.out.println("holaqueonda" + listaCmod.get(0).toString());
+    for (Campo c : listaCompararC){
+        id=c.getIdCampo();
+        for(Campo Ca : listaCmod){
+            if(Ca.getIdCampo()==id){
+            
+                tamLista=c.getLotes().size(); 
+                     for(Lotes l : c.getLotes()){
+                        if(l.getEstado()!= null){
+                            
+                            contest++;
+                            //c.setEstado(listaestadosC.get(1));
+
+                        }
+                        
+                  
+                  }
+                
+            }
+        
+        
+        
+        }
+        
+         
+              
+         //listaCompararC.set(listaCompararC.indexOf(c), c);
+
+        if(contest==tamLista){
+            
+            c.setEstado(listaestadosC.get(2));
+            control.modificarCampo(c);
+        
+        }else{
+        
+            c.setEstado(listaestadosC.get(1));
+            control.modificarCampo(c);
+
+        }
+        
+        
+        
+        }
+        
+        
+               
+                    
+            
+        }
+
+
+
+
+
+    
+    
+    
+    
+    private void tablaCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCamposMouseClicked
+        
+        
+        
         dtm2.setRowCount(0);
         int indice;
-        indice=jTable1.getSelectedRow();
+        indice=tablaCampos.getSelectedRow();
         int aux= Integer.parseInt ((String) dtm.getValueAt(indice,0));
-       
-        for(Campo c : lista){
+        
+        
+        
+        for(Campo c : listaC){
             if(c.getIdCampo()== aux ){
-                listaL=c.getLotes();
+                if(!listaCmod.contains(c)){
+                listaCmod.add(c);
+              }
+                
+                for(Lotes l : c.getLotes()){
+                    if(l.getEstado()==null){
+                    
+                        listaL.add(l);
+                    
+                    }
+                
+                
+                }
+                
+                campo=c;
             }
         
         }
         
-        listaL.stream().map((obj) -> new String []{Long.toString(obj.getIdLote()),Long.toString(obj.getTamanio()),obj.getTiposuelo().getDescripcion()}).forEachOrdered((Lotes) -> {
-        dtm2.addRow(Lotes);
+        System.out.println("esta es la lista" + listaCmod.toString());
+        if(listaL!=null){
+            listaL.stream().map((obj) -> new String []{Long.toString(obj.getIdLote()),Long.toString(obj.getTamanio()),obj.getTiposuelo().getDescripcion()}).forEachOrdered((Lotes) -> {
+            dtm2.addRow(Lotes);
         
         
         });
         
-        
-    }//GEN-LAST:event_jTable1MouseClicked
+        }else{
+            er1.setVisible(true);
+            er1.setLocationRelativeTo(null);
+        }
+        listaL.clear();
+    }//GEN-LAST:event_tablaCamposMouseClicked
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
        Inicio ini = new Inicio(control);
@@ -278,6 +467,56 @@ public class AgregarProyecto extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void tablaLotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaLotesMouseClicked
+
+       
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_tablaLotesMouseClicked
+
+    private void tablaCamposAncestorMoved(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tablaCamposAncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaCamposAncestorMoved
+
+    private void tablaLotesAgrMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaLotesAgrMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tablaLotesAgrMouseClicked
+
+    private void agregarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLActionPerformed
+        int indLotes;
+        long id;
+        indLotes=tablaLotes.getSelectedRow();
+        String [] lote = new String [] {(String)tablaLotes.getValueAt(indLotes, 0),(String)tablaLotes.getValueAt(indLotes, 1),(String)tablaLotes.getValueAt(indLotes, 2)};
+        
+        
+        id= Long.parseLong((String) tablaLotes.getValueAt(indLotes,0));
+        
+        for (Lotes l : campo.getLotes()){
+             
+            if((l.getIdLote()==id && !listaLSelect.contains(l)) ||  listaLSelect == null ) {  
+                 
+                 dtmmostrar.addRow(lote);
+                 listaLSelect.add(l);
+                 
+             
+             }
+            
+         
+        }
+        System.out.println(listaLSelect);
+        tablaLotes.getValueAt(indLotes, 0);
+    }//GEN-LAST:event_agregarLActionPerformed
+
+    private void quitarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarLActionPerformed
+               int indice;
+               indice=tablaLotesAgr.getSelectedRow();
+               listaLSelect.remove(indice);
+               dtmmostrar.removeRow(indice);
+    }//GEN-LAST:event_quitarLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,15 +555,19 @@ public class AgregarProyecto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAgregarP;
+    private javax.swing.JButton agregarL;
     private javax.swing.JToggleButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JButton quitarL;
+    private javax.swing.JTable tablaCampos;
+    private javax.swing.JTable tablaLotes;
+    private javax.swing.JTable tablaLotesAgr;
     private javax.swing.JTable tablaProyecto;
     // End of variables declaration//GEN-END:variables
 }

@@ -41,7 +41,7 @@ Contributor(s):
 -->
 <hibernate-mapping>
   <class  name="Clases.EstadoCampo" table="EstadoCampo">
-      <id name="idEstado" type="int">
+      <id name="idEstado" type="java.lang.Long">
             <column name="IDESTADO" />
             <generator class="native" />
     </id>

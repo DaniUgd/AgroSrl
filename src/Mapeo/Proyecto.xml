@@ -13,7 +13,7 @@
     <list name="lotes" cascade="none">
         <key column="FKPROYECTO"/>
         <index column=""/>
-        <one-to-many class="Clases.Lotes"/>
+        <many-to-many class="Clases.Lotes"/>
     </list>
    
     <list name="tpsuelo" cascade="none">

@@ -51,11 +51,14 @@ Contributor(s):
      <property name="nombre" type="java.lang.String">
              <column name="Nombre"/>
     </property>
+    
 
-    <list name="lotes" cascade="all">
+    <list name="lotes" lazy="false" cascade="all">
+
         <key column="fk_Campo"/>
         <index column=""/>
-    <one-to-many class="Clases.Lotes"/>
+        
+    <one-to-many  class="Clases.Lotes"/>
     </list>
     <many-to-one name="estado" cascade="none" class="Clases.EstadoCampo">
         <column name="FKESTADOCAMPO"/>

@@ -31,6 +31,7 @@ private Session session;
         } catch (HibernateException hibernateException) {
             System.out.println(hibernateException);
             System.out.println("Fallo");
+            session.getTransaction().rollback();
         }
 		
 	

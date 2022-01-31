@@ -119,6 +119,16 @@ return  estados;
         return proy;
     
     }
+     public EstadoProyecto obtenerEstado(Long id) {
+       EstadoProyecto estado = new EstadoProyecto();
+       estado=estadopdao.obtener(id);
+        return estado;
+    }
+     public void modificarProyecto(Proyecto g){
+        
+        proyectodao.modificar(g);
+
+}
      
 
 }

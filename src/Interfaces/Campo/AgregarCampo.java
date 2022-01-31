@@ -61,7 +61,7 @@ public class AgregarCampo extends javax.swing.JFrame {
         g.setNombre(NomCampo.getText());
         long tam=parseLong(cantHec.getText());
         g.setTamanio(tam);
-        int estado=1;
+        long estado=1;
         est.setIdEstado(estado);
         g.setEstado(est);
         
@@ -99,7 +99,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     g.setNombre(NomCampo.getText());
                     long tam=parseLong(cantHec.getText());
                     g.setTamanio(tam);
-                    int estado=1;
+                    long estado=1;
                     est.setIdEstado(estado);
                     g.setEstado(est);
                     
@@ -108,7 +108,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     
                     control.agregarCampo(g);
                     agregarL = new AgregarLote(control,g);
-                    
+                    pregunta.setVisible(false);
                 }catch(NumberFormatException z){
                     Warning er = new Warning();
                     er.setVisible(true);
@@ -155,7 +155,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     g.setNombre(NomCampo.getText());
                     long tam=parseLong(cantHec.getText());
                     g.setTamanio(tam);
-                    int estado=1;
+                    long estado=1;
                     est.setIdEstado(estado);
                     g.setEstado(est);
                     
@@ -375,8 +375,8 @@ public class AgregarCampo extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Inicio inicio = new Inicio(control);
-        inicio.show(true);
-        this.show(false);
+        inicio.setVisible(true);
+        this.setVisible(false);
         inicio.setLocationRelativeTo(null);
     }//GEN-LAST:event_jButton2ActionPerformed
 

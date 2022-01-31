@@ -12,29 +12,27 @@ import java.util.ArrayList;
  * @author Daniel
  */
 public class EstadoCampo {
-    private int idEstado;
+    private Long idEstado;
     private String descripcion;
-    
+
+    @Override
+    public String toString() {
+        return "EstadoCampo{" + "idEstado=" + idEstado + ", descripcion=" + descripcion + '}';
+    }
+
+    public EstadoCampo(Long idEstado, String descripcion) {
+        this.idEstado = idEstado;
+        this.descripcion = descripcion;
+    }
+
     public EstadoCampo() {
-       
-
-}
-
-    public EstadoCampo(int idEstado, String descripcion, ArrayList<Campo> campo) {
-        this.idEstado = idEstado;
-        this.descripcion = descripcion;
     }
 
-    public EstadoCampo(int idEstado, String descripcion) {
-        this.idEstado = idEstado;
-        this.descripcion = descripcion;
-    }
-
-    public int getIdEstado() {
+    public Long getIdEstado() {
         return idEstado;
     }
 
-    public void setIdEstado(int idEstado) {
+    public void setIdEstado(Long idEstado) {
         this.idEstado = idEstado;
     }
 
@@ -45,6 +43,7 @@ public class EstadoCampo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    
 
 
 
