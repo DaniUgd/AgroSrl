@@ -11,6 +11,7 @@ import Clases.Lotes;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
 import Interfaces.Inicio;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,9 +19,10 @@ import javax.swing.table.DefaultTableModel;
 public class ModificarCampo extends javax.swing.JFrame {
 Controlador control;
 Campo campo = new Campo();
-List <EstadoCampo> estados=null;
-List <Lotes> listalotes=null;
-List <TipoSuelo> suelos=null;
+List <EstadoCampo> estados= new ArrayList();
+List <Lotes> listalotes= new ArrayList();
+List <TipoSuelo> suelos=new ArrayList();
+
 DefaultTableModel dtm = new DefaultTableModel();
     public ModificarCampo() {
         initComponents();
@@ -30,7 +32,7 @@ DefaultTableModel dtm = new DefaultTableModel();
         initComponents();
         control=control2;
         campo=c;
-        listalotes= c.getLotes();
+        listalotes=c.getLotes();
         suelos=control.obtenerSuelos();
         estados = control.obtenerEstados();
         String [] columnas = new String [] {"Nro Lote","Hectareas","Tipo de Suelo"};
@@ -171,6 +173,7 @@ DefaultTableModel dtm = new DefaultTableModel();
        String nombreC;
        String hectC;
        long hectarea;
+       Lotes lot = new Lotes();
        nombreC=nuevonom.getText();
        hectC=nuevahec.getText();
        if(!"".equals(nombreC)){
@@ -189,8 +192,12 @@ DefaultTableModel dtm = new DefaultTableModel();
        }else{
            hectarea=campo.getTamanio();
            campo.setTamanio(hectarea);
-       
+           
        }
+       
+               
+       
+
         control.modificarCampo(campo);
         
         

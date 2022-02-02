@@ -207,8 +207,7 @@ public AgregarLote() {
     }//GEN-LAST:event_tamanioLActionPerformed
 
     private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
-      campo.setLotes(lotes);
-      control.modificarCampo(campo);
+   
       this.setVisible(false);
       ModificarCampo volveratras= new ModificarCampo(control,campo);
       volveratras.setVisible(true);
@@ -218,27 +217,35 @@ public AgregarLote() {
     private void agregaloteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregaloteActionPerformed
         long hectareas;
         String inde,hec=tamanioL.getText();
+        
         try {
         Lotes l = new Lotes();
         hectareas=Long.parseLong(hec);
         inde=combox.getItemAt(combox.getSelectedIndex());
         for (TipoSuelo t : suelos){
-            if(inde.equals(t.getDescripcion())){
-                
+            if(inde.equals(t.getDescripcion())){ 
             l.setTiposuelo(t);
-    }};
+            }
+        };
         
         l.setTamanio(hectareas);
-        
-        lotes.add(l);
-        
-        control.agregarLotes(l);
+        l.setFk_Campo(campo.getIdCampo());
+            lotes.add(l);
+            
+            campo.setLotes(lotes);
+            control.agregarLotes(l);
+            control.modificarCampo(campo);
+            control.ModificarEstadoCampo();
+            
+            
+            
         }catch(NumberFormatException z){
     
          er.setVisible(true);
          er.setLocationRelativeTo(null);
          
         }
+        
         
         
     }//GEN-LAST:event_agregaloteActionPerformed

@@ -26,6 +26,7 @@ public class Controlador {
  private final EstadoProyectoimpl estadopdao = new EstadoProyectoimpl();
  private final Proyectoimpl proyectodao = new Proyectoimpl();
  
+ 
  public void agregarCampo(Campo g){
     campodao.insertar(g);
 }
@@ -63,7 +64,7 @@ return  estados;
         
         campodao.modificar(g);
 
-}
+    }
     
     public void agregarEstadoC(EstadoCampo g){
         estadocampodao.insertar(g);
@@ -130,5 +131,66 @@ return  estados;
 
 }
      
+     
+    public List <Lotes> obtenerTodosLotes() {
+         List <Lotes> lot= null;
+        lot=lotesdao.obtenerTodos();
+        
+        return lot;
+     
+
+}
+    
+     public void modificarLote(Lotes g){
+        
+        lotesdao.modificar(g);
+
+    }
+    
+    public EstadoCampo obtenerEstadoC(Long id) {
+       EstadoCampo estado = new EstadoCampo();
+       estado=estadocampodao.obtener(id);
+        return estado;
+    }
+    
+    
+     public void ModificarEstadoCampo(){
+        
+       List <Lotes> TodoLotes = new ArrayList();
+       List <Campo> TodoCampo = new ArrayList();
+        TodoCampo=obtenerCampos();
+        TodoLotes=obtenerTodosLotes();
+        for(Campo c : TodoCampo){
+            int cont=0;
+            for(Lotes l : TodoLotes){
+                if(c.getIdCampo()==l.getFk_Campo()){
+                    if(l.getEstado()!=null){
+                        cont++;
+                    }
+                }
+            }
+            if(cont!=c.getLotes().size()){
+                c.setEstado(obtenerEstadoC((long) 2));
+                
+            
+            }
+            else if(cont==c.getLotes().size()){
+                c.setEstado(obtenerEstadoC((long) 3));
+                
+            }
+            if(cont==0){
+                c.setEstado(obtenerEstadoC((long) 1));
+                
+            }
+            
+            modificarCampo(c);
+            
+        }     
+                    
+            
+        }
+    
+    
+    
 
 }

@@ -14,19 +14,17 @@ public class Lotes {
     private long tamanio;
     TipoSuelo tiposuelo;
     private EstadoProyecto estado;
+    private Long fk_Campo;
+
     public Lotes() {
     }
 
-    @Override
-    public String toString() {
-        return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + ", estado=" + estado + '}';
-    }
-
-    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo, EstadoProyecto estado) {
+    public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo, EstadoProyecto estado, Long fk_Campo) {
         this.idLote = idLote;
         this.tamanio = tamanio;
         this.tiposuelo = tiposuelo;
         this.estado = estado;
+        this.fk_Campo = fk_Campo;
     }
 
     public int getIdLote() {
@@ -61,6 +59,23 @@ public class Lotes {
         this.estado = estado;
     }
 
+    public Long getFk_Campo() {
+        return fk_Campo;
+    }
+
+    public void setFk_Campo(Long fk_Campo) {
+        this.fk_Campo = fk_Campo;
+    }
+
+    @Override
+    public String toString() {
+        return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + ", estado=" + estado + ", fk_Campo=" + fk_Campo + '}';
+    }
+  
+
+    
+   
+    
     
    
     

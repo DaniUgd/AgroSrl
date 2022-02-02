@@ -12,6 +12,7 @@ private String nombre;
 List <Lotes> lotes;
 private EstadoCampo estado;
 
+
     public Campo(long tamanio, Long idCampo, String nombre, List<Lotes> lotes, EstadoCampo estado) {
         this.tamanio = tamanio;
         this.idCampo = idCampo;
@@ -71,6 +72,11 @@ private EstadoCampo estado;
        lotes= new ArrayList<Lotes>();
         this.lotes.add(e);
  }
+
+    @Override
+    public String toString() {
+        return "Campo{" + "tamanio=" + tamanio + ", idCampo=" + idCampo + ", nombre=" + nombre + ", lotes=" + lotes + ", estado=" + estado + '}';
+    }
 
     
     

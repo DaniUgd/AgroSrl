@@ -61,6 +61,7 @@ public class AgregarProyecto extends javax.swing.JFrame {
     List <Proyecto> listaP=null;
     List <TipoSuelo> listaTpS=new ArrayList();
     List <Lotes> listaLSelect=new ArrayList();
+    Campo ultimoC = new Campo();
 
     
     /**
@@ -93,7 +94,7 @@ public class AgregarProyecto extends javax.swing.JFrame {
         dtmPro.setColumnIdentifiers(tituloP);
         tablaProyecto.setModel(dtmPro);
         listaP=control.obtenerProyectos();
-        listaP.stream().map((obj) -> new String []{Long.toString(obj.getIdProyecto()),obj.getDescripcion(), obj.getTpsuelo().toString(),obj.getLaboreos().toString() }).forEachOrdered((proyecto) -> {
+        listaP.stream().map((obj) -> new String []{Long.toString(obj.getIdProyecto()),obj.getDescripcion(), obj.getTpsuelo().toString(),obj.getLaboreosPre().toString() }).forEachOrdered((proyecto) -> {
         dtmPro.addRow(proyecto);
         });
         
@@ -317,7 +318,8 @@ public class AgregarProyecto extends javax.swing.JFrame {
                     
                         if(tipoS.contains(l.getTiposuelo())){
                             l.setEstado(control.obtenerEstado((long)1));
-                        
+                           
+                            control.modificarLote(l);
                         }else{
                             cont++;
                             System.out.println("noentra");
@@ -334,75 +336,30 @@ public class AgregarProyecto extends javax.swing.JFrame {
                       er.setVisible(true);
                       er.setLocationRelativeTo(null);
                   } else{
-                      p.setLotes(listaLSelect);
-                      
+                      for(Lotes l: listaLSelect){
+                      p.getLotes().add(l);
+                      }
                       control.modificarProyecto(p);
-                        
                       ex.setVisible(true);
                       ex.setLocationRelativeTo(null);
                   }
                   System.out.println(p.toString());
             cont=0;
-            ModificarEstadoCampo();
+            control.ModificarEstadoCampo();
+            System.out.println(listaCompararC);
+            
+            
+            
+            dtm2.setRowCount(0);
+            dtmmostrar.setRowCount(0);
+            listaLSelect.clear();
             
                     
         
     }//GEN-LAST:event_BotonAgregarPActionPerformed
 
-    private void ModificarEstadoCampo(){
-    boolean flag=false;
-    int tamLista=0,contest=0;
-    long id;
-    listaCompararC=control.obtenerCampos();
-    System.out.println("holaqueonda" + listaCmod.get(0).toString());
-    for (Campo c : listaCompararC){
-        id=c.getIdCampo();
-        for(Campo Ca : listaCmod){
-            if(Ca.getIdCampo()==id){
-            
-                tamLista=c.getLotes().size(); 
-                     for(Lotes l : c.getLotes()){
-                        if(l.getEstado()!= null){
-                            
-                            contest++;
-                            //c.setEstado(listaestadosC.get(1));
-
-                        }
-                        
-                  
-                  }
-                
-            }
-        
-        
-        
-        }
-        
-         
-              
-         //listaCompararC.set(listaCompararC.indexOf(c), c);
-
-        if(contest==tamLista){
-            
-            c.setEstado(listaestadosC.get(2));
-            control.modificarCampo(c);
-        
-        }else{
-        
-            c.setEstado(listaestadosC.get(1));
-            control.modificarCampo(c);
-
-        }
-        
-        
-        
-        }
-        
-        
-               
-                    
-            
-        }
+    
+    
 
 
 
@@ -443,6 +400,8 @@ public class AgregarProyecto extends javax.swing.JFrame {
             }
         
         }
+        
+        
         
         System.out.println("esta es la lista" + listaCmod.toString());
         if(listaL!=null){

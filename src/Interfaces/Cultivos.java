@@ -19,14 +19,19 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Cultivos extends javax.swing.JFrame {
 Controlador control;
-DefaultTableModel dtmLD = new DefaultTableModel();
-DefaultTableModel dtmLA = new DefaultTableModel();
+
 DefaultTableModel dtmSD = new DefaultTableModel();
 DefaultTableModel dtmSA = new DefaultTableModel();
+DefaultTableModel dtmLaboreo = new DefaultTableModel();
+DefaultTableModel dtmPreSiembra = new DefaultTableModel();
+DefaultTableModel dtmPostSiembra = new DefaultTableModel();
+
 List <TipoSuelo> tiposuelos = null;
-List <Laboreo> laboreos = null;
-List <Laboreo> lselect = new ArrayList() ;
 List <TipoSuelo> tsselect = new ArrayList() ;
+List <Laboreo> laboreos = null;
+List <Laboreo> lselectPre = new ArrayList() ;
+List <Laboreo> lselectPost = new ArrayList();
+
 
 Proyecto proyecto = new Proyecto();
 
@@ -36,12 +41,14 @@ Proyecto proyecto = new Proyecto();
         String [] tituloL = new String []  {"ID Laboreo" , "Descripcion"};
         String [] tituloS = new String []  {"ID Tipo Suelo" , "Descripcion"};
 
-        dtmLD.setColumnIdentifiers(tituloL);
-        dtmLA.setColumnIdentifiers(tituloL);
+        dtmLaboreo.setColumnIdentifiers(tituloL);
+        dtmPreSiembra.setColumnIdentifiers(tituloL);
         dtmSD.setColumnIdentifiers(tituloS);
         dtmSA.setColumnIdentifiers(tituloS);
-        ListaLaboreos.setModel(dtmLD);
-        ListaLaAgr.setModel(dtmLA);
+        
+        TablaLab.setModel(dtmLaboreo);
+        
+        //TablaLab.setModel(dtmLaboreo);
         ListaSuelos.setModel(dtmSD);
         ListaSAgr.setModel(dtmSA);
         laboreos=control.obtenerLaboreos();
@@ -50,7 +57,7 @@ Proyecto proyecto = new Proyecto();
         dtmSD.addRow(tipoS);
         });   
                 laboreos.stream().map((obj) -> new String []{Long.toString(obj.getIdLaboreo()),obj.getDescripcion()}).forEachOrdered((tipoL) -> {
-        dtmLD.addRow(tipoL);
+        dtmLaboreo.addRow(tipoL);
         });
                 
         
@@ -66,10 +73,7 @@ Proyecto proyecto = new Proyecto();
         jLabel1 = new javax.swing.JLabel();
         nomCultivo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ListaLaAgr = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ListaLaboreos = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        TablaLab = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         botQuitarS = new javax.swing.JToggleButton();
         botAgregarL = new javax.swing.JToggleButton();
@@ -83,6 +87,14 @@ Proyecto proyecto = new Proyecto();
         botQuitarL = new javax.swing.JToggleButton();
         jToggleButton6 = new javax.swing.JToggleButton();
         CrearProyecto = new javax.swing.JToggleButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TablaPostSiembra = new javax.swing.JTable();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        TablaPreSiembra = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        botQuitarL1 = new javax.swing.JToggleButton();
+        botAgregarL1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,7 +103,7 @@ Proyecto proyecto = new Proyecto();
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TIPOS DE SUELOS AGREGADOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 230, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 630, 230, 20));
 
         nomCultivo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nomCultivo.setText("Ejemplo: Soja");
@@ -100,9 +112,9 @@ Proyecto proyecto = new Proyecto();
                 nomCultivoActionPerformed(evt);
             }
         });
-        jPanel1.add(nomCultivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 210, -1));
+        jPanel1.add(nomCultivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 210, -1));
 
-        ListaLaAgr.setModel(new javax.swing.table.DefaultTableModel(
+        TablaLab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -113,34 +125,14 @@ Proyecto proyecto = new Proyecto();
                 "Id Laboreo", "Nombre del Laboreo"
             }
         ));
-        jScrollPane1.setViewportView(ListaLaAgr);
+        jScrollPane1.setViewportView(TablaLab);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, 100));
-
-        ListaLaboreos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Id Laboreo", "Nombre del Laboreo"
-            }
-        ));
-        jScrollPane2.setViewportView(ListaLaboreos);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 220, -1, 100));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Laboreos Disponibles");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 200, 310, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 280, -1, 100));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Laboreos Agregados");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 310, -1));
+        jLabel3.setText("Laboreos disponibles");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 310, -1));
 
         botQuitarS.setText("Quitar");
         botQuitarS.addActionListener(new java.awt.event.ActionListener() {
@@ -148,15 +140,15 @@ Proyecto proyecto = new Proyecto();
                 botQuitarSActionPerformed(evt);
             }
         });
-        jPanel1.add(botQuitarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 550, 120, 30));
+        jPanel1.add(botQuitarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 780, 120, 30));
 
-        botAgregarL.setText("Agregar Labores");
+        botAgregarL.setText("Agregar Labores Pre Siembra");
         botAgregarL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botAgregarLActionPerformed(evt);
             }
         });
-        jPanel1.add(botAgregarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 330, 120, 30));
+        jPanel1.add(botAgregarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 190, 30));
 
         ListaSAgr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -171,11 +163,11 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane3.setViewportView(ListaSAgr);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 440, -1, 100));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, -1, 100));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("INGRESE EL NOMBRE DEL CULTIVO:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 230, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 230, 20));
 
         ListaSuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,12 +182,12 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane4.setViewportView(ListaSuelos);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 440, -1, 100));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 670, -1, 100));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("SELECCIONE EL/LOS TIPOS DE SUELO");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 410, 250, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 630, 250, 20));
 
         botAgrS.setText("Agregar Tipo de suelo");
         botAgrS.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +195,7 @@ Proyecto proyecto = new Proyecto();
                 botAgrSActionPerformed(evt);
             }
         });
-        jPanel1.add(botAgrS, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 550, 150, 30));
+        jPanel1.add(botAgrS, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 790, 150, 30));
 
         botQuitarL.setText("Quitar");
         botQuitarL.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +203,7 @@ Proyecto proyecto = new Proyecto();
                 botQuitarLActionPerformed(evt);
             }
         });
-        jPanel1.add(botQuitarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 120, 30));
+        jPanel1.add(botQuitarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 120, 30));
 
         jToggleButton6.setText("Volver");
         jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +211,7 @@ Proyecto proyecto = new Proyecto();
                 jToggleButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jToggleButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 100, 30));
+        jPanel1.add(jToggleButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 860, 100, 30));
 
         CrearProyecto.setText("Crear Proyecto");
         CrearProyecto.addActionListener(new java.awt.event.ActionListener() {
@@ -227,21 +219,76 @@ Proyecto proyecto = new Proyecto();
                 CrearProyectoActionPerformed(evt);
             }
         });
-        jPanel1.add(CrearProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 670, -1, 30));
+        jPanel1.add(CrearProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 860, -1, 30));
+
+        TablaPostSiembra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id Laboreo", "Nombre del Laboreo"
+            }
+        ));
+        jScrollPane5.setViewportView(TablaPostSiembra);
+
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, 100));
+
+        TablaPreSiembra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Id Laboreo", "Nombre del Laboreo"
+            }
+        ));
+        jScrollPane7.setViewportView(TablaPreSiembra);
+
+        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, 100));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Laboreos Agregados Post Siembra");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 310, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Laboreos Agregados Pre Siembra");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 310, -1));
+
+        botQuitarL1.setText("Quitar");
+        botQuitarL1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botQuitarL1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botQuitarL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 580, 120, 30));
+
+        botAgregarL1.setText("Agregar Labores Post Siembra");
+        botAgregarL1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botAgregarL1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(botAgregarL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 400, 180, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1039, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -261,12 +308,12 @@ Proyecto proyecto = new Proyecto();
     private void botAgregarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarLActionPerformed
         int indice;
         Laboreo lab = new Laboreo();
-        indice=ListaLaboreos.getSelectedRow();
-        lab.setIdLaboreo(Long.parseLong((String) ListaLaboreos.getValueAt(indice, 0)));
-        lab.setDescripcion((String) ListaLaboreos.getValueAt(indice, 1));
+        indice=TablaPreSiembra.getSelectedRow();
+        lab.setIdLaboreo(Long.parseLong((String) TablaPreSiembra.getValueAt(indice, 0)));
+        lab.setDescripcion((String) TablaPreSiembra.getValueAt(indice, 1));
         String [] filalabor = new String [] {(String)lab.getIdLaboreo().toString(),lab.getDescripcion()};
-        dtmLA.addRow(filalabor);
-        lselect.add(lab);
+        dtmPreSiembra.addRow(filalabor);
+        lselectPre.add(lab);
                 
 
         
@@ -275,9 +322,9 @@ Proyecto proyecto = new Proyecto();
 
     private void botQuitarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarLActionPerformed
                int indice;
-               indice=ListaLaAgr.getSelectedRow();
-               lselect.remove(indice);
-               dtmLA.removeRow(indice);
+               indice=TablaLab.getSelectedRow();
+               lselectPre.remove(indice);
+               dtmPreSiembra.removeRow(indice);
 
     }//GEN-LAST:event_botQuitarLActionPerformed
 
@@ -292,7 +339,7 @@ Proyecto proyecto = new Proyecto();
 
     private void CrearProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearProyectoActionPerformed
             proyecto.setDescripcion(nomCultivo.getText());
-            proyecto.setLaboreos(lselect);
+            proyecto.setLaboreosPre(lselectPre);
             proyecto.setTpsuelo(tsselect);
             control.agregarP(proyecto);
             
@@ -314,6 +361,14 @@ Proyecto proyecto = new Proyecto();
         
         
     }//GEN-LAST:event_botAgrSActionPerformed
+
+    private void botQuitarL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarL1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botQuitarL1ActionPerformed
+
+    private void botAgregarL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarL1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botAgregarL1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,24 +407,29 @@ Proyecto proyecto = new Proyecto();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton CrearProyecto;
-    private javax.swing.JTable ListaLaAgr;
-    private javax.swing.JTable ListaLaboreos;
     private javax.swing.JTable ListaSAgr;
     private javax.swing.JTable ListaSuelos;
+    private javax.swing.JTable TablaLab;
+    private javax.swing.JTable TablaPostSiembra;
+    private javax.swing.JTable TablaPreSiembra;
     private javax.swing.JToggleButton botAgrS;
     private javax.swing.JToggleButton botAgregarL;
+    private javax.swing.JToggleButton botAgregarL1;
     private javax.swing.JToggleButton botQuitarL;
+    private javax.swing.JToggleButton botQuitarL1;
     private javax.swing.JToggleButton botQuitarS;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JToggleButton jToggleButton6;
     private javax.swing.JTextField nomCultivo;
     // End of variables declaration//GEN-END:variables

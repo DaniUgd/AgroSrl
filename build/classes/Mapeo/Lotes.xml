@@ -48,6 +48,9 @@ Contributor(s):
     <property name="tamanio" type="java.lang.Long">
              <column name="TAMANIO"/>
     </property>
+    <property name="fk_Campo" type="java.lang.Long">
+             <column name="fk_Campo"/>
+    </property>
     
     <many-to-one name="estado" cascade="none" class="Clases.EstadoProyecto">
         <column name="FKESTADOPROYECTO"/>
@@ -55,5 +58,14 @@ Contributor(s):
 <many-to-one name="tiposuelo" cascade="none" class="Clases.TipoSuelo">
         <column name="FKTIPOSUELO"/>
 </many-to-one>
+
+<!--<set name="proyectos" table="proyectoLote" cascade="none" inverse="false">
+        <key column="idLote"/>
+        
+        <many-to-many column="idProyecto" class="Clases.Proyecto"/>
+    </set>-->
+
+
+
   </class>
 </hibernate-mapping>

@@ -9,6 +9,7 @@ import Clases.EstadoCampo;
 import Clases.TipoSuelo;
 import Controladora.Controlador;
 import Interfaces.Excepciones.Warning;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class AgregarEstadoCampo extends javax.swing.JFrame {
 Controlador control= null;
 DefaultTableModel dtm = new DefaultTableModel();
-List <EstadoCampo> estados = null;
+List <EstadoCampo> estados = new ArrayList();
 Warning er = new Warning();
 
     public AgregarEstadoCampo() {

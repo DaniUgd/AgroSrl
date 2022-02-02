@@ -43,6 +43,7 @@ public class AgregarCampo extends javax.swing.JFrame {
     Controlador control;
     Campo campo = null;
     List <Campo> lista = null;
+    List <Lotes> listal =null;
     JFrame pregunta = new JFrame();
     JPanel panel = new  JPanel();
     JLabel label = new JLabel("¿Desea agregar lotes a este campo?");

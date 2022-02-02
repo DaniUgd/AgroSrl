@@ -54,10 +54,8 @@ Contributor(s):
     
 
     <list name="lotes" lazy="false" cascade="all">
-
         <key column="fk_Campo"/>
         <index column=""/>
-        
     <one-to-many  class="Clases.Lotes"/>
     </list>
     <many-to-one name="estado" cascade="none" class="Clases.EstadoCampo">

@@ -15,19 +15,6 @@ public class EstadoCampo {
     private Long idEstado;
     private String descripcion;
 
-    @Override
-    public String toString() {
-        return "EstadoCampo{" + "idEstado=" + idEstado + ", descripcion=" + descripcion + '}';
-    }
-
-    public EstadoCampo(Long idEstado, String descripcion) {
-        this.idEstado = idEstado;
-        this.descripcion = descripcion;
-    }
-
-    public EstadoCampo() {
-    }
-
     public Long getIdEstado() {
         return idEstado;
     }
@@ -43,7 +30,23 @@ public class EstadoCampo {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    @Override
+    public String toString() {
+        return "EstadoCampo{" + "idEstado=" + idEstado + ", descripcion=" + descripcion + '}';
+    }
+
     
+    
+    public EstadoCampo() {
+    }
+
+    public EstadoCampo(Long idEstado, String descripcion) {
+        this.idEstado = idEstado;
+        this.descripcion = descripcion;
+    }
+
+   
 
 
 

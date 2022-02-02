@@ -17,22 +17,19 @@ public class Proyecto {
    private String descripcion;
    private List <Lotes> lotes;
    private List <TipoSuelo> tpsuelo;
-   private List <Laboreo> laboreos;
+   private List <Laboreo> laboreosPre;
+   private List <Laboreo> laboreosPost;
 
-    public Proyecto() {
-    }
-
-    public Proyecto(Long idProyecto, String descripcion, List<Lotes> lotes, List<TipoSuelo> tpsuelo, List<Laboreo> laboreos) {
+    public Proyecto(Long idProyecto, String descripcion, List<Lotes> lotes, List<TipoSuelo> tpsuelo, List<Laboreo> laboreosPre, List<Laboreo> laboreosPost) {
         this.idProyecto = idProyecto;
         this.descripcion = descripcion;
         this.lotes = lotes;
         this.tpsuelo = tpsuelo;
-        this.laboreos = laboreos;
+        this.laboreosPre = laboreosPre;
+        this.laboreosPost = laboreosPost;
     }
 
-    @Override
-    public String toString() {
-        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", tpsuelo=" + tpsuelo + ", laboreos=" + laboreos + '}';
+    public Proyecto() {
     }
 
     public Long getIdProyecto() {
@@ -67,13 +64,28 @@ public class Proyecto {
         this.tpsuelo = tpsuelo;
     }
 
-    public List<Laboreo> getLaboreos() {
-        return laboreos;
+    public List<Laboreo> getLaboreosPre() {
+        return laboreosPre;
     }
 
-    public void setLaboreos(List<Laboreo> laboreos) {
-        this.laboreos = laboreos;
+    public void setLaboreosPre(List<Laboreo> laboreosPre) {
+        this.laboreosPre = laboreosPre;
     }
+
+    public List<Laboreo> getLaboreosPost() {
+        return laboreosPost;
+    }
+
+    public void setLaboreosPost(List<Laboreo> laboreosPost) {
+        this.laboreosPost = laboreosPost;
+    }
+
+    @Override
+    public String toString() {
+        return "Proyecto{" + "idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", lotes=" + lotes + ", tpsuelo=" + tpsuelo + ", laboreosPre=" + laboreosPre + ", laboreosPost=" + laboreosPost + '}';
+    }
+
+    
 
  
 

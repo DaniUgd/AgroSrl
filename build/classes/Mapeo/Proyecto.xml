@@ -10,9 +10,11 @@
     <property name="descripcion" type="java.lang.String">
              <column name="DESCRIPCION"/>
     </property>
-    <list name="lotes" cascade="none">
-        <key column="FKPROYECTO"/>
-        <index column=""/>
+    
+    
+    <list name="lotes" table="proyectoLote" cascade="none" >
+        <key column="idProyecto"/>
+        <index column="" />
         <many-to-many class="Clases.Lotes"/>
     </list>
    
@@ -21,7 +23,15 @@
         <index column=""/>
     <many-to-many class="Clases.TipoSuelo"/>
     </list>
-    <list name="laboreos" cascade="none">
+    
+    
+    <list name="laboreosPre" cascade="none">
+        <key column="fk_proyecto"/>
+        <index column=""/>
+    <many-to-many class="Clases.Laboreo"/>
+    </list>
+    
+    <list name="laboreosPost" cascade="none">
         <key column="fk_proyecto"/>
         <index column=""/>
     <many-to-many class="Clases.Laboreo"/>
