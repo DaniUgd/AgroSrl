@@ -78,6 +78,8 @@ private Session session=null;
                 
             } catch (NullPointerException e){
                 System.out.println("Falló");
+                  e.printStackTrace();
+                     session.getTransaction().rollback();
             }
             return retorno;
     }

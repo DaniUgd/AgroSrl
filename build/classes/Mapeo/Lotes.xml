@@ -51,6 +51,9 @@ Contributor(s):
     <property name="fk_Campo" type="java.lang.Long">
              <column name="fk_Campo"/>
     </property>
+    <property name="laboreoact" type="java.lang.String">
+             <column name="laboreoact"/>
+    </property>
     
     <many-to-one name="estado" cascade="none" class="Clases.EstadoProyecto">
         <column name="FKESTADOPROYECTO"/>

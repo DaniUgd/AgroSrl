@@ -37,15 +37,19 @@ public class Inicio extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
         lblimagen = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         estado = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
-        jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         EstadoP = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenu7 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -84,14 +88,6 @@ public class Inicio extends javax.swing.JFrame {
         });
         jMenuBar2.add(jMenu8);
 
-        jMenu1.setText("Gestion de Proyecto");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
-        jMenuBar2.add(jMenu1);
-
         jMenu3.setText("Cultivo");
         jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,6 +111,29 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jMenuBar2.add(EstadoP);
+
+        jMenu5.setText("Proyectos");
+
+        jMenu1.setText("Iniciar un proyecto");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenu5.add(jMenu1);
+
+        jMenu6.setText("Proyectos Vigentes");
+        jMenu6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu6MouseClicked(evt);
+            }
+        });
+        jMenu5.add(jMenu6);
+
+        jMenu7.setText("Historial de Proyectos");
+        jMenu5.add(jMenu7);
+
+        jMenuBar2.add(jMenu5);
 
         setJMenuBar(jMenuBar2);
 
@@ -186,6 +205,14 @@ public class Inicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_EstadoPMouseClicked
 
+    private void jMenu6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu6MouseClicked
+       ProyectosVigentes proV = new ProyectosVigentes(control);
+       proV.setVisible(true);
+       proV.setLocationRelativeTo(null);
+       this.setVisible(false);
+       
+    }//GEN-LAST:event_jMenu6MouseClicked
+
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -228,12 +255,16 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JLabel lblimagen;
     // End of variables declaration//GEN-END:variables

@@ -101,7 +101,7 @@ Campo campo;
                 
                 catch (Exception e) {
                      e.printStackTrace();
-                    // session.getTransaction().rollback();
+                    session.getTransaction().rollback();
                 }
                 return mostrar;
         }
@@ -116,6 +116,8 @@ Campo campo;
                 
             } catch (NullPointerException e){
                 System.out.println("Falló");
+                  e.printStackTrace();
+                     session.getTransaction().rollback();
                 
             }
             return retorno;

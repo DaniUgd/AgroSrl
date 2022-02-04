@@ -43,14 +43,18 @@ Proyecto proyecto = new Proyecto();
 
         dtmLaboreo.setColumnIdentifiers(tituloL);
         dtmPreSiembra.setColumnIdentifiers(tituloL);
+        dtmPostSiembra.setColumnIdentifiers(tituloL);
         dtmSD.setColumnIdentifiers(tituloS);
         dtmSA.setColumnIdentifiers(tituloS);
         
         TablaLab.setModel(dtmLaboreo);
-        
-        //TablaLab.setModel(dtmLaboreo);
+        TablaPreSiembra.setModel(dtmPreSiembra);
+        TablaPostSiembra.setModel(dtmPostSiembra);
         ListaSuelos.setModel(dtmSD);
         ListaSAgr.setModel(dtmSA);
+        
+        
+
         laboreos=control.obtenerLaboreos();
         tiposuelos=control.obtenerSuelos();
                 tiposuelos.stream().map((obj) -> new String []{Long.toString(obj.getIdSuelo()),obj.getDescripcion()}).forEachOrdered((tipoS) -> {
@@ -76,7 +80,7 @@ Proyecto proyecto = new Proyecto();
         TablaLab = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         botQuitarS = new javax.swing.JToggleButton();
-        botAgregarL = new javax.swing.JToggleButton();
+        botAgregarLPre = new javax.swing.JToggleButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         ListaSAgr = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
@@ -93,8 +97,8 @@ Proyecto proyecto = new Proyecto();
         TablaPreSiembra = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        botQuitarL1 = new javax.swing.JToggleButton();
-        botAgregarL1 = new javax.swing.JToggleButton();
+        botQuitarLPost = new javax.swing.JToggleButton();
+        botAgregarLPost = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,7 +107,7 @@ Proyecto proyecto = new Proyecto();
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("TIPOS DE SUELOS AGREGADOS");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 630, 230, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 490, 230, 20));
 
         nomCultivo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         nomCultivo.setText("Ejemplo: Soja");
@@ -112,7 +116,7 @@ Proyecto proyecto = new Proyecto();
                 nomCultivoActionPerformed(evt);
             }
         });
-        jPanel1.add(nomCultivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 110, 210, -1));
+        jPanel1.add(nomCultivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 210, -1));
 
         TablaLab.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,12 +131,12 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane1.setViewportView(TablaLab);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 280, -1, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 110, 450, 100));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Laboreos disponibles");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 240, 310, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 80, 310, -1));
 
         botQuitarS.setText("Quitar");
         botQuitarS.addActionListener(new java.awt.event.ActionListener() {
@@ -140,15 +144,15 @@ Proyecto proyecto = new Proyecto();
                 botQuitarSActionPerformed(evt);
             }
         });
-        jPanel1.add(botQuitarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 780, 120, 30));
+        jPanel1.add(botQuitarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 630, 120, 30));
 
-        botAgregarL.setText("Agregar Labores Pre Siembra");
-        botAgregarL.addActionListener(new java.awt.event.ActionListener() {
+        botAgregarLPre.setText("Agregar Labores Pre Siembra");
+        botAgregarLPre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botAgregarLActionPerformed(evt);
+                botAgregarLPreActionPerformed(evt);
             }
         });
-        jPanel1.add(botAgregarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 190, 30));
+        jPanel1.add(botAgregarLPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 190, 30));
 
         ListaSAgr.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,11 +167,11 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane3.setViewportView(ListaSAgr);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 660, -1, 100));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, -1, 100));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("INGRESE EL NOMBRE DEL CULTIVO:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 230, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 230, 20));
 
         ListaSuelos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -182,12 +186,12 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane4.setViewportView(ListaSuelos);
 
-        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 670, -1, 100));
+        jPanel1.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, -1, 100));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("SELECCIONE EL/LOS TIPOS DE SUELO");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 630, 250, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 490, 250, 20));
 
         botAgrS.setText("Agregar Tipo de suelo");
         botAgrS.addActionListener(new java.awt.event.ActionListener() {
@@ -195,7 +199,7 @@ Proyecto proyecto = new Proyecto();
                 botAgrSActionPerformed(evt);
             }
         });
-        jPanel1.add(botAgrS, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 790, 150, 30));
+        jPanel1.add(botAgrS, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 630, 150, 30));
 
         botQuitarL.setText("Quitar");
         botQuitarL.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +207,7 @@ Proyecto proyecto = new Proyecto();
                 botQuitarLActionPerformed(evt);
             }
         });
-        jPanel1.add(botQuitarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 120, 30));
+        jPanel1.add(botQuitarL, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 120, 30));
 
         jToggleButton6.setText("Volver");
         jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +215,7 @@ Proyecto proyecto = new Proyecto();
                 jToggleButton6ActionPerformed(evt);
             }
         });
-        jPanel1.add(jToggleButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 860, 100, 30));
+        jPanel1.add(jToggleButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 360, 110, 30));
 
         CrearProyecto.setText("Crear Proyecto");
         CrearProyecto.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +223,7 @@ Proyecto proyecto = new Proyecto();
                 CrearProyectoActionPerformed(evt);
             }
         });
-        jPanel1.add(CrearProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 860, -1, 30));
+        jPanel1.add(CrearProyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, -1, 30));
 
         TablaPostSiembra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -234,7 +238,7 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane5.setViewportView(TablaPostSiembra);
 
-        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, -1, 100));
+        jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, 100));
 
         TablaPreSiembra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -249,46 +253,45 @@ Proyecto proyecto = new Proyecto();
         ));
         jScrollPane7.setViewportView(TablaPreSiembra);
 
-        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, 100));
+        jPanel1.add(jScrollPane7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, 100));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Laboreos Agregados Post Siembra");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, 310, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 310, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Laboreos Agregados Pre Siembra");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, 310, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 310, 20));
 
-        botQuitarL1.setText("Quitar");
-        botQuitarL1.addActionListener(new java.awt.event.ActionListener() {
+        botQuitarLPost.setText("Quitar");
+        botQuitarLPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botQuitarL1ActionPerformed(evt);
+                botQuitarLPostActionPerformed(evt);
             }
         });
-        jPanel1.add(botQuitarL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 580, 120, 30));
+        jPanel1.add(botQuitarLPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 120, 30));
 
-        botAgregarL1.setText("Agregar Labores Post Siembra");
-        botAgregarL1.addActionListener(new java.awt.event.ActionListener() {
+        botAgregarLPost.setText("Agregar Labores Post Siembra");
+        botAgregarLPost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botAgregarL1ActionPerformed(evt);
+                botAgregarLPostActionPerformed(evt);
             }
         });
-        jPanel1.add(botAgregarL1, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 400, 180, 30));
+        jPanel1.add(botAgregarLPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 210, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1190, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 797, Short.MAX_VALUE)
         );
 
         pack();
@@ -305,20 +308,22 @@ Proyecto proyecto = new Proyecto();
                dtmSA.removeRow(indice);
     }//GEN-LAST:event_botQuitarSActionPerformed
 
-    private void botAgregarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarLActionPerformed
+    private void botAgregarLPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarLPreActionPerformed
         int indice;
         Laboreo lab = new Laboreo();
-        indice=TablaPreSiembra.getSelectedRow();
-        lab.setIdLaboreo(Long.parseLong((String) TablaPreSiembra.getValueAt(indice, 0)));
-        lab.setDescripcion((String) TablaPreSiembra.getValueAt(indice, 1));
+        indice=TablaLab.getSelectedRow();
+        System.out.println(indice);
+        lab.setIdLaboreo(Long.parseLong((String) dtmLaboreo.getValueAt(indice, 0)));
+        lab.setDescripcion((String) dtmLaboreo.getValueAt(indice, 1));
         String [] filalabor = new String [] {(String)lab.getIdLaboreo().toString(),lab.getDescripcion()};
         dtmPreSiembra.addRow(filalabor);
         lselectPre.add(lab);
+        
                 
 
         
         
-    }//GEN-LAST:event_botAgregarLActionPerformed
+    }//GEN-LAST:event_botAgregarLPreActionPerformed
 
     private void botQuitarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarLActionPerformed
                int indice;
@@ -340,6 +345,7 @@ Proyecto proyecto = new Proyecto();
     private void CrearProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearProyectoActionPerformed
             proyecto.setDescripcion(nomCultivo.getText());
             proyecto.setLaboreosPre(lselectPre);
+            proyecto.setLaboreosPost(lselectPost);
             proyecto.setTpsuelo(tsselect);
             control.agregarP(proyecto);
             
@@ -362,13 +368,28 @@ Proyecto proyecto = new Proyecto();
         
     }//GEN-LAST:event_botAgrSActionPerformed
 
-    private void botQuitarL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarL1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botQuitarL1ActionPerformed
+    private void botQuitarLPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarLPostActionPerformed
+               int indice;
+               indice=TablaPostSiembra.getSelectedRow();
+               lselectPost.remove(indice);
+               dtmPostSiembra.removeRow(indice);
+    }//GEN-LAST:event_botQuitarLPostActionPerformed
 
-    private void botAgregarL1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarL1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botAgregarL1ActionPerformed
+    private void botAgregarLPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarLPostActionPerformed
+        int indice;
+        Laboreo lab = new Laboreo();
+        indice=TablaLab.getSelectedRow();
+        System.out.println(indice);
+        lab.setIdLaboreo(Long.parseLong((String) dtmLaboreo.getValueAt(indice, 0)));
+        lab.setDescripcion((String) dtmLaboreo.getValueAt(indice, 1));
+        String [] filalabor = new String [] {(String)lab.getIdLaboreo().toString(),lab.getDescripcion()};
+        dtmPostSiembra.addRow(filalabor);
+        lselectPost.add(lab);
+        
+        
+        
+        
+    }//GEN-LAST:event_botAgregarLPostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -413,10 +434,10 @@ Proyecto proyecto = new Proyecto();
     private javax.swing.JTable TablaPostSiembra;
     private javax.swing.JTable TablaPreSiembra;
     private javax.swing.JToggleButton botAgrS;
-    private javax.swing.JToggleButton botAgregarL;
-    private javax.swing.JToggleButton botAgregarL1;
+    private javax.swing.JToggleButton botAgregarLPost;
+    private javax.swing.JToggleButton botAgregarLPre;
     private javax.swing.JToggleButton botQuitarL;
-    private javax.swing.JToggleButton botQuitarL1;
+    private javax.swing.JToggleButton botQuitarLPost;
     private javax.swing.JToggleButton botQuitarS;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

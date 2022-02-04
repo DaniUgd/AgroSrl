@@ -48,6 +48,7 @@ public class Proyectoimpl implements ProyectoDao {
             System.out.println("Exito");
         } catch (HibernateException hibernateException) {
             System.out.println(hibernateException);
+            
             System.out.println("Fallo");
         }
     }
@@ -93,6 +94,8 @@ public class Proyectoimpl implements ProyectoDao {
                 
             } catch (NullPointerException e){
                 System.out.println("Falló");
+                  e.printStackTrace();
+                     session.getTransaction().rollback();
             }
             return retorno;
     }

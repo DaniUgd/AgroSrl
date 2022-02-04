@@ -84,7 +84,7 @@ private Session session;
                 
                 catch (Exception e) {
                      e.printStackTrace();
-                    // session.getTransaction().rollback();
+                    session.getTransaction().rollback();
                 }
                 return mostrar;
         
