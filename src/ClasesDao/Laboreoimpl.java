@@ -65,6 +65,7 @@ private Session session;
                     
                     }
                      session.getTransaction().commit();
+                     
                 }
                 
                 catch (Exception e) {
@@ -81,7 +82,7 @@ private Session session;
                 session = null;
                 session= HibernateSession.getSession();
                 retorno = (Laboreo) session.get(Laboreo.class, id);
-                
+                session.close();
             } catch (NullPointerException e){
                 System.out.println("Falló");
                   e.printStackTrace();

@@ -12,9 +12,10 @@
     </property>
     
     
-    <list name="lotes" table="proyectoLote" cascade="none" >
-        <key column="idProyecto"/>
-        <index column="" />
+    <list name="lotes" table="proyectoLote" lazy="false"  >
+        <key column="idProyecto" />
+        <index  column="ORDEN" length="4" type="java.lang.Integer"/>
+        
         <many-to-many class="Clases.Lotes"/>
     </list>
    

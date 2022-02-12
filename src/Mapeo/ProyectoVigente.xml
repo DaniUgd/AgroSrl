@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+  <class name="Clases.ProyectoVigente" table="proyectolote">
+      <!--<composite-id         
+          name="propertyName"         
+          class="ClassName"         
+          mapped="true|false"         
+          access="field|property|ClassName">               
+          <key-property name="propertyName" type="typename" column="column_name"/>         
+          <key-many-to-one name="propertyName" class="ClassName" column="column_name"/>         
+          </composite-id>-->
+      
+      
+      
+  <id name="idProyecto" type="java.lang.Long" >
+            <column name="idProyecto"/>
+            <generator class="native" />
+    </id>
+    <property name="idLote" type="java.lang.Long">
+            <column name="elt" />
+             
+    </property>
+  
+  </class>
+  
+  
+  
+</hibernate-mapping>

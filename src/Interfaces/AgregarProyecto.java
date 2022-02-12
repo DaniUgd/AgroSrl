@@ -308,22 +308,26 @@ public class AgregarProyecto extends javax.swing.JFrame {
                     Proyecto p =new Proyecto();
                     List <TipoSuelo> tipoS = new ArrayList();
                     int cont=0;
+                     List <Lotes> lot = new ArrayList();
 
                     int indice;
                     indice=tablaProyecto.getSelectedRow();
                     p=listaP.get(indice);
                    
                     tipoS=p.getTpsuelo();
+                    System.out.println(tipoS.toString());
                     for(Lotes l :listaLSelect){
-                    
-                        if(tipoS.contains(l.getTiposuelo())){
-                            l.setEstado(control.obtenerEstado((long)1));
-                           
-                            control.modificarLote(l);
+                        
+                       
+                        if(tipoS.toString().contains(l.getTiposuelo().getDescripcion().toString())){
+                            
+                            
+                            lot.add(l); 
+                            
                         }else{
                             cont++;
                             System.out.println("noentra");
-                            
+                          
                             break;
                             
                         }
@@ -332,20 +336,29 @@ public class AgregarProyecto extends javax.swing.JFrame {
                     }
                     
                     
+                    
                   if(cont>0){
                       er.setVisible(true);
                       er.setLocationRelativeTo(null);
+                     
                   } else{
-                      for(Lotes l: listaLSelect){
-                      p.getLotes().add(l);
+                      for(Lotes l : lot){
+                          l.setEstado(control.obtenerEstado((long)1));
+                          control.modificarLote(l);
                       }
-                      control.modificarProyecto(p);
-                      ex.setVisible(true);
-                      ex.setLocationRelativeTo(null);
-                  }
+                      
+                      
+                      for(Lotes l: listaLSelect){
+                        p.getLotes().add(l);
+                      }
+                        control.modificarProyecto(p);
+                        ex.setVisible(true);
+                        ex.setLocationRelativeTo(null);
+                        control.ModificarEstadoCampo();
+                    }
                   System.out.println(p.toString());
             cont=0;
-            control.ModificarEstadoCampo();
+           
             System.out.println(listaCompararC);
             
             

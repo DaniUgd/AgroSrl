@@ -70,11 +70,13 @@ public class Proyectoimpl implements ProyectoDao {
                     tr.setTimeout(2);
                     mostrar= session.createCriteria(Proyecto.class).list();
                     System.out.println(mostrar);
+                    
                     for(Object obj :mostrar ){
                         System.out.println(obj.toString());
                     
                     }
                      session.getTransaction().commit();
+                
                 }
                 
                 catch (Exception e) {
@@ -91,7 +93,7 @@ public class Proyectoimpl implements ProyectoDao {
                 session = null;
                 session= HibernateSession.getSession();
                 retorno = (Proyecto) session.get(Proyecto.class, id);
-                
+              
             } catch (NullPointerException e){
                 System.out.println("Falló");
                   e.printStackTrace();

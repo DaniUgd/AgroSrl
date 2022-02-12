@@ -5,13 +5,13 @@
  */
 package interDao;
 
-import Clases.Historial;
+import Clases.ProyectoVigente;
 import ClasesDao.DAO;
 
 /**
  *
  * @author Daniel
  */
-public interface HistorialDao extends DAO <Historial,Long> {
+public interface ProyectoVigenteDao extends DAO <ProyectoVigente,Long> {
     
 }

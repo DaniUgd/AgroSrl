@@ -80,6 +80,7 @@ private Session session;
                     
                     }
                      session.getTransaction().commit();
+                     session.close();
                 }
                 
                 catch (Exception e) {

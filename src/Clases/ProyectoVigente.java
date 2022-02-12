@@ -9,16 +9,16 @@ package Clases;
  *
  * @author Daniel
  */
-public class Historial {
+public class ProyectoVigente {
     private Long idProyecto;
     private Long idLote;
 
-    public Historial(Long idProyecto, Long idLote) {
+    public ProyectoVigente(Long idProyecto, Long idLote) {
         this.idProyecto = idProyecto;
         this.idLote = idLote;
     }
 
-    public Historial() {
+    public ProyectoVigente() {
     }
 
     public Long getIdProyecto() {
@@ -39,7 +39,7 @@ public class Historial {
 
     @Override
     public String toString() {
-        return "Historial{" + "idProyecto=" + idProyecto + ", idLote=" + idLote + '}';
+        return "ProyectoVigente{" + "idProyecto=" + idProyecto + ", idLote=" + idLote + '}';
     }
     
     

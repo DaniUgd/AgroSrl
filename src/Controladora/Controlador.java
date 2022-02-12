@@ -25,6 +25,7 @@ public class Controlador {
  private final Laboreoimpl laboreodao = new Laboreoimpl();
  private final EstadoProyectoimpl estadopdao = new EstadoProyectoimpl();
  private final Proyectoimpl proyectodao = new Proyectoimpl();
+ private final ProyectoVigenteimpl proyectovdao = new ProyectoVigenteimpl();
  
  
  public void agregarCampo(Campo g){
@@ -191,6 +192,36 @@ return  estados;
         }
     
     
-    
+     public void modificarProyectoV(ProyectoVigente g){
+        
+        proyectovdao.modificar(g);
 
+    }
+     
+     
+      public List <ProyectoVigente> obtenerTodosProyectov() {
+         List <ProyectoVigente> prov= null;
+        prov=proyectovdao.obtenerTodos();
+        return prov;
+      
+      }
+      
+       public ProyectoVigente obtenerProyectoV(Long id) {
+       ProyectoVigente prov = new ProyectoVigente();
+       prov=proyectovdao.obtener(id);
+        return prov;
+    }
+    
+        public void eliminarProyectoV(ProyectoVigente g){
+        
+                proyectovdao.eliminarPV(g);
+            
+        }
+        
+      public ProyectoVigente BuscarIdPV(Long id,Long idLote) {
+            ProyectoVigente prov = new ProyectoVigente();
+            prov=proyectovdao.BuscarIdPV(id,idLote);
+            return prov;
+        }
 }
+
