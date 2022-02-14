@@ -25,12 +25,16 @@ public class Controlador {
  private final Laboreoimpl laboreodao = new Laboreoimpl();
  private final EstadoProyectoimpl estadopdao = new EstadoProyectoimpl();
  private final Proyectoimpl proyectodao = new Proyectoimpl();
+ private final Historialimpl historialdao = new Historialimpl();
  
  
  public void agregarCampo(Campo g){
     campodao.insertar(g);
 }
-
+ public void agregarHistorial(Historial g){
+    historialdao.insertar(g);
+}
+ 
 public List <Campo> obtenerCampos(){
    List <Campo> mostrar=null;
    mostrar=campodao.obtenerTodos();
@@ -191,6 +195,36 @@ return  estados;
         }
     
     
-    
+     public void modificarProyectoV(Historial g){
+        
+        historialdao.modificar(g);
 
+    }
+     
+     
+      public List <Historial> obtenerTodosProyectov() {
+         List <Historial> prov= null;
+        prov=historialdao.obtenerTodos();
+        return prov;
+      
+      }
+      
+       public Historial obtenerProyectoV(Long id) {
+       Historial prov = new Historial();
+       prov=historialdao.obtener(id);
+        return prov;
+    }
+    
+        public void eliminarProyectoV(Historial g){
+        
+                historialdao.eliminarPV(g);
+            
+        }
+        
+      public Historial BuscarIdPV(Long id,Long idLote) {
+            Historial prov = new Historial();
+            prov=historialdao.BuscarIdPV(id,idLote);
+            return prov;
+        }
 }
+

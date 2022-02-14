@@ -12,10 +12,10 @@
     </property>
     
     
-    <list name="lotes" table="proyectoLote" cascade="none" >
-        <key column="idProyecto"/>
-        <index column="" />
-        <many-to-many class="Clases.Lotes"/>
+    <list name="lotes" table="proyectoLote" lazy="false">
+        <key column="idProyecto" />
+        <index  column=""/>
+        <one-to-many class="Clases.Lotes"/>
     </list>
    
     <list name="tpsuelo" cascade="none">

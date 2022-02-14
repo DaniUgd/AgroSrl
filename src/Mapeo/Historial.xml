@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
+
 <hibernate-mapping>
-  <class name="Clases.Historial" table="proyectolote">
-  <id name="idProyecto" type="java.lang.Long">
-            <column name="IDPROYECTO" />
+  <class name="Clases.Historial" table="Historial">
+      
+  <id name="idhistorial" type="java.lang.Long">
+            <column name="idHistorial" />
             <generator class="native" />
     </id>
-    <property name="idLote" type="java.lang.Long">
-             <column name="elt"/>
+    <property name="NombreCampo" type="java.lang.String">
+             <column name="NombreCampo"/>
     </property>
-    
-</class>
-
-
+    <property name="DescripcionP" type="java.lang.String">
+             <column name="DescripcionP"/>
+    </property>
+    <property name="idProyecto" type="java.lang.Long">
+        <column name="idProyecto"/>
+    </property>
+    <property name="idLote" type="java.lang.Long">
+        <column name="idLote"/>
+    </property>
+    <property name="fecha" type="java.sql.Date">
+        <column name="fecha"/>
+    </property>
+    <property name="EstadoProyecto" type="java.lang.String">
+        <column name="EstadoProyecto"/>
+    </property>
+  </class>
+  
+  
+  
 </hibernate-mapping>

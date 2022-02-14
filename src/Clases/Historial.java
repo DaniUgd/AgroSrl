@@ -5,20 +5,45 @@
  */
 package Clases;
 
-/**
- *
- * @author Daniel
- */
-public class Historial {
-    private Long idProyecto;
-    private Long idLote;
+import java.io.Serializable;
+import java.sql.Date;
 
-    public Historial(Long idProyecto, Long idLote) {
-        this.idProyecto = idProyecto;
-        this.idLote = idLote;
-    }
+
+public class Historial implements Serializable {
+    private  Long idhistorial;
+    private  Long idProyecto;
+    private  Long idLote;
+    private  String EstadoProyecto;
+    private  String NombreCampo;
+    private  String DescripcionP;
+    private  String laboreoefect;
+    private  Date fecha;
 
     public Historial() {
+    }
+
+    public Historial(Long idhistorial, Long idProyecto, Long idLote, String EstadoProyecto, String NombreCampo, String DescripcionP, String laboreoefect, Date fecha) {
+        this.idhistorial = idhistorial;
+        this.idProyecto = idProyecto;
+        this.idLote = idLote;
+        this.EstadoProyecto = EstadoProyecto;
+        this.NombreCampo = NombreCampo;
+        this.DescripcionP = DescripcionP;
+        this.laboreoefect = laboreoefect;
+        this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Historial{" + "idhistorial=" + idhistorial + ", idProyecto=" + idProyecto + ", idLote=" + idLote + ", EstadoProyecto=" + EstadoProyecto + ", NombreCampo=" + NombreCampo + ", DescripcionP=" + DescripcionP + ", laboreoefect=" + laboreoefect + ", fecha=" + fecha + '}';
+    }
+
+    public Long getIdhistorial() {
+        return idhistorial;
+    }
+
+    public void setIdhistorial(Long idhistorial) {
+        this.idhistorial = idhistorial;
     }
 
     public Long getIdProyecto() {
@@ -37,11 +62,47 @@ public class Historial {
         this.idLote = idLote;
     }
 
-    @Override
-    public String toString() {
-        return "Historial{" + "idProyecto=" + idProyecto + ", idLote=" + idLote + '}';
+    public String getEstadoProyecto() {
+        return EstadoProyecto;
     }
-    
+
+    public void setEstadoProyecto(String EstadoProyecto) {
+        this.EstadoProyecto = EstadoProyecto;
+    }
+
+    public String getNombreCampo() {
+        return NombreCampo;
+    }
+
+    public void setNombreCampo(String NombreCampo) {
+        this.NombreCampo = NombreCampo;
+    }
+
+    public String getDescripcionP() {
+        return DescripcionP;
+    }
+
+    public void setDescripcionP(String DescripcionP) {
+        this.DescripcionP = DescripcionP;
+    }
+
+    public String getLaboreoefect() {
+        return laboreoefect;
+    }
+
+    public void setLaboreoefect(String laboreoefect) {
+        this.laboreoefect = laboreoefect;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+   
     
     
 }

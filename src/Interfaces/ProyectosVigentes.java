@@ -10,10 +10,23 @@ import Clases.EstadoProyecto;
 import Clases.Laboreo;
 import Clases.Lotes;
 import Clases.Proyecto;
+import Clases.Historial;
 import Controladora.Controlador;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,21 +39,52 @@ DefaultTableModel dtmPro = new DefaultTableModel();
 DefaultTableModel dtmLpro = new DefaultTableModel();
 DefaultTableModel dtmPRE = new DefaultTableModel();
 DefaultTableModel dtmPOST = new DefaultTableModel();
+JFrame reinicio = new JFrame();
+JPanel panel = new JPanel();
+JLabel pregunta =new JLabel();
+JTextField razon = new JTextField();
+JButton OK = new JButton();
 
-
-
+ActionListener action = new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
+       
+        reinicio.setVisible(true);
+            reinicio.setLocationRelativeTo(null);
+            
+    }
+};
+ActionListener cerrar;
+Historial hist = new Historial();
+List <Lotes> lotesSelec = new ArrayList();
 List <Integer> indices = new ArrayList();
-
+Lotes lote = new Lotes();
 List <Proyecto> proyectos = new ArrayList();
-List <Lotes> lotesP=  new ArrayList();
-List <Campo> CampoP=  new ArrayList();
-List <Laboreo> laboreopre=  new ArrayList();
-List <Laboreo> laboreopost=  new ArrayList();  
-
+private List <Lotes> lotesP=  new ArrayList();
+List <Campo> CampoP =  new ArrayList();
+List <Laboreo> laboreopre =  new ArrayList();
+List <Laboreo> laboreopost =  new ArrayList();  
+List <Proyecto> prov = new ArrayList();
+List <Historial> listahist = new ArrayList();
+Proyecto p = new Proyecto();
 
 
 
     public ProyectosVigentes(Controlador control2) {
+        this.cerrar = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                long miliseconds = System.currentTimeMillis();
+                 Date date = new Date(miliseconds);
+                hist.setDescripcionP(razon.getText());
+                hist.setFecha(date);
+                listahist.add(hist);
+                
+                reinicio.setVisible(false);
+             
+            }
+        };
         initComponents();
         control = control2;
         String [] titulo = new String [] {"Id Proyecto","Descripcion"};
@@ -51,22 +95,38 @@ List <Laboreo> laboreopost=  new ArrayList();
         dtmLpro.setColumnIdentifiers(titulo2);
         dtmPRE.setColumnIdentifiers(titulopre);
         dtmPOST.setColumnIdentifiers(titulopost);
+        OK.setText("OK");
+        pregunta.setText("Por que desea reiniciar/cancelar el proyecto?");
+        
+        pregunta.setBounds(145, 50, 500, 75);
+        reinicio.setSize(500, 300);
+        panel.setSize(500, 300);
+        razon.setBounds(150, 150, 200, 20);
+        OK.setBounds(200, 200, 70, 35);
+        panel.setLayout(null);
+        panel.add(pregunta);
+        panel.add(razon);
+        panel.add(OK);
+        reinicio.add(panel);
+        Reiniciar.addActionListener(action);
+        Cancelar.addActionListener(action);
+        OK.addActionListener(cerrar);
+
         
         tablaProyectos.setModel(dtmPro);
         tablaLotesP.setModel(dtmLpro);
         tablaPRE.setModel(dtmPRE);
         tablaPOST.setModel(dtmPOST);
-        
-        
+          
+        prov= control.obtenerProyectos();
+        System.out.println("este es prov pero buscado por id"+prov.toString());
         proyectos=control.obtenerProyectos();
         
                 proyectos.stream().map((obj) -> new String []{Long.toString(obj.getIdProyecto()),obj.getDescripcion()}).forEachOrdered((proy) -> {
         dtmPro.addRow(proy);
         });  
                 
-
-            
-        
+             
         
         
         
@@ -127,12 +187,22 @@ List <Laboreo> laboreopost=  new ArrayList();
         jPanel1.add(Finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, 90, -1));
 
         Cancelar.setText("Cancelar");
+        Cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelarActionPerformed(evt);
+            }
+        });
         jPanel1.add(Cancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 260, 90, -1));
 
         jLabel1.setText("Proyectos Vigentes:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         Reiniciar.setText("Reiniciar");
+        Reiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReiniciarActionPerformed(evt);
+            }
+        });
         jPanel1.add(Reiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 90, -1));
 
         volver.setText("Volver");
@@ -238,8 +308,6 @@ List <Laboreo> laboreopost=  new ArrayList();
 
     private void tablaProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaProyectosMouseClicked
         int indice;
-        lotesP.clear();
-        Proyecto p = new Proyecto();
         dtmLpro.setRowCount(0);
         dtmPRE.setRowCount(0);
         dtmPOST.setRowCount(0);
@@ -248,8 +316,10 @@ List <Laboreo> laboreopost=  new ArrayList();
         
         p=proyectos.get(indice);
         lotesP=p.getLotes();
+        System.out.println(p.getLotes().toString());
         laboreopre=p.getLaboreosPre();
         laboreopost=p.getLaboreosPost();
+        
         for (Laboreo l :laboreopre){
             
             String [] rowLAB = new String[] {String.valueOf(l.getIdLaboreo())+ " - " + l.getDescripcion()};
@@ -273,7 +343,7 @@ List <Laboreo> laboreopost=  new ArrayList();
             c=control.buscarCampo(l.getFk_Campo());
             String [] rowLotes = new String[] {String.valueOf(c.getIdCampo()),c.getNombre(),String.valueOf(l.getIdLote()),p.getDescripcion(),String.valueOf(l.getEstado().getDescripcion()),String.valueOf(l.getLaboreoact())};
             dtmLpro.addRow(rowLotes);
-        
+            
         }
         
         
@@ -289,8 +359,8 @@ List <Laboreo> laboreopost=  new ArrayList();
         Laboreo l = new Laboreo();
         List <Lotes> lotselec=  new ArrayList();
         EstadoProyecto est = new EstadoProyecto();
-        Proyecto p = new Proyecto();
-        Lotes lote = new Lotes();
+        
+        
         indice=tablaPRE.getSelectedRow();
         indl=tablaLotesP.getSelectedRow();
         
@@ -301,30 +371,13 @@ List <Laboreo> laboreopost=  new ArrayList();
         lote=lotesP.get(indl);
         lote.setEstado(est);
         lote.setLaboreoact(l.getDescripcion());
-        
-        if(lotselec.contains(lote)){
-
-
-        }else{
-                lotselec.add(lote);
-                
-        }
-        
-       
-        
-        
-        
-  
-        
-
-        
-        
-        
-        
-        
+        lotesSelec.add(lote);
+      
         
     }//GEN-LAST:event_tablaPREMouseClicked
 
+    
+    
     private void tablaPOSTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaPOSTMouseClicked
         int indice,indl;
         Laboreo l = new Laboreo();
@@ -335,7 +388,10 @@ List <Laboreo> laboreopost=  new ArrayList();
         l=laboreopost.get(indice);
         tablaLotesP.setValueAt(l.getDescripcion(), indl, 5);
         tablaLotesP.setValueAt(est.getDescripcion(), indl, 4);
-        
+        lote=lotesP.get(indl);
+        lote.setEstado(est);
+        lote.setLaboreoact(l.getDescripcion());
+        lotesSelec.add(lote);
         
         
         
@@ -344,8 +400,14 @@ List <Laboreo> laboreopost=  new ArrayList();
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
             
-       
-    
+        for(Lotes l: lotesSelec){
+            control.modificarLote(l);
+            
+        }
+        for(Historial h : listahist){
+            control.agregarHistorial(h);
+        }
+        
         
         
         
@@ -356,6 +418,78 @@ List <Laboreo> laboreopost=  new ArrayList();
 
         
     }//GEN-LAST:event_tablaLotesPMouseClicked
+
+    private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
+        int indl; 
+        
+        
+        
+        
+        
+        String nomcamp = new String();
+        
+        Lotes lot=new Lotes();
+        EstadoProyecto est = new EstadoProyecto();
+        est=control.obtenerEstado((long)4);
+        indl=tablaLotesP.getSelectedRow();
+        tablaLotesP.setValueAt("null", indl, 5);
+        tablaLotesP.setValueAt(est.getDescripcion(), indl, 4);
+        nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
+        lot=lotesP.get(indl);
+        hist.setIdLote((long)lot.getIdLote());
+        
+        hist.setIdProyecto(p.getIdProyecto());
+        hist.setNombreCampo(nomcamp);
+        hist.setLaboreoefect(lot.getLaboreoact());
+        hist.setEstadoProyecto(est.getDescripcion());
+        
+        
+        est=control.obtenerEstado((long)1);
+        lot.setEstado(est);
+        
+        lot.setLaboreoact(null);
+        lotesSelec.add(lot);
+        
+    }//GEN-LAST:event_ReiniciarActionPerformed
+
+    private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
+           Lotes lot = new Lotes();
+           
+           int indl;
+           String nomcamp = new String();
+
+           Historial hist=new Historial();
+           EstadoProyecto est = new EstadoProyecto();
+           hist.setIdProyecto(p.getIdProyecto());
+        
+           indl=tablaLotesP.getSelectedRow();
+           for(Lotes l : lotesP){
+           
+               System.out.println(l.getEstado());
+           
+           }
+           lot=lotesP.get(indl);
+           hist.setEstadoProyecto(est.getDescripcion());
+           hist.setLaboreoefect(lot.getLaboreoact());
+           hist.setIdLote((long)lot.getIdLote());
+           nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
+           hist.setNombreCampo(nomcamp);
+           
+           dtmLpro.removeRow(indl);
+          System.out.println("ACA"+lot.getFk_proyecto());
+           lot.setFk_proyecto(null);
+          
+           lot.setEstado(null);
+           lot.setLaboreoact(null);
+          
+           
+          lotesSelec.add(lot);
+          
+           
+           
+        
+        
+    }//GEN-LAST:event_CancelarActionPerformed
 
     /**
      * @param args the command line arguments

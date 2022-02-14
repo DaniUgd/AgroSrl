@@ -40,7 +40,7 @@ made subject to such option by the copyright holder.
 Contributor(s):
 -->
 <hibernate-mapping>
-  <class  name="Clases.EstadoCampo" table="EstadoCampo">
+  <class  name="Clases.EstadoCampo" table="EstadoCampo" lazy="false">
       <id name="idEstado" type="java.lang.Long">
             <column name="IDESTADO" />
             <generator class="native" />

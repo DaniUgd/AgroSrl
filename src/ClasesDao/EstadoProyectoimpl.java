@@ -59,12 +59,15 @@ private Session session;
                     
                     }
                      session.getTransaction().commit();
+                    
                 }
                 
                 catch (Exception e) {
                     e.printStackTrace();
                      session.getTransaction().rollback();
+                     
                 }
+                
                 return mostrar;
 
     }
@@ -82,7 +85,7 @@ private Session session;
                   e.printStackTrace();
                      session.getTransaction().rollback();
             }
-            
+           
             return retorno;
 
 

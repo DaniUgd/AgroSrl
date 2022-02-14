@@ -36,6 +36,7 @@ private Session session=null;
                     Query  q = session.createQuery("SELECT e FROM EstadoCampo e");
                     
                     estados= q.list();
+                    
                 } catch (Exception e) {
                 }
                 System.out.println(estados);

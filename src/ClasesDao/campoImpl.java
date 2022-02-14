@@ -97,6 +97,7 @@ Campo campo;
                     
                     }
                      session.getTransaction().commit();
+                     session.close();
                 }
                 
                 catch (Exception e) {
@@ -113,7 +114,7 @@ Campo campo;
                 session = null;
                 session= HibernateSession.getSession();
                 retorno = (Campo) session.get(Campo.class, id);
-                
+                session.close();
             } catch (NullPointerException e){
                 System.out.println("Falló");
                   e.printStackTrace();

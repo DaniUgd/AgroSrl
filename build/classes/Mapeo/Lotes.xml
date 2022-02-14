@@ -54,19 +54,15 @@ Contributor(s):
     <property name="laboreoact" type="java.lang.String">
              <column name="laboreoact"/>
     </property>
-    
+    <property name="fk_proyecto" type="java.lang.Long">
+             <column name="idProyecto"/>
+    </property>
     <many-to-one name="estado" cascade="none" class="Clases.EstadoProyecto">
         <column name="FKESTADOPROYECTO"/>
 </many-to-one>
 <many-to-one name="tiposuelo" cascade="none" class="Clases.TipoSuelo">
         <column name="FKTIPOSUELO"/>
 </many-to-one>
-
-<!--<set name="proyectos" table="proyectoLote" cascade="none" inverse="false">
-        <key column="idLote"/>
-        
-        <many-to-many column="idProyecto" class="Clases.Proyecto"/>
-    </set>-->
 
 
 

@@ -62,9 +62,10 @@ private Session session=null;
                     Query  q = session.createQuery("SELECT t FROM TipoSuelo t");
                     
                     suelos= q.list();
+                   session.close();
                 } catch (Exception e) {
                 }
-              
+                
 		return suelos;
         
     }
