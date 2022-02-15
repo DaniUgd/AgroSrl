@@ -105,27 +105,30 @@ private Session session=null;
     @Override
     public List<Historial> obtenerTodos() {
         
-            session = null;
-            session= HibernateSession.getSession();
-               /* try {
-            
-                    Query  q = session.createQuery("FROM ProyectoVigente");
+          Transaction tr= null;
+        List <Historial> mostrar = null;
+
+                try {
                     
-                    prov= q.list();
-                    System.out.println("Aca esta prov desde la impl"+prov.toString());
-                   session.close();
-                } catch (Exception e) {
+                    session = null;
+                    session= HibernateSession.getSession();
+                    tr=session.beginTransaction();
+                    tr.setTimeout(5);
+                    mostrar= session.createCriteria(Historial.class).list();
+                    System.out.println(mostrar);
+                    for(Object obj :mostrar ){
+                        System.out.println(obj.toString());
+                    
+                    }
+                     session.getTransaction().commit();
+                     session.close();
                 }
                 
-		return prov;*/
-        
-               List<Historial> prov = session.createQuery(
-                "SELECT ph from ProyectoVigente ph WHERE ph.idLote = : elt2" )
-               .setParameter( "elt2", (long)5 )
-               .list();
-                
-               System.out.println("esto es obtener todos de prov"+prov);
-               return prov;
+                catch (Exception e) {
+                     e.printStackTrace();
+                    session.getTransaction().rollback();
+                }
+                return mostrar;
                
                
                

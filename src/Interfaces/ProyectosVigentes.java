@@ -21,6 +21,7 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,6 +29,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import static net.bytebuddy.matcher.ElementMatchers.is;
 import static net.bytebuddy.matcher.ElementMatchers.none;
 
 /**
@@ -49,10 +51,8 @@ JButton OK = new JButton();
 ActionListener action = new ActionListener() {
     @Override
     public void actionPerformed(ActionEvent e) {
-        
-       
         reinicio.setVisible(true);
-            reinicio.setLocationRelativeTo(null);
+        reinicio.setLocationRelativeTo(null);
             
     }
 };
@@ -69,20 +69,17 @@ List <Laboreo> laboreopost =  new ArrayList();
 List <Proyecto> prov = new ArrayList();
 List <Historial> listahist = new ArrayList();
 Proyecto p = new Proyecto();
-
+String raz = new String();
 
 
     public ProyectosVigentes(Controlador control2) {
         this.cerrar = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                long miliseconds = System.currentTimeMillis();
-                 Date date = new Date(miliseconds);
-                hist.setDescripcionP(razon.getText());
-                hist.setFecha(date);
-               
-                
-                
+                raz=razon.getText();
+                hist.setDescripcionP(raz);
+                razon.setText(null);
+                raz=null;
                 reinicio.setVisible(false);
              
             }
@@ -186,6 +183,11 @@ Proyecto p = new Proyecto();
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 160, 100));
 
         Finalizar.setText("Finalizar");
+        Finalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FinalizarActionPerformed(evt);
+            }
+        });
         jPanel1.add(Finalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 290, 90, -1));
 
         Cancelar.setText("Cancelar");
@@ -340,13 +342,20 @@ Proyecto p = new Proyecto();
         
         
         System.out.println("aca esta elñ tamaño de la lista de p"+p.getLotes().size());
+       
         
         int cont =0;
         for (Lotes l : p.getLotes()){
             cont++;
+            if(Objects.nonNull(l) ){
             c=control.buscarCampo(l.getFk_Campo());
             String [] rowLotes = new String[] {String.valueOf(c.getIdCampo()),c.getNombre(),String.valueOf(l.getIdLote()),p.getDescripcion(),String.valueOf(l.getEstado().getDescripcion()),String.valueOf(l.getLaboreoact())};
             dtmLpro.addRow(rowLotes);
+            }
+            else{
+                 
+            
+            }
                 
             
         }
@@ -452,14 +461,10 @@ Proyecto p = new Proyecto();
     }//GEN-LAST:event_tablaLotesPMouseClicked
 
     private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
-        int indl; 
-        
-        
-        
-        
-        
+        int indl;
         String nomcamp = new String();
-        
+        long miliseconds = System.currentTimeMillis();
+        Date date = new Date(miliseconds);   
         Lotes lot=new Lotes();
         EstadoProyecto est = new EstadoProyecto();
         est=control.obtenerEstado((long)4);
@@ -469,26 +474,28 @@ Proyecto p = new Proyecto();
         nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
         lot=lotesP.get(indl);
         hist.setIdLote((long)lot.getIdLote());
-        
         hist.setIdProyecto(p.getIdProyecto());
         hist.setNombreCampo(nomcamp);
         hist.setLaboreoefect(lot.getLaboreoact());
         hist.setEstadoProyecto(est.getDescripcion());
         
+        hist.setFecha(date);
+                
         
         est=control.obtenerEstado((long)1);
         lot.setEstado(est);
         
         lot.setLaboreoact(null);
         lotesSelec.add(lot);
-        
         listahist.add(hist);
+        
         
     }//GEN-LAST:event_ReiniciarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
            Lotes lot = new Lotes();
-           List <Lotes> lotes = new ArrayList();
+           long miliseconds = System.currentTimeMillis();
+           Date date = new Date(miliseconds);
            List <Lotes> lotesAux = new ArrayList();
            int indl;
            String nomcamp = new String();
@@ -499,7 +506,7 @@ Proyecto p = new Proyecto();
           
            indl=tablaLotesP.getSelectedRow();
            lot=lotesP.get(indl);
-           lotes=p.getLotes();
+          
            for(Lotes l : p.getLotes()){
                if(l.getIdLote()==lot.getIdLote()){
                }else{
@@ -508,9 +515,7 @@ Proyecto p = new Proyecto();
            }
            p.setLotes(lotesAux);
            
-           //lotes.remove(lot);
-          // p.setLotes(lotes);
-           
+          
            control.modificarProyecto(p);
            
            hist.setEstadoProyecto(est.getDescripcion());
@@ -524,12 +529,56 @@ Proyecto p = new Proyecto();
            lot.setEstado(null);
            lot.setLaboreoact(null);
            
+           
+            
+           hist.setFecha(date);
            lotesSelec.add(lot);
            listahist.add(hist);
+        
            
         
         
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
+          List <Lotes> lotesAux = new ArrayList();
+             int indl;
+        String nomcamp = new String();
+        long miliseconds = System.currentTimeMillis();
+                 Date date = new Date(miliseconds);
+        Lotes lot=new Lotes();
+        EstadoProyecto est = new EstadoProyecto();
+        est=control.obtenerEstado((long)6);
+        indl=tablaLotesP.getSelectedRow();
+        /*tablaLotesP.setValueAt("null", indl, 5);
+        tablaLotesP.setValueAt(est.getDescripcion(), indl, 4);*/
+        nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
+        lot=lotesP.get(indl);
+        hist.setIdLote((long)lot.getIdLote());
+        hist.setIdProyecto(p.getIdProyecto());
+        hist.setNombreCampo(nomcamp);
+        hist.setLaboreoefect(lot.getLaboreoact());
+        hist.setEstadoProyecto(est.getDescripcion());
+        hist.setDescripcionP("Finalizado con exito");
+        hist.setFecha(date);
+        
+        for(Lotes l : p.getLotes()){
+               if(l.getIdLote()==lot.getIdLote()){
+               }else{
+                   lotesAux.add(l);
+               }
+           }
+           p.setLotes(lotesAux);
+         lot.setFk_proyecto(null);
+        lot.setEstado(null);
+        lot.setLaboreoact(null);
+        lotesSelec.add(lot);
+        
+        listahist.add(hist);
+            
+            
+            
+    }//GEN-LAST:event_FinalizarActionPerformed
 
     /**
      * @param args the command line arguments

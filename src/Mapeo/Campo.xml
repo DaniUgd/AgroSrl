@@ -53,9 +53,9 @@ Contributor(s):
     </property>
     
 
-    <list name="lotes" lazy="false" cascade="all">
+    <list name="lotes" lazy="false" cascade="all" inverse="false" >
         <key column="fk_Campo"/>
-        <index column=""/>
+        <index column="ordenCampo"/>
     <one-to-many  class="Clases.Lotes"/>
     </list>
     <many-to-one name="estado" cascade="none" class="Clases.EstadoCampo">

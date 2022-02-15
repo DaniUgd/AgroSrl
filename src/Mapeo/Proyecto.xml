@@ -12,9 +12,9 @@
     </property>
     
     
-    <list name="lotes" table="proyectoLote" lazy="false" cascade="none">
-        <key column="idProyecto" />
-        <index  column=""/>
+    <list name="lotes" table="proyectoLote" lazy="false" cascade="none" inverse="false">
+        <key column="idProyecto"  />
+        <index  column="ordenProyecto"  />
         <one-to-many class="Clases.Lotes"/>
     </list>
    

@@ -136,6 +136,11 @@ public class Inicio extends javax.swing.JFrame {
         jMenu5.add(jMenu6);
 
         jMenu7.setText("Historial de Proyectos");
+        jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu7MouseClicked(evt);
+            }
+        });
         jMenu5.add(jMenu7);
 
         jMenuBar2.add(jMenu5);
@@ -221,6 +226,16 @@ public class Inicio extends javax.swing.JFrame {
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
         
     }//GEN-LAST:event_jMenu5MouseClicked
+
+    private void jMenu7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu7MouseClicked
+       MostrarHistorial mh = new MostrarHistorial(control);
+        this.setVisible(false);
+        mh.setVisible(true);
+        mh.setLocationRelativeTo(null);
+       
+        
+        
+    }//GEN-LAST:event_jMenu7MouseClicked
 
    
     public static void main(String args[]) {
