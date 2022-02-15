@@ -27,6 +27,9 @@
     <property name="EstadoProyecto" type="java.lang.String">
         <column name="EstadoProyecto"/>
     </property>
+    <property name="laboreoefect" type="java.lang.String">
+        <column name="laboreoEfectuado"/>
+    </property>
   </class>
   
   

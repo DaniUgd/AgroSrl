@@ -12,7 +12,7 @@
     </property>
     
     
-    <list name="lotes" table="proyectoLote" lazy="false">
+    <list name="lotes" table="proyectoLote" lazy="false" cascade="none">
         <key column="idProyecto" />
         <index  column=""/>
         <one-to-many class="Clases.Lotes"/>
