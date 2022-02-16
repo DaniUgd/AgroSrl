@@ -26,6 +26,7 @@ import java.util.Set;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -42,21 +43,8 @@ DefaultTableModel dtmPro = new DefaultTableModel();
 DefaultTableModel dtmLpro = new DefaultTableModel();
 DefaultTableModel dtmPRE = new DefaultTableModel();
 DefaultTableModel dtmPOST = new DefaultTableModel();
-JFrame reinicio = new JFrame();
-JPanel panel = new JPanel();
-JLabel pregunta =new JLabel();
-JTextField razon = new JTextField();
-JButton OK = new JButton();
 
-ActionListener action = new ActionListener() {
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        reinicio.setVisible(true);
-        reinicio.setLocationRelativeTo(null);
-            
-    }
-};
-ActionListener cerrar;
+
 Historial hist = new Historial();
 List <Lotes> lotesSelec = new ArrayList();
 List <Integer> indices = new ArrayList();
@@ -69,21 +57,12 @@ List <Laboreo> laboreopost =  new ArrayList();
 List <Proyecto> prov = new ArrayList();
 List <Historial> listahist = new ArrayList();
 Proyecto p = new Proyecto();
-String raz = new String();
+
+
 
 
     public ProyectosVigentes(Controlador control2) {
-        this.cerrar = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                raz=razon.getText();
-                hist.setDescripcionP(raz);
-                razon.setText(null);
-                raz=null;
-                reinicio.setVisible(false);
-             
-            }
-        };
+
         initComponents();
         control = control2;
         String [] titulo = new String [] {"Id Proyecto","Descripcion"};
@@ -94,22 +73,8 @@ String raz = new String();
         dtmLpro.setColumnIdentifiers(titulo2);
         dtmPRE.setColumnIdentifiers(titulopre);
         dtmPOST.setColumnIdentifiers(titulopost);
-        OK.setText("OK");
-        pregunta.setText("Por que desea reiniciar/cancelar el proyecto?");
-        
-        pregunta.setBounds(145, 50, 500, 75);
-        reinicio.setSize(500, 300);
-        panel.setSize(500, 300);
-        razon.setBounds(150, 150, 200, 20);
-        OK.setBounds(200, 200, 70, 35);
-        panel.setLayout(null);
-        panel.add(pregunta);
-        panel.add(razon);
-        panel.add(OK);
-        reinicio.add(panel);
-        Reiniciar.addActionListener(action);
-        Cancelar.addActionListener(action);
-        OK.addActionListener(cerrar);
+
+
 
         
         tablaProyectos.setModel(dtmPro);
@@ -157,6 +122,7 @@ String raz = new String();
         jScrollPane4 = new javax.swing.JScrollPane();
         tablaPRE = new javax.swing.JTable();
         Actualizar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -283,7 +249,10 @@ String raz = new String();
                 ActualizarActionPerformed(evt);
             }
         });
-        jPanel1.add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 450, -1, -1));
+        jPanel1.add(Actualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, -1));
+
+        jLabel2.setText("Haga click en actualizar para guardar los cambios");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 430, 320, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -420,7 +389,7 @@ String raz = new String();
         tablaLotesP.setValueAt(l.getDescripcion(), indl, 5);
         tablaLotesP.setValueAt(est.getDescripcion(), indl, 4);
         lote=lotesP.get(indl);
-         nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
+        nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
         h.setNombreCampo(nomcamp);
         h.setDescripcionP("Etapa completada con exito");
         h.setEstadoProyecto(lote.getEstado().getDescripcion());
@@ -438,7 +407,7 @@ String raz = new String();
     }//GEN-LAST:event_tablaPOSTMouseClicked
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
-            
+       try{     
         for(Lotes l: lotesSelec){
             control.modificarLote(l);
             
@@ -449,6 +418,11 @@ String raz = new String();
         
         lotesSelec.clear();
         listahist.clear();
+       }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un lote ");
+        
+        }
         
         
         
@@ -463,6 +437,9 @@ String raz = new String();
     private void ReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReiniciarActionPerformed
         int indl;
         String nomcamp = new String();
+        String razon = JOptionPane.showInputDialog("Por qué desea reiniciar/cancelar el proyecto?");
+        try{
+        hist.setDescripcionP(razon);
         long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);   
         Lotes lot=new Lotes();
@@ -480,7 +457,7 @@ String raz = new String();
         hist.setEstadoProyecto(est.getDescripcion());
         
         hist.setFecha(date);
-                
+        hist.setDescripcionP(razon);
         
         est=control.obtenerEstado((long)1);
         lot.setEstado(est);
@@ -488,19 +465,27 @@ String raz = new String();
         lot.setLaboreoact(null);
         lotesSelec.add(lot);
         listahist.add(hist);
+        }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un lote ");
+        
+        }
         
         
     }//GEN-LAST:event_ReiniciarActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
            Lotes lot = new Lotes();
+           String razon = JOptionPane.showInputDialog("Por qué desea reiniciar/cancelar el proyecto?");
            long miliseconds = System.currentTimeMillis();
            Date date = new Date(miliseconds);
            List <Lotes> lotesAux = new ArrayList();
            int indl;
            String nomcamp = new String();
-           Historial hist=new Historial();
+           
            EstadoProyecto est = new EstadoProyecto();
+           
+           try{
            est=control.obtenerEstado((long)5);
            hist.setIdProyecto(p.getIdProyecto());
           
@@ -528,18 +513,23 @@ String raz = new String();
            lot.setFk_proyecto(null);
            lot.setEstado(null);
            lot.setLaboreoact(null);
-           
+           hist.setDescripcionP(razon);
            
             
            hist.setFecha(date);
            lotesSelec.add(lot);
            listahist.add(hist);
+           }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un lote ");
+        
+        }
         
            
         
         
     }//GEN-LAST:event_CancelarActionPerformed
-
+    
     private void FinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FinalizarActionPerformed
           List <Lotes> lotesAux = new ArrayList();
              int indl;
@@ -548,10 +538,11 @@ String raz = new String();
                  Date date = new Date(miliseconds);
         Lotes lot=new Lotes();
         EstadoProyecto est = new EstadoProyecto();
+        
+        try{
         est=control.obtenerEstado((long)6);
         indl=tablaLotesP.getSelectedRow();
-        /*tablaLotesP.setValueAt("null", indl, 5);
-        tablaLotesP.setValueAt(est.getDescripcion(), indl, 4);*/
+
         nomcamp=(String)tablaLotesP.getValueAt(indl, 1);
         lot=lotesP.get(indl);
         hist.setIdLote((long)lot.getIdLote());
@@ -575,7 +566,12 @@ String raz = new String();
         lotesSelec.add(lot);
         
         listahist.add(hist);
-            
+        }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un lote ");
+        
+        }
+           
             
             
     }//GEN-LAST:event_FinalizarActionPerformed
@@ -621,6 +617,7 @@ String raz = new String();
     private javax.swing.JButton Finalizar;
     private javax.swing.JButton Reiniciar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

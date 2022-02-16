@@ -36,6 +36,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeJava.to;
@@ -311,6 +312,7 @@ public class AgregarProyecto extends javax.swing.JFrame {
                      List <Lotes> lot = new ArrayList();
 
                     int indice;
+                    try{
                     indice=tablaProyecto.getSelectedRow();
                     p=listaP.get(indice);
                    
@@ -366,7 +368,12 @@ public class AgregarProyecto extends javax.swing.JFrame {
             dtm2.setRowCount(0);
             dtmmostrar.setRowCount(0);
             listaLSelect.clear();
-            
+                    }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar datos de las tablas");
+        
+        }
+        
                     
         
     }//GEN-LAST:event_BotonAgregarPActionPerformed
@@ -461,6 +468,8 @@ public class AgregarProyecto extends javax.swing.JFrame {
     private void agregarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarLActionPerformed
         int indLotes;
         long id;
+        
+        try{
         indLotes=tablaLotes.getSelectedRow();
         String [] lote = new String [] {(String)tablaLotes.getValueAt(indLotes, 0),(String)tablaLotes.getValueAt(indLotes, 1),(String)tablaLotes.getValueAt(indLotes, 2)};
         
@@ -481,13 +490,26 @@ public class AgregarProyecto extends javax.swing.JFrame {
         }
         System.out.println(listaLSelect);
         tablaLotes.getValueAt(indLotes, 0);
+        }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un lote ");
+        
+        }
+        
     }//GEN-LAST:event_agregarLActionPerformed
 
     private void quitarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitarLActionPerformed
                int indice;
+               try{
                indice=tablaLotesAgr.getSelectedRow();
                listaLSelect.remove(indice);
                dtmmostrar.removeRow(indice);
+               }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un lote ");
+        
+        }
+        
     }//GEN-LAST:event_quitarLActionPerformed
 
     /**

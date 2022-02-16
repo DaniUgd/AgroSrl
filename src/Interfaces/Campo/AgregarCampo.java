@@ -28,6 +28,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import static jdk.nashorn.internal.objects.NativeJava.to;
@@ -111,9 +112,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     agregarL = new AgregarLote(control,g);
                     pregunta.setVisible(false);
                 }catch(NumberFormatException z){
-                    Warning er = new Warning();
-                    er.setVisible(true);
-                    er.setLocationRelativeTo(null);
+JOptionPane.showMessageDialog(null, "No puede dejar los espacios en blanco, y  el tamaño del campo no debe contener letras ");
                     pregunta.setVisible(false);
                 }}
         };
@@ -167,7 +166,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     AgregarLote agregarL = new AgregarLote(control,g);
                     
                 }catch(NumberFormatException z){
-                    Error er = new Error();
+                    JOptionPane.showMessageDialog(null, "No puede dejar los espacios en blanco, y  el tamaño del campo no debe contener letras ");
                     
                 }}
         };
@@ -359,11 +358,15 @@ public class AgregarCampo extends javax.swing.JFrame {
         String id;
         long ide;
         
-        
+        try{
         id=(String)dtm.getValueAt(jTable1.getSelectedRow(),0);
         ide=Long.parseLong(id);
         control.eliminarCampo(ide, lista);
+        }catch(ArrayIndexOutOfBoundsException e){
         
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un campo ");
+        
+        }
         
         
         
@@ -388,7 +391,7 @@ public class AgregarCampo extends javax.swing.JFrame {
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         long ide;
         String id;
-        
+       try{
         List <Lotes> lotes = new ArrayList <>();
         id=String.valueOf(dtm.getValueAt(jTable1.getSelectedRow(),0));
         ide=Long.parseLong(id);
@@ -404,7 +407,10 @@ public class AgregarCampo extends javax.swing.JFrame {
         ModificarCampo modiC = new ModificarCampo(control,campo);
         modiC.setVisible(true);
         modiC.setLocationRelativeTo(null);
-        
+       }catch(ArrayIndexOutOfBoundsException e){
+       JOptionPane.showMessageDialog(null, "Debe seleccionar un campo");
+           
+       }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void updateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateMouseClicked

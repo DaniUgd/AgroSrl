@@ -11,6 +11,7 @@ import Clases.TipoSuelo;
 import Controladora.Controlador;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -303,13 +304,19 @@ Proyecto proyecto = new Proyecto();
 
     private void botQuitarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarSActionPerformed
                int indice;
+               try{
                indice=ListaSAgr.getSelectedRow();
                tsselect.remove(indice);
                dtmSA.removeRow(indice);
+               }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 1 tipo de suelo");
+        }
     }//GEN-LAST:event_botQuitarSActionPerformed
 
     private void botAgregarLPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarLPreActionPerformed
         int indice;
+        try{
         Laboreo lab = new Laboreo();
         indice=TablaLab.getSelectedRow();
         System.out.println(indice);
@@ -318,7 +325,10 @@ Proyecto proyecto = new Proyecto();
         String [] filalabor = new String [] {(String)lab.getIdLaboreo().toString(),lab.getDescripcion()};
         dtmPreSiembra.addRow(filalabor);
         lselectPre.add(lab);
+        }catch(ArrayIndexOutOfBoundsException e){
         
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 1 laboreo");
+        }
                 
 
         
@@ -327,10 +337,14 @@ Proyecto proyecto = new Proyecto();
 
     private void botQuitarLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarLActionPerformed
                int indice;
+               try{
                indice=TablaLab.getSelectedRow();
                lselectPre.remove(indice);
                dtmPreSiembra.removeRow(indice);
-
+               }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 1 laboreo");
+        }
     }//GEN-LAST:event_botQuitarLActionPerformed
 
     private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
@@ -343,26 +357,36 @@ Proyecto proyecto = new Proyecto();
     }//GEN-LAST:event_jToggleButton6ActionPerformed
 
     private void CrearProyectoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearProyectoActionPerformed
-            proyecto.setDescripcion(nomCultivo.getText());
+          
+        if(!nomCultivo.getText().equals("") && lselectPre.size()!=0 && lselectPost.size()!=0&& tsselect.size()!=0){
+        proyecto.setDescripcion(nomCultivo.getText());
             proyecto.setLaboreosPre(lselectPre);
             proyecto.setLaboreosPost(lselectPost);
             proyecto.setTpsuelo(tsselect);
             control.agregarP(proyecto);
-            
-            
+        }else{
+        JOptionPane.showMessageDialog(null, "Debe seleccionar los datos a agregar a las tablas, y no debe dejar el nombre del cultivo en blanco");
+        
+        }
+
             
     }//GEN-LAST:event_CrearProyectoActionPerformed
 
     private void botAgrSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgrSActionPerformed
       int indice;
-        TipoSuelo suelo = new TipoSuelo();
-        indice=ListaSuelos.getSelectedRow();
+        
+     TipoSuelo suelo = new TipoSuelo();
+     try{   
+     indice=ListaSuelos.getSelectedRow();
         suelo.setIdSuelo(Long.parseLong((String) ListaSuelos.getValueAt(indice, 0)));
         suelo.setDescripcion((String) ListaSuelos.getValueAt(indice, 1));
         String [] filasuelo = new String [] {(String)suelo.getIdSuelo().toString(),suelo.getDescripcion()};
         dtmSA.addRow(filasuelo);
         tsselect.add(suelo);
-
+     }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 1 tipo de suelo");
+        }
         
         
         
@@ -370,13 +394,20 @@ Proyecto proyecto = new Proyecto();
 
     private void botQuitarLPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botQuitarLPostActionPerformed
                int indice;
+               try{
                indice=TablaPostSiembra.getSelectedRow();
                lselectPost.remove(indice);
                dtmPostSiembra.removeRow(indice);
+               }catch(ArrayIndexOutOfBoundsException e){
+        
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 1 laboreo");
+        }
     }//GEN-LAST:event_botQuitarLPostActionPerformed
 
     private void botAgregarLPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botAgregarLPostActionPerformed
         int indice;
+        try{
+        
         Laboreo lab = new Laboreo();
         indice=TablaLab.getSelectedRow();
         System.out.println(indice);
@@ -385,7 +416,10 @@ Proyecto proyecto = new Proyecto();
         String [] filalabor = new String [] {(String)lab.getIdLaboreo().toString(),lab.getDescripcion()};
         dtmPostSiembra.addRow(filalabor);
         lselectPost.add(lab);
+        }catch(ArrayIndexOutOfBoundsException e){
         
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos 1 laboreo");
+        }
         
         
         

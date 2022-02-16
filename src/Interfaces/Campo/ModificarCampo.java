@@ -13,6 +13,7 @@ import Controladora.Controlador;
 import Interfaces.Inicio;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -128,8 +129,8 @@ DefaultTableModel dtm = new DefaultTableModel();
         });
         jPanel1.add(nuevahec, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 110, -1));
 
-        jLabel6.setText("Cambiar Hectareas");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        jLabel6.setText("Cambiar Tamaño");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 90, -1));
 
         jLabel3.setText("Cambiar Nombre");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, -1));
@@ -174,33 +175,38 @@ DefaultTableModel dtm = new DefaultTableModel();
        String hectC;
        long hectarea;
        Lotes lot = new Lotes();
-       nombreC=nuevonom.getText();
-       hectC=nuevahec.getText();
-       if(!"".equals(nombreC)){
-       campo.setNombre(nombreC);
-       hectarea=campo.getTamanio();
-       campo.setTamanio(hectarea);
-       }else{
-            nombreC=campo.getNombre();
-            campo.setNombre(nombreC);
-       }
        
-       if(!"".equals(nuevahec.getText())){
-       hectarea=Long.parseLong(hectC);
-       campo.setTamanio(hectarea);
+      if(!nuevonom.getText().equals("") && !nuevahec.getText().equals("")){
+      
+          nombreC=nuevonom.getText();
+          hectC=nuevahec.getText();
+          if(!"".equals(nombreC)){
+              campo.setNombre(nombreC);
+              hectarea=campo.getTamanio();
+              campo.setTamanio(hectarea);
+          }else{
+              nombreC=campo.getNombre();
+              campo.setNombre(nombreC);
+          }
+          
+          if(!"".equals(nuevahec.getText())){
+              hectarea=Long.parseLong(hectC);
+              campo.setTamanio(hectarea);
+              
+          }else{
+              hectarea=campo.getTamanio();
+              campo.setTamanio(hectarea);
+              
+          }
+          
+          
+          
+          
+          control.modificarCampo(campo);
+          } else {
+          JOptionPane.showMessageDialog(null, "No puede dejar los espacios en blanco, y  el tamaño del campo no debe contener letras ");
+      }
        
-       }else{
-           hectarea=campo.getTamanio();
-           campo.setTamanio(hectarea);
-           
-       }
-       
-               
-       
-
-        control.modificarCampo(campo);
-        
-        
         
     }//GEN-LAST:event_modicampoActionPerformed
 
