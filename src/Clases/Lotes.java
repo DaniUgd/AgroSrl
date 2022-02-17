@@ -21,6 +21,11 @@ public class Lotes {
     public Lotes() {
     }
 
+    @Override
+    public String toString() {
+        return "Lotes{" + "idLote=" + idLote + ", tamanio=" + tamanio + ", tiposuelo=" + tiposuelo + ", estado=" + estado + ", fk_Campo=" + fk_Campo + ", laboreoact=" + laboreoact + ", fk_proyecto=" + fk_proyecto + '}';
+    }
+
     public Lotes(int idLote, long tamanio, TipoSuelo tiposuelo, EstadoProyecto estado, Long fk_Campo, String laboreoact, Long fk_proyecto) {
         this.idLote = idLote;
         this.tamanio = tamanio;

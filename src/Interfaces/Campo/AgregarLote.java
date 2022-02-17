@@ -15,6 +15,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 
 public class AgregarLote extends javax.swing.JFrame {
@@ -227,20 +228,23 @@ public AgregarLote() {
             l.setTiposuelo(t);
             }
         };
-        
+       
         l.setTamanio(hectareas);
         l.setFk_Campo(campo.getIdCampo());
             lotes.add(l);
-            
+             if(control.verificarTam(campo.getIdCampo(),lotes)){
             campo.setLotes(lotes);
             control.agregarLotes(l);
             control.modificarCampo(campo);
-            control.ModificarEstadoCampo();
-            
-            
-            
+            control.ModificarEstadoCampo(); 
+        
+        }else{
+          JOptionPane.showMessageDialog(null, "El tamaño del lote no debe superar al campo");
+        
+        }
+        
         }catch(NumberFormatException z){
-    
+            
          er.setVisible(true);
          er.setLocationRelativeTo(null);
          

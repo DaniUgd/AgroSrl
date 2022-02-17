@@ -110,6 +110,7 @@ public class AgregarCampo extends javax.swing.JFrame {
                     
                     control.agregarCampo(g);
                     agregarL = new AgregarLote(control,g);
+                    agregarL.setLocationRelativeTo(null);
                     pregunta.setVisible(false);
                 }catch(NumberFormatException z){
 JOptionPane.showMessageDialog(null, "No puede dejar los espacios en blanco, y  el tamaño del campo no debe contener letras ");
@@ -359,9 +360,13 @@ JOptionPane.showMessageDialog(null, "No puede dejar los espacios en blanco, y  e
         long ide;
         
         try{
+         
         id=(String)dtm.getValueAt(jTable1.getSelectedRow(),0);
         ide=Long.parseLong(id);
+        if(control.verificarLotes(ide)){
         control.eliminarCampo(ide, lista);
+         
+         }
         }catch(ArrayIndexOutOfBoundsException e){
         
             JOptionPane.showMessageDialog(null, "Debe seleccionar un campo ");
@@ -455,6 +460,7 @@ JOptionPane.showMessageDialog(null, "No puede dejar los espacios en blanco, y  e
     
     private void crearcampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearcampoActionPerformed
     try{
+       this.setVisible(false);
        pregunta.setLocationRelativeTo(null);
        pregunta.setVisible(true);
        }catch(Exception e){

@@ -39,9 +39,18 @@ DefaultTableModel dtm = new DefaultTableModel();
         String [] columnas = new String [] {"Nro Lote","Hectareas","Tipo de Suelo"};
         dtm.setColumnIdentifiers(columnas);
         jTable1.setModel(dtm);
-        listalotes.stream().map((l) -> new String [] {Long.toString(l.getIdLote()),Long.toString(l.getTamanio()),l.getTiposuelo().getDescripcion().toString()}).forEachOrdered((mostrarlotes) -> {
-            dtm.addRow(mostrarlotes);
-    });
+        
+        for(Lotes l: listalotes){
+            
+            if(l.getIdLote()!=0){
+                 String [] datos = new String [] {String.valueOf(l.getIdLote()),String.valueOf(l.getTamanio()),l.getTiposuelo().getDescripcion()};
+                 dtm.addRow(datos);
+            
+            }
+        
+        
+        }
+        
 
         
        

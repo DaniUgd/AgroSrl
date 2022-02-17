@@ -14,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class Controlador {
@@ -226,5 +227,40 @@ return  estados;
             prov=historialdao.BuscarIdPV(id,idLote);
             return prov;
         }
+      
+      public boolean verificarLotes(long id){
+          boolean f=false;
+            Campo campo = new Campo();
+            campo=campodao.obtener(id);
+          if (campo.getEstado().getIdEstado()!=1){
+                JOptionPane.showMessageDialog(null, "Debe Finalizar/Cancelar todos los proyectso vigentes");
+          }else{
+              f=true;
+          
+          }
+          
+          return f;
+      
+      }
+      public boolean verificarTam(long id, List <Lotes> lotes ){
+       boolean f=false;
+            long tamanio=0;
+            Campo campo = new Campo();
+            campo=campodao.obtener(id);
+            for(Lotes l: lotes){
+                tamanio=tamanio+l.getTamanio();
+                    
+            }
+             if(campo.getTamanio()>=tamanio){
+                f=true;
+            
+            }
+            
+            
+       return f;
+       
+      }
+      
+      
 }
 

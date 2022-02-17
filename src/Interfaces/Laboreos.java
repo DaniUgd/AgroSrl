@@ -94,7 +94,6 @@ public class Laboreos extends javax.swing.JFrame {
         });
         jPanel2.add(agregaE1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, -1, -1));
 
-        nuevoLaboreo.setForeground(new java.awt.Color(204, 204, 204));
         nuevoLaboreo.setText("Ejemplo: Rastrillar");
         nuevoLaboreo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         nuevoLaboreo.addActionListener(new java.awt.event.ActionListener() {
